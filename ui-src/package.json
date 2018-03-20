@@ -1,0 +1,38 @@
+{
+  "name": "create-react-app",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "hc-redux-middleware": "latest",
+    "material-ui": "next",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-scripts": "latest",
+    "redux": "latest",
+    "redux-form": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && node copy-to-ui.js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^3.3.15",
+    "@storybook/addon-links": "^3.3.15",
+    "@storybook/addon-notes": "^3.3.15",
+    "@storybook/addons": "^3.3.15",
+    "@storybook/react": "^3.3.15",
+    "@storybook/storybook-deployer": "^2.3.0",
+    "babel-core": "^6.26.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "expect": "^23.0.0-alpha.0",
+    "react-redux": "^5.0.7",
+    "storybook-addon-specifications": "^2.1.1"
+  }
+}
