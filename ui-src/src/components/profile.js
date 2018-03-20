@@ -26,13 +26,14 @@ const renderTextField = ({
   input,
   label,
   name,
+  id,
   required,
   meta: {
     touched,
     error
   },
   ...custom
-}) => (<TextField name={name} label={label} error={touched && error} {...input} {...custom}/>)
+}) => (<TextField name={name} id={id} label={label} error={touched && error} {...input} {...custom}/>)
 
 function UsageIcon(props) {
   switch (props.type) {
@@ -68,6 +69,7 @@ function UsageIcon(props) {
       const {classes, handleSubmit, profileHash, profileSpec} = this.props;
       return (<div className={classes.root}>
         <form onSubmit={handleSubmit}>
+          <Field name='personaName' component={renderTextField} label='Persona' />
           {
             profileSpec.profile.map((field, index) => (<div key={index}>
               <Field name={field.appLabel} component={renderTextField} label={field.display} />

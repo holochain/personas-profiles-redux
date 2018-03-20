@@ -77,9 +77,17 @@ storiesOf('Profile', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add('New Profile no personas', withNotes(noPersonas) (() => {
     specs(() => describe('New Profile no personas', function () {
-      it('If you click the "Create Profile" button with all of the fields filled out the action "Clicked the Register button" will fire', () => {
+      it('Enter the name of your new Persona in the text box called "Persona"', () => {
         const wrapper = mount(<Provider store={store}><ProfileForm register={action('Clicked the Register button')} profileSpec={profileSpec}/></Provider>)
-        expect(true)
+        wrapper.find('input[name="personaName"]').simulate('change', {target: {value: 'Work'}})
+      })
+      it('Fill out the rest of the fields with your Profile information and click "Create Profile"', () => {
+        const wrapper = mount(<Provider store={store}><ProfileForm register={action('Clicked the Register button')} profileSpec={profileSpec}/></Provider>)
+        wrapper.find('input[name="personaName"]').simulate('change', {target: {value: 'Work'}})
+        wrapper.find('input[name="firstname"]').simulate('change', {target: {value: 'Phil'}})
+        wrapper.find('input[name="address"]').simulate('change', {target: {value: '123 Holochain Road'}})
+        wrapper.find('input[name="suburb"]').simulate('change', {target: {value: 'Burwood'}})
+        wrapper.find('input[name="city"]').simulate('change', {target: {value: 'Melbourne'}})
       })
     }))
     return getProfile()
