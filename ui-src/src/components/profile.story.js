@@ -16,7 +16,11 @@ import CreateStore from '../store'
 
 let store = CreateStore()
 let profileSpec = {
-  "expires": "20181212",
+  "$id": "holochat/profileSpec.json",
+  "source-dna": "QmZ4CP5unaghnmxbJkSBwobehgcF5VdcKLPimXEkwVTUYh",
+  "type": "object",
+  "expiry": "2018-12-12T01:01:10+00:00",
+  "required": ["firstname", "address", "suburb"],
   "profile": [
     {
       "appLabel": "firstname",
@@ -73,16 +77,58 @@ let profileSpec = {
   ]
 }
 
+let personas = [
+    {
+        "name": "Personal",
+        "persona": [
+            {"firstName": "Phil"},
+            {"lastName": "Beadle"},
+            {"address": "123 Holochain Road"},
+            {"suburb": "Burwood"},
+            {"city": "Melbourne"}
+        ]
+    },
+    {
+        "name": "Work",
+        "persona": [
+            {"firstName": "Philip"},
+            {"lastName": "Beadle"},
+            {"role": "Chief Engineer"},
+            {"location": "Melbourne"}
+        ]
+    },
+    {
+        "name": "Friends",
+        "persona": [
+            {"nickName": "@philt3r"},
+            {"hobby": "DJ"}
+        ]
+    }
+]
+
+
+let suggestions = [
+  { 'persona': 'Work', 'field': 'firstName', 'label': 'Philip' },
+  { 'persona': 'Work', 'field': 'lastName', 'label': 'Beadle' },
+  { 'persona': 'Work', 'field': 'role', 'label': 'Chief Engineer' },
+  { 'persona': 'Work', 'field': 'location', 'label': 'Melbourne' },
+  { 'persona': 'Personal', 'field': 'firstName', 'label': 'Phil' },
+  { 'persona': 'Personal', 'field': 'lastName', 'label': 'Beadle' },
+  { 'persona': 'Personal', 'field': 'address', 'label': '123 Holochain Road' },
+  { 'persona': 'Personal', 'field': 'suburb', 'label': 'Burwood' },
+  { 'persona': 'Personal', 'field': 'city', 'label': 'Melbourne' }
+]
+
 storiesOf('Profile', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
-  .add('New Profile no personas', withNotes(noPersonas) (() => {
-    specs(() => describe('New Profile no personas', function () {
+  .add('New Profile no Existing Identities', withNotes(noPersonas) (() => {
+    specs(() => describe('New Profile no Existing Identities', function () {
       it('Enter the name of your new Persona in the text box called "Persona"', () => {
-        const wrapper = mount(<Provider store={store}><ProfileForm register={action('Clicked the Register button')} profileSpec={profileSpec}/></Provider>)
+        const wrapper = mount(getProfile(profileSpec, personas, suggestions))
         wrapper.find('input[name="personaName"]').simulate('change', {target: {value: 'Work'}})
       })
       it('Fill out the rest of the fields with your Profile information and click "Create Profile"', () => {
-        const wrapper = mount(<Provider store={store}><ProfileForm register={action('Clicked the Register button')} profileSpec={profileSpec}/></Provider>)
+        const wrapper = mount(getProfile(profileSpec, personas, suggestions))
         wrapper.find('input[name="personaName"]').simulate('change', {target: {value: 'Work'}})
         wrapper.find('input[name="firstname"]').simulate('change', {target: {value: 'Phil'}})
         wrapper.find('input[name="address"]').simulate('change', {target: {value: '123 Holochain Road'}})
@@ -90,18 +136,18 @@ storiesOf('Profile', module)
         wrapper.find('input[name="city"]').simulate('change', {target: {value: 'Melbourne'}})
       })
     }))
-    return getProfile()
+    return getProfile(profileSpec, suggestions)
   }))
-  .add('New Profile with Personas', withNotes(threePersonas) (() => {
-    specs(() => describe('New Profile with personas', function () {
+  .add('New Profile with Existing Identities', withNotes(threePersonas) (() => {
+    specs(() => describe('New Profile with Existing Identities', function () {
       it('Select which Persona you want to use', () => {
-        const wrapper = mount(<Provider store={store}><ProfileForm register={action('Clicked the Register button')} profileSpec={profileSpec}/></Provider>)
-        expect(true)
+        const wrapper = mount(getProfile(profileSpec, personas, suggestions))
+        wrapper.find('input[name="personaName"]').at(0 ).simulate('click')
       })
     }))
-    return getProfile()
+    return getProfile(profileSpec, personas, suggestions)
   }))
 
-function getProfile() {
-  return (<ProfileForm register={action('Clicked the Register button')} profileSpec={profileSpec} />)
+function getProfile(profileSpec, personas, suggestions) {
+  return (<Provider store={store}><ProfileForm register={action('Clicked the Register button')} profileSpec={profileSpec} personas={personas} suggestions={suggestions} /></Provider>)
 }

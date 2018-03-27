@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "autosuggest-highlight": "^3.1.1",
     "hc-redux-middleware": "latest",
     "material-ui": "next",
     "material-ui-icons": "^1.0.0-beta.36",
     "prop-types": "latest",
     "react": "latest",
+    "react-autosuggest": "^9.3.4",
     "react-dom": "latest",
+    "react-redux": "^5.0.7",
     "react-scripts": "latest",
     "redux": "latest",
     "redux-form": "latest"
@@ -19,7 +22,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "storybook:deploy": "storybook-to-ghpages",
+    "storybook:build": "build-storybook -s public"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.15",
@@ -32,7 +36,6 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "expect": "^23.0.0-alpha.0",
-    "react-redux": "^5.0.7",
     "storybook-addon-specifications": "^2.1.1"
   }
 }
