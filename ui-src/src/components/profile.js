@@ -28,20 +28,21 @@ const styles = theme => ({
   }
 });
 
+let suggestions = []
+let profileMapping = {}
 const renderProfileField = ({
-  input,
   suggestions,
   label,
-  name,
-  id,
-  onChange,
+  specField,
   required,
+  onSelect,
   meta: {
     touched,
     error
   },
   ...custom
-}) => (<ProfileField name={name} id={id} label={label} onChange={onChange} error={touched && error} {...input} {...custom} suggestions={suggestions} />)
+}) => (<ProfileField specField={specField} label={label} error={touched && error}
+    onSelect={onSelect} {...custom} suggestions={suggestions} />)
 
 // const validate = values => {
 //   const errors = {}
@@ -55,47 +56,63 @@ const renderProfileField = ({
 // }
 
 class Profile extends React.Component {
-  handleRegister = values => {
-    this.props.register(values)
+  handleCreateProfile = () => {
+    this.props.createProfileMapping(profileMapping)
   }
+
   state = {
-    personaFieldValue: ''
+    personaFieldValue: '',
+    suggestions: []
   };
 
-  handleChange = (event, { newValue }) => {
-    consol.log(newValue)
-    let personaFieldValue  = newValue.split(' - ')[0]
-    this.setState({
-      personaFieldValue: personaFieldValue
-    })
+
+  handleSelect = (mappingField) => {
+    if(mappingField !== undefined){
+      let fieldName  = mappingField.split(' - ')[0]
+      let holoVaultField = mappingField.split(' - ')[1]
+      profileMapping.profile[fieldName]= holoVaultField
+      console.log(mappingField)
+      this.setState({
+        personaFieldValue: mappingField
+      })
+    }
+    console.log(profileMapping)
   }
-  render() {
-    const {classes, handleSubmit, profileHash, profileSpec, personas} = this.props
-    let suggestions = []
-    personas.forEach(function(persona){
+
+  componentDidMount(){
+    this.props.personas.forEach(function(persona){
       persona.persona.forEach(function(field){
         let key = Object.keys(field)[0]
         suggestions.push({ 'persona': persona.name, 'field': key, 'label': field[key]})
       })
     })
+    profileMapping = {
+      'id': this.props.profileSpec.id,
+      'sourceDna': this.props.profileSpec.sourceDna,
+      'expiry': this.props.profileSpec.expiry,
+      'profile': {}
+    }
+  }
 
+  render() {
+    const {classes, handleSubmit, profileHash, profileSpec} = this.props
     return (<div className={classes.root}>
-      <Typography variant="display1">
-        My Personal Data
+      <Typography variant='display1'>
+        HoloVault
       </Typography>
-      <Typography variant="body1" gutterBottom>
-        Your personal information is kept by you in 1 location, this "My Personal Data" app. Other applications
+      <Typography variant='body1' gutterBottom>
+        Your personal information is kept by you in 1 location, this 'HoloVault' app. Other applications
         ask to borrow your info for a set amount of time and you can revoke that access when ever you like.
-        Also you don't have to keep filling out the same info for every app and giving away your info. "My Personal Data"
+        Also you don't have to keep filling out the same info for every app and giving away your info. 'HoloVault'
         helps you reuse info you've already saved.
       </Typography>
       <form onSubmit={handleSubmit}>
         {
           profileSpec.profile.map((field, index) => (<div key={index}>
-            <Field name={field.appLabel} onChange={this.handleChange} component={renderProfileField} label={field.display} suggestions={suggestions} usage={field.usage} className={classes.persona}/>
+            <Field name={field.appLabel} specField={field.appLabel} onSelect={this.handleSelect} component={renderProfileField} label={field.display} suggestions={suggestions} usage={field.usage} personaField={profileSpec.id + ' (' + field.appLabel + ')'} className={classes.persona}/>
           </div>))
         }
-        <Button name="register" variant="raised" className={classes.button} color="secondary" onClick={handleSubmit(this.handleRegister)}>
+        <Button name='createProfile' variant='raised' className={classes.button} color='secondary' onClick={handleSubmit(this.handleCreateProfile)}>
           <FingerPrint/>
           Create Profile
         </Button>

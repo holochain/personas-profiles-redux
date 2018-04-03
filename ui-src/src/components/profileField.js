@@ -134,6 +134,7 @@ class ProfileField extends React.Component {
     suggestions: [],
   };
 
+
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({
       suggestions: getSuggestions(value),
@@ -149,15 +150,27 @@ class ProfileField extends React.Component {
   handleChange = (event, { newValue }) => {
     let personaFieldValue  = newValue.split(' - ')[0]
     let personaField = newValue.split(' - ')[1]
+    if(personaField === undefined)
+    {
+      personaField = this.props.personaField
+    }
     this.setState({
       personaFieldValue: personaFieldValue,
       personaField: personaField
     });
+
+
+    this.props.onSelect(this.props.specField + ' - ' + personaField.replace(' (', '.').replace(')', ''));
   };
 
+  componentDidMount(){
+    setSuggestions(this.props.suggestions)
+    this.setState({
+      personaField: this.props.personaField
+    });
+  }
   render() {
-    const { classes, suggestions, label, usage } = this.props;
-    setSuggestions(suggestions)
+    const { classes, specField, label, usage} = this.props;
     return (
       <div>
         <Autosuggest

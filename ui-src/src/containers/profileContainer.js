@@ -12,14 +12,15 @@ const mapStateToProps = state => {
   return {
     profileHash: state.profile.profileHash,
     profile: state.profile.profile,
-    mapping: state.profile.mapping
+    profileMapping: state.profile.profileMapping
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    register: (profile) => {
-      dispatch(register(profile))
+    createProfileMapping: (mapping) => {
+      dispatch(createProfile(mapping))
+      dispatch(createProfileMapping(mapping))
     }
   }
 }
