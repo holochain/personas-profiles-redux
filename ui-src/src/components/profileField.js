@@ -150,6 +150,7 @@ class ProfileField extends React.Component {
   handleChange = (event, { newValue }) => {
     let personaFieldValue  = newValue.split(' - ')[0]
     let personaField = newValue.split(' - ')[1]
+    let removeTyped = false
     if(personaField === undefined)
     {
       personaField = this.props.personaField
@@ -158,9 +159,14 @@ class ProfileField extends React.Component {
       personaFieldValue: personaFieldValue,
       personaField: personaField
     });
-
-
-    this.props.onSelect(this.props.specField + ' - ' + personaField.replace(' (', '.').replace(')', ''));
+    personaField = personaField.replace(' (', '.').replace(')', '')
+    let personaName = personaField.split('.')[0]
+    personaField = personaField.split('.')[1]
+    if(event.target.value === undefined){
+      removeTyped = true
+    }
+    let personaProfileMapping = {'personaName': personaName, 'removeTyped': removeTyped, 'personaFieldValue': personaFieldValue, 'specField' : this.props.specField, 'personaField': personaField}
+    this.props.onSelect(personaProfileMapping);
   };
 
   componentDidMount(){

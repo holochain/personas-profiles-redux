@@ -175,15 +175,15 @@ storiesOf('Profile', module)
     return getProfile(profileSpec2, noExistingPersonas)
   }))
   .add('New Profile with Existing Identities', withNotes(threePersonas) (() => {
-    specs(() => describe('New Profile with Existing Identities', function () {
-      it('Select which Persona you want to use', () => {
-        const wrapper = mount(getProfile(profileSpec, personas, suggestions))
-        wrapper.find('input[name="personaName"]').at(0 ).simulate('click')
-      })
-    }))
+    // specs(() => describe('New Profile with Existing Identities', function () {
+    //   it('Select which Persona you want to use', () => {
+    //     const wrapper = mount(getProfile(profileSpec, personas, suggestions))
+    //     wrapper.find('input[name="personaName"]').at(0 ).simulate('click')
+    //   })
+    // }))
     return getProfile(profileSpec1, personas)
   }))
 
 function getProfile(profileSpec, personas) {
-  return (<Provider store={store}><ProfileForm createProfileMapping={action('Clicked the Register button')} profileSpec={profileSpec} personas={personas} /></Provider>)
+  return (<Provider store={store}><ProfileForm createProfileMapping={action('Sent the Profile Map')} createPersona={action('Sent the Persona')} profileSpec={profileSpec} personas={personas} /></Provider>)
 }

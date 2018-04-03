@@ -32,6 +32,8 @@ let suggestions = []
 let profileMapping = {}
 const renderProfileField = ({
   suggestions,
+  name,
+  key,
   label,
   specField,
   required,
@@ -41,7 +43,7 @@ const renderProfileField = ({
     error
   },
   ...custom
-}) => (<ProfileField specField={specField} label={label} error={touched && error}
+}) => (<ProfileField name={name} specField={specField} key={key} label={label} error={touched && error}
     onSelect={onSelect} {...custom} suggestions={suggestions} />)
 
 // const validate = values => {
@@ -56,27 +58,39 @@ const renderProfileField = ({
 // }
 
 class Profile extends React.Component {
+  state = {
+    newPersona: {}
+  }
   handleCreateProfile = () => {
     this.props.createProfileMapping(profileMapping)
+    this.props.createPersona(this.state.newPersona)
   }
 
-  state = {
-    personaFieldValue: '',
-    suggestions: []
-  };
-
-
-  handleSelect = (mappingField) => {
-    if(mappingField !== undefined){
-      let fieldName  = mappingField.split(' - ')[0]
-      let holoVaultField = mappingField.split(' - ')[1]
-      profileMapping.profile[fieldName]= holoVaultField
-      console.log(mappingField)
-      this.setState({
-        personaFieldValue: mappingField
+  //Gets the object from the field and creates the Profile mapping and if there are newField
+  //crestes the new Persona Object ready to save
+  handleSelect = (personaProfileMapping) => {
+    if(personaProfileMapping !== undefined){
+      profileMapping.profile[personaProfileMapping.specField]= personaProfileMapping.personaField
+      let persona = this.props.personas.filter(function (persona){
+        return persona.name === personaProfileMapping.personaName
+      })[0]
+      let personaField = persona.persona.filter(function (persona){
+        return Object.keys(persona)[0] === personaProfileMapping.personaField
       })
+      if(personaField.length === 0){
+        let newField = {}
+        newField[personaProfileMapping.personaField] = personaProfileMapping.personaFieldValue
+        persona.persona.push(newField)
+      } else {
+        personaField[0][personaProfileMapping.personaField] = personaProfileMapping.personaFieldValue
+      }
+      if(personaProfileMapping.removeTyped){
+        this.props.personas[this.props.personas.length - 1].persona = this.props.personas[this.props.personas.length - 1].persona.filter(function(persona) {
+          return Object.keys(persona)[0] !== personaProfileMapping.specField
+        })
+      }
+      this.setState({newPersona: this.props.personas[this.props.personas.length - 1]})
     }
-    console.log(profileMapping)
   }
 
   componentDidMount(){
@@ -85,6 +99,10 @@ class Profile extends React.Component {
         let key = Object.keys(field)[0]
         suggestions.push({ 'persona': persona.name, 'field': key, 'label': field[key]})
       })
+    })
+    this.props.personas.push({
+        "name": this.props.profileSpec.id,
+        "persona": []
     })
     profileMapping = {
       'id': this.props.profileSpec.id,
@@ -109,7 +127,7 @@ class Profile extends React.Component {
       <form onSubmit={handleSubmit}>
         {
           profileSpec.profile.map((field, index) => (<div key={index}>
-            <Field name={field.appLabel} specField={field.appLabel} onSelect={this.handleSelect} component={renderProfileField} label={field.display} suggestions={suggestions} usage={field.usage} personaField={profileSpec.id + ' (' + field.appLabel + ')'} className={classes.persona}/>
+            <Field key={index} name={field.appLabel} specField={field.appLabel} onSelect={this.handleSelect} component={renderProfileField} label={field.display} suggestions={suggestions} usage={field.usage} personaField={profileSpec.id + ' (' + field.appLabel + ')'} className={classes.persona}/>
           </div>))
         }
         <Button name='createProfile' variant='raised' className={classes.button} color='secondary' onClick={handleSubmit(this.handleCreateProfile)}>

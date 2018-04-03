@@ -18,8 +18,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    createPersona: (mapping) => {
+      dispatch(createPersona(mapping))
+    },
     createProfileMapping: (mapping) => {
-      dispatch(createProfile(mapping))
       dispatch(createProfileMapping(mapping))
     }
   }
