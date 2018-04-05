@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui/styles';
-import withRoot from '../withRoot';
+import withRoot from '../../withRoot';
 import {Field, reduxForm} from 'redux-form'
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
@@ -70,23 +70,23 @@ class Profile extends React.Component {
   //crestes the new Persona Object ready to save
   handleSelect = (personaProfileMapping) => {
     if(personaProfileMapping !== undefined){
-      profileMapping.profile[personaProfileMapping.specField]= personaProfileMapping.personaField
+      profileMapping.profile[personaProfileMapping.specField]= personaProfileMapping.personaName + '.' + personaProfileMapping.personaField
       let persona = this.props.personas.filter(function (persona){
         return persona.name === personaProfileMapping.personaName
       })[0]
-      let personaField = persona.persona.filter(function (persona){
+      let personaField = persona.personaFields.filter(function (persona){
         return Object.keys(persona)[0] === personaProfileMapping.personaField
       })
       if(personaField.length === 0){
         let newField = {}
         newField[personaProfileMapping.personaField] = personaProfileMapping.personaFieldValue
-        persona.persona.push(newField)
+        persona.personaFields.push(newField)
       } else {
         personaField[0][personaProfileMapping.personaField] = personaProfileMapping.personaFieldValue
       }
       if(personaProfileMapping.removeTyped){
-        this.props.personas[this.props.personas.length - 1].persona = this.props.personas[this.props.personas.length - 1].persona.filter(function(persona) {
-          return Object.keys(persona)[0] !== personaProfileMapping.specField
+        this.props.personas[this.props.personas.length - 1].persona = this.props.personas[this.props.personas.length - 1].personaFields.filter(function(personaField) {
+          return Object.keys(personaField)[0] !== personaProfileMapping.specField
         })
       }
       this.setState({newPersona: this.props.personas[this.props.personas.length - 1]})
@@ -95,14 +95,14 @@ class Profile extends React.Component {
 
   componentDidMount(){
     this.props.personas.forEach(function(persona){
-      persona.persona.forEach(function(field){
+      persona.personaFields.forEach(function(field){
         let key = Object.keys(field)[0]
         suggestions.push({ 'persona': persona.name, 'field': key, 'label': field[key]})
       })
     })
     this.props.personas.push({
         "name": this.props.profileSpec.id,
-        "persona": []
+        "personaFields": []
     })
     profileMapping = {
       'id': this.props.profileSpec.id,
@@ -118,8 +118,11 @@ class Profile extends React.Component {
       <Typography variant='display1'>
         HoloVault
       </Typography>
+      <Typography variant='subheading'>
+        The {this.props.profileSpec.id} app is requesting your personal information.
+      </Typography>
       <Typography variant='body1' gutterBottom>
-        Your personal information is kept by you in 1 location, this 'HoloVault' app. Other applications
+        Your personal information is managed by you in 1 location, 'HoloVault'. Other applications
         ask to borrow your info for a set amount of time and you can revoke that access when ever you like.
         Also you don't have to keep filling out the same info for every app and giving away your info. 'HoloVault'
         helps you reuse info you've already saved.

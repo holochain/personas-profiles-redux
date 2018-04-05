@@ -12,7 +12,7 @@ import noPersonas from './noPersonas.md'
 import threePersonas from './threePersonas.md'
 configure({adapter: new Adapter()})
 
-import CreateStore from '../store'
+import CreateStore from '../../store'
 
 let store = CreateStore()
 let profileSpec1 = {
@@ -114,7 +114,7 @@ let profileSpec2 = {
 let personas = [
     {
         "name": "Personal",
-        "persona": [
+        "personaFields": [
             {"firstName": "Phil"},
             {"lastName": "Beadle"},
             {"address": "123 Holochain Road"},
@@ -124,7 +124,7 @@ let personas = [
     },
     {
         "name": "Work",
-        "persona": [
+        "personaFields": [
             {"firstName": "Philip"},
             {"lastName": "Beadle"},
             {"role": "Chief Engineer"},
@@ -133,7 +133,7 @@ let personas = [
     },
     {
         "name": "Friends",
-        "persona": [
+        "personaFields": [
             {"nickName": "@philt3r"},
             {"hobby": "DJ"}
         ]
@@ -156,31 +156,11 @@ let profileMapping = {
 
 storiesOf('Profile', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
-  .add('New Profile no Existing Identities', withNotes(noPersonas) (() => {
+  .add('New Profile no Existing Personas', withNotes(noPersonas) (() => {
     let noExistingPersonas = []
-    // specs(() => describe('New Profile no Existing Identities', function () {
-    //   it('Enter the name of your new Persona in the text box called "Persona"', () => {
-    //     const wrapper = mount(getProfile(profileSpec, noExistingPersonas))
-    //     // wrapper.find('input[name="personaName"]').simulate('change', {target: {value: 'Work'}})
-    //   })
-    //   it('Fill out the rest of the fields with your Profile information and click "Create Profile"', () => {
-    //     const wrapper = mount(getProfile(profileSpec, noExistingPersonas))
-    //     // wrapper.find('input[name="personaName"]').simulate('change', {target: {value: 'Work'}})
-    //     wrapper.find('input[name="firstname"]').simulate('change', {target: {value: 'Phil'}})
-    //     wrapper.find('input[name="address"]').simulate('change', {target: {value: '123 Holochain Road'}})
-    //     wrapper.find('input[name="suburb"]').simulate('change', {target: {value: 'Burwood'}})
-    //     wrapper.find('input[name="city"]').simulate('change', {target: {value: 'Melbourne'}})
-    //   })
-    // }))
     return getProfile(profileSpec2, noExistingPersonas)
   }))
-  .add('New Profile with Existing Identities', withNotes(threePersonas) (() => {
-    // specs(() => describe('New Profile with Existing Identities', function () {
-    //   it('Select which Persona you want to use', () => {
-    //     const wrapper = mount(getProfile(profileSpec, personas, suggestions))
-    //     wrapper.find('input[name="personaName"]').at(0 ).simulate('click')
-    //   })
-    // }))
+  .add('New Profile with Existing Personas', withNotes(threePersonas) (() => {
     return getProfile(profileSpec1, personas)
   }))
 
