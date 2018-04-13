@@ -158,9 +158,28 @@ storiesOf('Profile', module)
   .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add('New Profile no Existing Personas', withNotes(noPersonas) (() => {
     let noExistingPersonas = []
+    specs(() => describe('New Profile no Existing Personas', function () {
+      it('Creating a Profile with valid entries sends a Persona and a PersonaMapping', () => {
+        const wrapper = mount(getProfile(profileSpec2, noExistingPersonas))
+        wrapper.find('input[name="userName"]').simulate('change', {target: {value: '@philt3r'}})
+        wrapper.find('input[name="userName"]').simulate('change', {target: {value: '@philt3r'}})
+        wrapper.find('input[name="dogsname"]').simulate('change', {target: {value: 'Thor'}})
+        wrapper.find('button[name="createProfile"]').simulate('click')
+      })
+    }))
     return getProfile(profileSpec2, noExistingPersonas)
   }))
   .add('New Profile with Existing Personas', withNotes(threePersonas) (() => {
+    specs(() => describe('New Profile Existing Personas', function () {
+      it('Creating a Profile by adding new entries sends a full Persona and a PersonaMapping', () => {
+        const wrapper = mount(getProfile(profileSpec1, personas))
+        wrapper.find('input[name="firstname"]').simulate('change', {target: {value: 'Phil'}})
+        wrapper.find('input[name="address"]').simulate('change', {target: {value: '@philt3r'}})
+        wrapper.find('input[name="suburb"]').simulate('change', {target: {value: 'Thor'}})
+        wrapper.find('input[name="city"]').simulate('change', {target: {value: 'Thor'}})
+        wrapper.find('button[name="createProfile"]').simulate('click')
+      })
+    }))
     return getProfile(profileSpec1, personas)
   }))
 

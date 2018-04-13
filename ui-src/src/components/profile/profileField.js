@@ -17,6 +17,7 @@ function renderInput(inputProps) {
 
   return (
     <TextField
+      name={name}
       fullWidth
       onChange = {onChange}
       InputProps={{
@@ -176,7 +177,7 @@ class ProfileField extends React.Component {
     });
   }
   render() {
-    const { classes, specField, label, usage} = this.props;
+    const { classes, fieldName, specField, label, usage} = this.props;
     return (
       <div>
         <Autosuggest
@@ -195,6 +196,7 @@ class ProfileField extends React.Component {
           renderSuggestion={renderSuggestion}
           inputProps={{
             classes,
+            name: specField,
             placeholder: label,
             value: this.state.personaFieldValue,
             onChange: this.handleChange,
