@@ -1,6 +1,6 @@
 {
-  "name": "create-react-app",
-  "version": "1.0.0",
+  "name": "holo-vault",
+  "version": "0.0.1",
   "private": true,
   "proxy": "http://localhost:4141",
   "dependencies": {
