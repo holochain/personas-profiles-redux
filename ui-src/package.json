@@ -22,6 +22,7 @@
     "build": "react-scripts build && node copy-to-ui.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "release:files": "node copy-release.js",
     "storybook": "start-storybook -p 9009 -s public",
     "storybook:deploy": "storybook-to-ghpages",
     "storybook:build": "build-storybook -s public"
