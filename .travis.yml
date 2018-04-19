@@ -24,7 +24,7 @@ script:
   - docker run --rm -v "$(pwd):/holo-vault" holochain/holochain-proto:develop bash -c "cd /holo-vault; hcdev -no-nat-upnp -mdns=true test"
   - cd ui-automation
   - npm install
-  # - docker run --rm -v "$(pwd):/holo-vault" holochain/holochain-proto:develop bash -c "cd /holo-vault; hcdev -execpath=$HOME/.holochaindev1 -no-nat-upnp -port=6001 -agentID=agent3141 -mdns=true web 3141 & hcdev -execpath=$HOME/.holochaindev2 -no-nat-upnp -port=6002 -agentID=agent4141 -mdns=true web 4141 & hcdev -execpath=$HOME/.holochaindev3 -no-nat-upnp -port=6003 -agentID=agent5141 -mdns=true web 5141 & cd ui-automation & npm test"
+  ## - docker run --rm -v "$(pwd):/holo-vault" holochain/holochain-proto:develop bash -c "cd /holo-vault; hcdev -execpath=$HOME/.holochaindev1 -no-nat-upnp -port=6001 -agentID=agent3141 -mdns=true web 3141 & hcdev -execpath=$HOME/.holochaindev2 -no-nat-upnp -port=6002 -agentID=agent4141 -mdns=true web 4141 & hcdev -execpath=$HOME/.holochaindev3 -no-nat-upnp -port=6003 -agentID=agent5141 -mdns=true web 5141 & cd ui-automation & npm test"
   - npm test
   - cd ..
   - cd ui-src
