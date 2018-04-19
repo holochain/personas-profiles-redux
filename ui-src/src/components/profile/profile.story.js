@@ -173,7 +173,9 @@ storiesOf('Profile', module)
     specs(() => describe('New Profile Existing Personas', function () {
       it('Creating a Profile by adding new entries sends a full Persona and a PersonaMapping', () => {
         const wrapper = mount(getProfile(profileSpec1, personas))
-        wrapper.find('input[name="firstname"]').simulate('change', {target: {value: 'Phil'}})
+        wrapper.find('input[name="firstname"]').simulate('change', {target: {value: 'P'}})
+        console.log(wrapper.find('ul').exists())
+        // expect(wrapper.find('ul').childAt(0).prop('value')).to.equal('li')
         wrapper.find('input[name="address"]').simulate('change', {target: {value: '@philt3r'}})
         wrapper.find('input[name="suburb"]').simulate('change', {target: {value: 'Thor'}})
         wrapper.find('input[name="city"]').simulate('change', {target: {value: 'Thor'}})
@@ -184,5 +186,5 @@ storiesOf('Profile', module)
   }))
 
 function getProfile(profileSpec, personas) {
-  return (<Provider store={store}><ProfileForm createProfileMapping={action('Sent the Profile Map')} createPersona={action('Sent the Persona')} profileSpec={profileSpec} personas={personas} /></Provider>)
+  return (<Provider store={store}><ProfileForm profileMappingCreate={action('Sent the Profile Map')} createPersona={action('Sent the Persona')} profileSpec={profileSpec} personas={personas} /></Provider>)
 }

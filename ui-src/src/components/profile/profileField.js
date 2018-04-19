@@ -17,7 +17,7 @@ function renderInput(inputProps) {
 
   return (
     <TextField
-      name={name}
+      name= {inputProps.name}
       fullWidth
       onChange = {onChange}
       InputProps={{

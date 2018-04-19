@@ -1,10 +1,10 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import Profile from './containers/profileContainer'
+import Persona from './containers/personaContainer'
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <Profile />
+    <Persona />
   </Provider>
 )
 

@@ -8,25 +8,26 @@
 //  Exposed functions with custom logic https://developer.holochain.org/API_reference
 // -----------------------------------------------------------------
 
-function profileMappingCreate (profileMappingEntry) {
-  var profileMappingHash = commit("profileMapping", profileMappingEntry);
-  return profileMappingHash;
+function personaCreate (personaEntry) {
+  debug('personaCreate')
+  var personaHash = commit("persona", personaEntry);
+  return personaHash;
 }
 
-function profileMappingRead (profileMappingHash) {
-  var profileMapping = get(profileMappingHash);
-  return profileMapping;
+function personaRead (personaHash) {
+  var persona = get(personaHash);
+  return persona;
 }
 
-function profileMappingUpdate (params) {
+function personaUpdate (params) {
   var replaces = params.replaces;
   var newEntry = params.newEntry;
-  var profileMappingHash = update("profileMapping", newEntry, replaces);
-  return profileMappingHash;
+  var personaHash = update("persona", newEntry, replaces);
+  return personaHash;
 }
 
-function profileMappingDelete () {
-  var result = remove(profileMappingHash);
+function personaDelete (personaHash) {
+  var result = remove(personaHash, 'No longer need this persona');
   return result;
 }
 
@@ -58,7 +59,12 @@ function genesis () {
  */
 function validateCommit (entryName, entry, header, pkg, sources) {
   switch (entryName) {
-    case "profileMapping":
+    case "persona":
+      // be sure to consider many edge cases for validating
+      // do not just flip this to true without considering what that means
+      // the action will ONLY be successfull if this returns true, so watch out!
+      return true;
+    case "persona_links":
       // be sure to consider many edge cases for validating
       // do not just flip this to true without considering what that means
       // the action will ONLY be successfull if this returns true, so watch out!
@@ -80,7 +86,12 @@ function validateCommit (entryName, entry, header, pkg, sources) {
  */
 function validatePut (entryName, entry, header, pkg, sources) {
   switch (entryName) {
-    case "profileMapping":
+    case "persona":
+      // be sure to consider many edge cases for validating
+      // do not just flip this to true without considering what that means
+      // the action will ONLY be successfull if this returns true, so watch out!
+      return true;
+    case "persona_links":
       // be sure to consider many edge cases for validating
       // do not just flip this to true without considering what that means
       // the action will ONLY be successfull if this returns true, so watch out!
@@ -103,7 +114,12 @@ function validatePut (entryName, entry, header, pkg, sources) {
  */
 function validateMod (entryName, entry, header, replaces, pkg, sources) {
   switch (entryName) {
-    case "profileMapping":
+    case "persona":
+      // be sure to consider many edge cases for validating
+      // do not just flip this to true without considering what that means
+      // the action will ONLY be successfull if this returns true, so watch out!
+      return true;
+    case "persona_links":
       // be sure to consider many edge cases for validating
       // do not just flip this to true without considering what that means
       // the action will ONLY be successfull if this returns true, so watch out!
@@ -124,7 +140,12 @@ function validateMod (entryName, entry, header, replaces, pkg, sources) {
  */
 function validateDel (entryName, hash, pkg, sources) {
   switch (entryName) {
-    case "profileMapping":
+    case "persona":
+      // be sure to consider many edge cases for validating
+      // do not just flip this to true without considering what that means
+      // the action will ONLY be successfull if this returns true, so watch out!
+      return true;
+    case "persona_links":
       // be sure to consider many edge cases for validating
       // do not just flip this to true without considering what that means
       // the action will ONLY be successfull if this returns true, so watch out!
@@ -146,7 +167,12 @@ function validateDel (entryName, hash, pkg, sources) {
  */
 function validateLink (entryName, baseHash, links, pkg, sources) {
   switch (entryName) {
-    case "profileMapping":
+    case "persona":
+      // be sure to consider many edge cases for validating
+      // do not just flip this to true without considering what that means
+      // the action will ONLY be successfull if this returns true, so watch out!
+      return false;
+    case "persona_links":
       // be sure to consider many edge cases for validating
       // do not just flip this to true without considering what that means
       // the action will ONLY be successfull if this returns true, so watch out!

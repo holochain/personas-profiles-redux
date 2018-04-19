@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import withRoot from '../../withRoot';
-import { Field, FieldArray, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField'
@@ -64,12 +64,36 @@ class Persona extends React.Component {
   }
 
   handlePersona = values => {
-      this.props.savePersona(values)
+    let fields = []
+    let currentFieldValue = ''
+    let currentField = ''
+    let isFieldName = true
+
+    Object.keys(values).forEach(function(field){
+      if(field !== 'personaName'){
+        console.log(isFieldName)
+        if(isFieldName){
+          currentField = values[field]
+
+          isFieldName = false
+        } else {
+          currentFieldValue = values[field]
+          fields.push(JSON.parse('{"' + currentField + '":"' + currentFieldValue + '"}'))
+          isFieldName = true
+        }
+      }
+
+    })
+    let persona = {
+        "name": values.personaName,
+        "personaFields": fields
+    }
+    console.log(JSON.stringify(persona))
+      this.props.personaCreate(persona)
   }
 
   handleAddPersonaField = () =>   {
     let personaFields = this.state.persona.personaFields.slice()
-    personaFields.push({"firstName": "Phil"})
     this.setState(prevState => ({
         persona: {
             ...prevState.persona,
@@ -82,6 +106,7 @@ class Persona extends React.Component {
     this.setState({
       persona: this.props.persona
     });
+    // this.props.loadPersona(this.props.persona)
   }
   render() {
     const { classes, handleSubmit, persona } = this.props;
@@ -97,7 +122,7 @@ class Persona extends React.Component {
             <FingerPrint/>
             Add Field
           </Button>
-          <Button name='createProfile' variant='raised' className={classes.button} color='secondary' onClick={handleSubmit(this.handlePersona)}>
+          <Button name='createPersona' variant='raised' className={classes.button} color='secondary' onClick={handleSubmit(this.handlePersona)}>
             <FingerPrint/>
             Create Persona
           </Button>

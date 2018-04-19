@@ -1,8 +1,9 @@
 
 import { connect } from 'react-redux'
-import ProfileForm from '../components/profile'
+import ProfileForm from '../components/profile/profile'
 import {
-  register
+  personaCreate,
+  profileMappingCreate
 } from '../actions'
 
 
@@ -12,17 +13,19 @@ const mapStateToProps = state => {
   return {
     profileHash: state.profile.profileHash,
     profile: state.profile.profile,
-    profileMapping: state.profile.profileMapping
+    profileMapping: state.profile.profileMapping,
+    profileSpec: state.profile.profileSpec,
+    personas: state.profile.personas
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createPersona: (mapping) => {
-      dispatch(createPersona(mapping))
+    personaCreate: (mapping) => {
+      dispatch(personaCreate(mapping))
     },
-    createProfileMapping: (mapping) => {
-      dispatch(createProfileMapping(mapping))
+    profileMappingCreate: (mapping) => {
+      dispatch(profileMappingCreate(mapping))
     }
   }
 }

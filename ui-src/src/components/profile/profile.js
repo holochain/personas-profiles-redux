@@ -62,8 +62,8 @@ class Profile extends React.Component {
     newPersona: {}
   }
   handleCreateProfile = () => {
-    this.props.createProfileMapping(profileMapping)
-    this.props.createPersona(this.state.newPersona)
+    this.props.profileMappingCreate(profileMapping)
+    this.props.personaCreate(this.state.newPersona)
   }
 
   //Gets the object from the field and creates the Profile mapping and if there are newField

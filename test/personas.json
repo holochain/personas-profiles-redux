@@ -1,0 +1,60 @@
+{
+  "Tests": [
+    {
+      "Convey": "Creating your new Persona saves it as a public entry",
+      "Details": "The concept is that you personally will have more than one device, so you share your own data to your own devices.  There is no need to link as we will use query() to fill a Profile",
+      "Zome": "personas",
+      "FnName": "personaCreate",
+      "Input": {
+        "name": "AwesomeApp",
+        "personaFields": [
+          {"userName": "@philt3r"},
+          {"dogsname": "Thor"}
+        ]
+      },
+      "Output": "%h%",
+      "Err": ""
+    },
+    {
+      "Convey": "You can read the Persona entry from its hash key.",
+      "Details": "When a request for your persona comes in the Profile Mapping is used to find your Persona info.",
+      "Zome": "personas",
+      "FnName": "personaRead",
+      "Input": "%h%",
+      "Output": {
+        "name": "AwesomeApp",
+        "personaFields": [
+          {"userName": "@philt3r"},
+          {"dogsname": "Thor"}
+        ]
+      },
+      "Err": ""
+    },
+    {
+      "Convey": "You can also update the Persona entry using its existing hash key.",
+      "Details": "You are in control of your Persona info and can update whenever you like.",
+      "Zome": "personas",
+      "FnName": "personaUpdate",
+      "Input": {
+        "replaces": "%h%",
+        "newEntry":{
+          "name": "UpdatedApp",
+          "personaFields": [
+            {"userName": "Pherrol"}
+          ]
+        }
+        },
+      "Output": "%h%",
+      "Err": ""
+    },
+    {
+      "Convey": "You can also delete the Persona entry using its existing hash key.",
+      "Details": "You are in control of your Persona info and can update whenever you like.",
+      "Zome": "personas",
+      "FnName": "personaDelete",
+      "Input": "%h%",
+      "Output": "%h%",
+      "Err": ""
+    }
+  ]
+}
