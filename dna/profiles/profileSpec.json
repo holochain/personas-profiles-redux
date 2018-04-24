@@ -1,58 +1,38 @@
 {
-  "$id": "holochat/profileSpec.json",
-  "source-dna": "QmZ4CP5unaghnmxbJkSBwobehgcF5VdcKLPimXEkwVTUYh",
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "id": "holo-vault-persona",
   "type": "object",
-  "expiry": "2018-12-12T01:01:10+00:00",
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "required": ["firstname", "address", "suburb"],
   "properties": {
-    "firstname": {
-      "$id": "/properties/firstname",
-      "type": "string",
-      "title": "First Name",
-      "default": "",
-      "usage": [
-        {
-          "type": "display",
-          "reason": "So we can show your name when people click your handle"
-        }
-      ]
+    "id": {
+      "type": "string"
     },
-    "address": {
-      "$id": "/properties/address",
-      "type": "string",
-      "title": "Address",
-      "default": "",
-      "usage": [
-        {
-          "type": "store",
-          "reason": "So we can keep records of where we sent your order"
-        }
-      ]
+    "sourceDna": {
+      "type": "string"
     },
-    "suburb": {
-      "$id": "/properties/suburb",
-      "type": "string",
-      "title": "Suburb",
-      "default": "",
-      "usage": [
-        {
-          "type": "store",
-          "reason": "So we can keep records of where we sent your order"
-        }
-      ]
+    "expiry": {
+      "type": "string"
     },
-    "city": {
-      "$id": "/properties/city",
-      "type": "string",
-      "title": "City",
-      "default": "",
-      "usage": [
-        {
-          "type": "store",
-          "reason": "So we can keep records of where we sent your order"
-        }
-      ]
+    "requiredFields": {
+      "default": [],
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "type": "array"
+    },
+    "profile": {
+      "default": [],
+      "items": {
+        "anyOf": [
+          {
+            "type": "object"
+          }
+        ]
+      },
+      "type": "array"
     }
   }
 }

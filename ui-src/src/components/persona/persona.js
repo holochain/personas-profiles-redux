@@ -115,6 +115,7 @@ class Persona extends React.Component {
 
         <form onSubmit={handleSubmit}>
           <div>
+            <p>Hi C</p>
             <Field name="personaName" component={renderTextField} label="Persona Name" value={persona.name} required={true} />
           </div>
           <PersonaFields persona={this.state.persona}/>

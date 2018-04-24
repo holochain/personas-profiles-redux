@@ -30,6 +30,10 @@ function profileMappingDelete () {
   return result;
 }
 
+function profileSpecCreate (profileSpecEntry) {
+  var profileSpecHash = commit("profileSpec", profileSpecEntry);
+  return profileSpecHash;
+}
 
 // -----------------------------------------------------------------
 //  The Genesis Function https://developer.holochain.org/genesis
@@ -63,6 +67,8 @@ function validateCommit (entryName, entry, header, pkg, sources) {
       // do not just flip this to true without considering what that means
       // the action will ONLY be successfull if this returns true, so watch out!
       return false;
+    case "profileSpec":
+      return true;
     default:
       // invalid entry name
       return false;
@@ -85,6 +91,8 @@ function validatePut (entryName, entry, header, pkg, sources) {
       // do not just flip this to true without considering what that means
       // the action will ONLY be successfull if this returns true, so watch out!
       return false;
+    case "profileSpec":
+      return true;
     default:
       // invalid entry name
       return false;

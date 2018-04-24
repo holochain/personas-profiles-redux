@@ -80,7 +80,14 @@
           "Name": "profileMapping",
           "DataFormat": "json",
           "Schema": "",
-          "SchemaFile": "",
+          "SchemaFile": "profileMapping.json",
+          "Sharing": "public"
+        },
+        {
+          "Name": "profileSpec",
+          "DataFormat": "json",
+          "Schema": "",
+          "SchemaFile": "profileSpec.json",
           "Sharing": "public"
         }
       ],
@@ -102,6 +109,11 @@
         },
         {
           "Name": "profileMappingDelete",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "profileSpecCreate",
           "CallingType": "json",
           "Exposure": "public"
         }
