@@ -23,7 +23,7 @@ class Profiles extends React.Component {
         <Typography variant='display1'>
           Profiles
         </Typography>
-        <Typography variant='body2' gutterBottom>
+        <Typography variant='body1' gutterBottom>
           Each time an app asks for Profile Information it gets stored here so you can see exactly what your informaiton is being used for.
         </Typography>
         <List>

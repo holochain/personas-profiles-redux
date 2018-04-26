@@ -1,9 +1,9 @@
 
 import { connect } from 'react-redux'
-import Profiles from '../components/profile/profiles'
+import Personas from '../components/persona/personas'
 import  * as constants from '../constants.js'
 import {
-  profilesList
+  personasList
 } from '../actions'
 
 
@@ -11,14 +11,14 @@ import {
 
 const mapStateToProps = state => {
   return {
-    profiles: [constants.profile1, constants.profile2, constants.profile3, constants.profile4]
+    personas: constants.personas
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    profilesList: (mapping) => {
-      dispatch(profilesList(mapping))
+    personasList: () => {
+      dispatch(personasList())
     }
   }
 }
@@ -26,4 +26,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Profiles)
+)(Personas)

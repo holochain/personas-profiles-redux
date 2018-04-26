@@ -4,11 +4,13 @@ import { Route } from 'react-router-dom'
 import { withStyles } from 'material-ui/styles';
 import withRoot from '../../../../withRoot';
 import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
 import List from 'material-ui/List'
 import { ListItem, ListItemAvatar, ListItemText } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
-import listCells from './listCells.md'
 import Markdown from 'react-markdown'
+import FingerPrint from 'material-ui-icons/Fingerprint'
+
 const styles = theme => ({
   root: {
     textAlign: 'left',
@@ -16,38 +18,45 @@ const styles = theme => ({
   },
 });
 
-class Cells extends React.Component {
+class Personas extends React.Component {
+
+  handleAddPersona = values => {
+
+  }
   render() {
-    const { classes, cells } = this.props;
+    const { classes, personas } = this.props;
     return (
       <div className={classes.root}>
         <Typography variant='display1'>
-          Cells
+          Personas
         </Typography>
         <Typography variant='body1' gutterBottom>
-          Each of the "Cells" you are part of has a set of Apps in it, each of those Apps is listed here as an App. Clicking the App will take you to the running instance of the App and will show you content from all of the Cells that use that App.
+          Look after your personal information here, click on a Persona to update or click Add Persona to create a new one.
         </Typography>
         <List>
           {
-            cells.map((cell, index) => (
+            personas.map((persona, index) => (
               <Route render={({ history}) => (
-                <ListItem key={index} button onClick={() => { history.push(cell.name) }}>
-                  <ListItemAvatar >
-                    <Avatar style={{marginTop: 10, borderRadius: 0 }}  src={cell.src} />
-                  </ListItemAvatar>
-                  <ListItemText primary={cell.name} secondary={cell.description} />
+                <ListItem key={index} button onClick={() => { history.push(`/persona/${persona.name}`) }}>
+                  <ListItemText primary={persona.name} />
                 </ListItem>
               )} />
             ))
           }
         </List>
+        <Route render={({ history}) => (
+          <Button name='addPersona' variant='raised' className={classes.button} color='primary' onClick={() => { history.push(`/persona/new`) }}>
+            <FingerPrint/>
+            Add Persona
+          </Button>
+        )} />
       </div>
     );
   }
 }
 
-Cells.propTypes = {
+Personas.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRoot(withStyles(styles)(Cells));
+export default withRoot(withStyles(styles)(Personas));

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import withRoot from '../../../../withRoot';
@@ -108,7 +109,7 @@ class Persona extends React.Component {
       personaName: this.props.persona.name
     }
     this.props.persona.personaFields.map((field, index) => (
-      initial[`fieldName${index}`] = Object.keys(field)
+      initial[`fieldName${index}`] = Object.keys(field)[0]
     ))
     this.props.persona.personaFields.map((field, index) => (
       initial[`fieldValue${index}`] = field[Object.keys(field)]
@@ -135,10 +136,12 @@ class Persona extends React.Component {
             <FingerPrint/>
             Add Field
           </Button>
-          <Button name='createPersona' variant='raised' className={classes.button} color='secondary' onClick={handleSubmit(this.handlePersona)}>
-            <FingerPrint/>
-            Create Persona
-          </Button>
+          <Route render={({ history}) => (
+            <Button name='createPersona' variant='raised' className={classes.button} color='secondary' onClick={handleSubmit(this.handlePersona)}>
+              <FingerPrint/>
+              Create Persona
+            </Button>
+          )} />
         </form>
       </div>
     );

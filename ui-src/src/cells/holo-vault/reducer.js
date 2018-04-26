@@ -7,12 +7,9 @@ const initialState = {
   userHash: 'empty',
   profileSpec: constants.profile1.profileSpec,
   profiles: [constants.profile1, constants.profile2, constants.profile3, constants.profile4],
+  profile: constants.profile1,
   personas:constants.personas,
-  persona: {
-      name: "New Persona",
-      personaFields: [
-      ]
-  }
+  persona: constants.personas[0]
 }
 
 function vaultReducer (state = initialState, action) {
@@ -32,6 +29,11 @@ function vaultReducer (state = initialState, action) {
         return {
           ...state,
           profiles: payload
+        }
+    case A.PERSONASLIST:
+        return {
+          ...state,
+          personas: payload
         }
     default:
       return state

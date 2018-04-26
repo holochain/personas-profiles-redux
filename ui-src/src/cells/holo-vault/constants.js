@@ -165,3 +165,16 @@ export const personas = [
         ]
     }
 ]
+
+export const mapping = {
+  "id": "HoloChat",
+  "source-dna": "QmZ4CP5unaghnmxbJkSBwobehgcF5VdcKLPimXEkwVTUYh",
+  "type": "object",
+  "expiry": "2018-12-12T01:01:10+00:00",
+  "profile":
+    {
+      "firstName": "Personal.firstName",
+      "lastName": "Work.lastName",
+      "handle": "Friends.nickName"
+    }
+}

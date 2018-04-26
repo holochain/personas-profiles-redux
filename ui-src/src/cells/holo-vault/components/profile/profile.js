@@ -93,9 +93,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount(){
-    console.log(this.props.personas)
     this.props.personas.forEach(function(persona){
-
       persona.personaFields.forEach(function(field){
         let key = Object.keys(field)[0]
         suggestions.push({ 'persona': persona.name, 'field': key, 'label': field[key]})
@@ -105,12 +103,10 @@ class Profile extends React.Component {
         "name": this.props.profileSpec.id,
         "personaFields": []
     })
-    profileMapping = {
-      'id': this.props.profileSpec.id,
-      'sourceDna': this.props.profileSpec.sourceDna,
-      'expiry': this.props.profileSpec.expiry,
-      'profile': {}
-    }
+    //iterate through this.props.mapping and get the values from query
+    profileMapping = this.props.mapping
+    console.log(profileMapping)
+    this.props.initialize(this.props.mapping)
   }
 
   render() {

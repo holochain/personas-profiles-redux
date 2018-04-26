@@ -1,2 +1,3 @@
-**List of Cells**
-Each of the "Cells" you are part of has a set of Apps in it, each of those Apps is listed here as an App. Clicking the App will take you to the running instance of the App and will show you content from all of the Cells that use that App.
+**List of Messages**
+The list of messages has all of the items in your feed. These can be a straight up text, text with an image or an Idea. The list is divided on days.
+You can add context with Emojis, Replies and turn conversations into more complex items such as an Idea.

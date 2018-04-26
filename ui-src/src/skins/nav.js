@@ -14,11 +14,12 @@ import Divider from 'material-ui/Divider'
 import MenuIcon from 'material-ui-icons/Menu'
 import GroupWorkIcon from 'material-ui-icons/GroupWork';
 import PersonIcon from 'material-ui-icons/Person'
+import PersonasContainer from '../cells/holo-vault/containers/personasContainer'
 import PersonaContainer from '../cells/holo-vault/containers/personaContainer'
 import ProfileContainer from '../cells/holo-vault/containers/profileContainer'
 import ProfilesContainer from '../cells/holo-vault/containers/profilesContainer'
 import CellsContainer from '../cells/cells/containers/cellsContainer'
-import MessagesContainer from '../cells/holo-chat/containers/messagesContainer'
+import SetupContainer from '../cells/holo-chat/containers/setupContainer'
 const drawerWidth = 180
 
 const styles = theme => ({
@@ -112,7 +113,7 @@ class Navigation extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant='title' color='inherit' noWrap>
-              Holo Brain
+            Amaze yourself!
             </Typography>
           </Toolbar>
         </AppBar>
@@ -128,10 +129,11 @@ class Navigation extends React.Component {
         </Hidden>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Route path='/personas' component={PersonaContainer} />
+          <Route path='/personas' component={PersonasContainer} />
+          <Route path='/persona/:name' component={PersonaContainer} />
           <Route path='/profiles' component={ProfilesContainer} />
           <Route path='/profile/:name' component={ProfileContainer} />
-          <Route path='/HoloChat' component={MessagesContainer} />
+          <Route path='/HoloChat' component={SetupContainer} />
           <Route path='/cells' component={CellsContainer} />
         </main>
       </div>

@@ -1,5 +1,6 @@
 import React from 'react'
-import {Provider} from 'react-redux';
+import {Provider} from 'react-redux'
+import { MemoryRouter } from 'react-router'
 import {storiesOf} from '@storybook/react'
 import {action, decorateAction} from '@storybook/addon-actions'
 import { withNotes } from '@storybook/addon-notes'
@@ -41,6 +42,9 @@ const personaCreate = decorateAction([
 ])
 
 storiesOf('HoloVault/Persona', module)
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+  ))
   // .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add('New Persona', withNotes(newPersonaNotes) (() => {
     specs(() => describe('New Persona', function () {

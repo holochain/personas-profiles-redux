@@ -7,25 +7,24 @@ import { withNotes } from '@storybook/addon-notes'
 import {specs, describe, it} from 'storybook-addon-specifications'
 import {configure, mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import Messages from './messages'
-import listMessages from './listMessages.md'
+import Setup from './setup'
 import expect from 'expect'
-import CreateStore from '../../../../store'
-import  * as constants from '../../constants.js'
-
+import setupNotes from './setup.md'
 configure({adapter: new Adapter()})
+
+import CreateStore from '../../../../store'
+
 let store = CreateStore()
 
 
-storiesOf('HoloChat/Messages', module)
+storiesOf('HoloChat/Setup', module)
 .addDecorator(story => (
     <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
   ))
-  // .addDecorator(story => <Provider store={store}>{story()}</Provider>)
-  .add('Feed', withNotes(listMessages) (() => {
-      return getMessages(constants.messages)
+  .add('Setup Step 1', withNotes(setupNotes) (() => {
+    return getSetup()
   }))
 
-function getMessages(messages) {
-  return (<Provider store={store}><Messages messages={messages} /></Provider>)
+function getSetup() {
+  return (<Provider store={store}><Setup /></Provider>)
 }
