@@ -7,7 +7,7 @@ import Typography from 'material-ui/Typography';
 import List from 'material-ui/List'
 import { ListItem, ListItemAvatar, ListItemText } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
-import Markdown from 'react-markdown'
+// import Markdown from 'react-markdown'
 const styles = theme => ({
   root: {
     textAlign: 'left',

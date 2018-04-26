@@ -5,11 +5,8 @@ import { withStyles } from 'material-ui/styles'
 import withRoot from '../../../../withRoot'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
-import List from 'material-ui/List'
-import { ListItem, ListItemAvatar, ListItemText } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
-// import setupNotes from './setup.md'
-import Markdown from 'react-markdown'
+
 const styles = theme => ({
   root: {
     textAlign: 'left',
