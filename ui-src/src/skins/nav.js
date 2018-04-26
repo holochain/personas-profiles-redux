@@ -77,32 +77,29 @@ class Navigation extends React.Component {
     const drawer = (
       <div>
         <div className={classes.toolbar} />
-        <Divider />
         <List>
-
           <Route render={({ history}) => (
             <div>
               <ListItem button onClick={() => { history.push('/cells') }}>
                 <ListItemIcon>
                   <GroupWorkIcon />
                 </ListItemIcon>
-                <ListItemText primary="Cells" />
+                <ListItemText primary='Cells' />
               </ListItem>
               <ListItem button onClick={() => { history.push('/personas') }}>
                 <ListItemIcon>
                   <PersonIcon />
                 </ListItemIcon>
-                <ListItemText primary="Personas" />
+                <ListItemText primary='Personas' />
               </ListItem>
               <ListItem button onClick={() => { history.push('/profiles') }}>
                 <ListItemIcon>
                   <PersonIcon />
                 </ListItemIcon>
-                <ListItemText primary="Profiles" />
+                <ListItemText primary='Profiles' />
               </ListItem>
             </div>
           )} />
-
       </List>
     </div>
     );
@@ -111,43 +108,21 @@ class Navigation extends React.Component {
       <div className={classes.root}>
         <AppBar className={classes.appBar}>
           <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={this.handleDrawerToggle}
-              className={classes.navIconHide}
-            >
+            <IconButton color='inherit' aria-label='open drawer' onClick={this.handleDrawerToggle} className={classes.navIconHide}>
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
+            <Typography variant='title' color='inherit' noWrap>
               Holo Brain
             </Typography>
           </Toolbar>
         </AppBar>
         <Hidden mdUp>
-          <Drawer
-            variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-            open={this.state.mobileOpen}
-            onClose={this.handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
+          <Drawer variant='temporary' anchor={theme.direction === 'rtl' ? 'right' : 'left'} open={this.state.mobileOpen} onClose={this.handleDrawerToggle} classes={{paper: classes.drawerPaper}} ModalProps={{ keepMounted: true }}>
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden smDown implementation="css">
-          <Drawer
-            variant="permanent"
-            open
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-          >
+        <Hidden smDown implementation='css'>
+          <Drawer variant='permanent' open classes={{paper: classes.drawerPaper}}>
             {drawer}
           </Drawer>
         </Hidden>

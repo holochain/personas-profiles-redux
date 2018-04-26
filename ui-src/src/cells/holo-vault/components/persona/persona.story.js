@@ -40,7 +40,7 @@ const personaCreate = decorateAction([
   }
 ])
 
-storiesOf('Persona', module)
+storiesOf('HoloVault/Persona', module)
   // .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add('New Persona', withNotes(newPersonaNotes) (() => {
     specs(() => describe('New Persona', function () {

@@ -87,7 +87,7 @@ class Persona extends React.Component {
         "personaFields": fields
     }
     console.log(JSON.stringify(persona))
-      this.props.personaCreate(persona)
+    this.props.personaCreate(persona)
   }
 
   handleAddPersonaField = () =>   {
@@ -105,16 +105,15 @@ class Persona extends React.Component {
       persona: this.props.persona
     });
     let initial = {
-      personaName: this.props.persona.personaName,
-      fieldName0: 'FirstName',
-      fieldValue0: 'Phil',
-      fieldName1: 'LastName',
-      fieldValue1: 'Beadle'
+      personaName: this.props.persona.name
     }
-    // this.props.persona.personaFields.map((field, index) => (
-    //   initial[`fieldName${index}`] = field
-    //   initial[`fieldValue${index}`] = field
-    // ))
+    this.props.persona.personaFields.map((field, index) => (
+      initial[`fieldName${index}`] = Object.keys(field)
+    ))
+    this.props.persona.personaFields.map((field, index) => (
+      initial[`fieldValue${index}`] = field[Object.keys(field)]
+    ))
+    console.log(initial)
     this.props.initialize(initial)
   }
   render() {

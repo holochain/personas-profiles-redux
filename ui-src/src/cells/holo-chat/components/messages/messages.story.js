@@ -21,7 +21,7 @@ storiesOf('HoloChat/Messages', module)
     <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
   ))
   // .addDecorator(story => <Provider store={store}>{story()}</Provider>)
-  .add('with text', () => (
+  .add('List of Messages', () => (
     <Provider store={store}><Messages /></Provider>
   ))
 

@@ -63,10 +63,7 @@ function genesis () {
 function validateCommit (entryName, entry, header, pkg, sources) {
   switch (entryName) {
     case "profileMapping":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
-      return false;
+      return true;
     case "profileSpec":
       return true;
     default:
@@ -87,10 +84,7 @@ function validateCommit (entryName, entry, header, pkg, sources) {
 function validatePut (entryName, entry, header, pkg, sources) {
   switch (entryName) {
     case "profileMapping":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
-      return false;
+      return true;
     case "profileSpec":
       return true;
     default:
