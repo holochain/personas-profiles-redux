@@ -5,7 +5,6 @@ import { withStyles } from 'material-ui/styles'
 import withRoot from '../../../../withRoot'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
-import Avatar from 'material-ui/Avatar'
 
 const styles = theme => ({
   root: {
