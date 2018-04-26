@@ -1,5 +1,5 @@
 import { configure } from '@storybook/react'
-const stories = require.context('../src/components', true, /story\.js$/)
+const stories = require.context('../src/cells', true, /story\.js$/)
 
 function loadStories () {
   stories.keys().forEach(stories)

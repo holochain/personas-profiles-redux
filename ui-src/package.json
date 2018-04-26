@@ -12,7 +12,9 @@
     "react": "latest",
     "react-autosuggest": "^9.3.4",
     "react-dom": "latest",
+    "react-markdown": "^3.3.0",
     "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "latest",
     "redux": "latest",
     "redux-form": "latest"

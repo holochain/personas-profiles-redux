@@ -11,6 +11,7 @@ import Typography from 'material-ui/Typography'
 import Tooltip from 'material-ui/Tooltip'
 import Save from 'material-ui-icons/Save'
 import Dvr from 'material-ui-icons/Dvr'
+import ViewListIcon from 'material-ui-icons/ViewList'
 
 function renderInput(inputProps) {
   const { classes, ref, onChange, ...other } = inputProps;
@@ -124,6 +125,8 @@ function UsageIcon(props) {
       return (<Tooltip title={props.reason}><Dvr/></Tooltip>)
     case 'store':
       return (<Tooltip title={props.reason}><Save/></Tooltip>)
+    case 'index':
+      return (<Tooltip title={props.reason}><ViewListIcon/></Tooltip>)
     default:
       return <div>{props.type}</div>
   }
@@ -177,7 +180,7 @@ class ProfileField extends React.Component {
     });
   }
   render() {
-    const { classes, fieldName, specField, label, usage} = this.props;
+    const { classes, specField, label, usage} = this.props;
     return (
       <div>
         <Autosuggest

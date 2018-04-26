@@ -2,7 +2,7 @@ import { compact } from 'lodash'
 import { applyMiddleware, compose, createStore } from 'redux'
 import promiseMiddleware from 'redux-promise'
 import { requestSendingMiddleware, hcMiddleware } from 'hc-redux-middleware'
-import holoVault from './reducer'
+import holoVault from './cells/holo-vault/reducer'
 
 const middleware = compact([
     hcMiddleware,

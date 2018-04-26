@@ -1,10 +1,13 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import Persona from './containers/personaContainer'
+import Navigation from './skins/nav'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <Persona />
+    <Router>
+      <Route path='/' component={Navigation} />
+    </Router>
   </Provider>
 )
 

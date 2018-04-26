@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import withRoot from '../../withRoot';
+import withRoot from '../../../../withRoot';
 import { Field, reduxForm } from 'redux-form'
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
@@ -43,8 +43,8 @@ function PersonaFields (props) {
     return (
       props.persona.personaFields.map((field, index) => (
         <div key={index}>
-          <Field name={'fieldName' + index} component={renderTextField} label="Field Name" required={true} />
-          <Field name={'fieldValue' + index} component={renderTextField} label="Field Value" required={true} />
+          <Field name={`fieldName${index}`} component={renderTextField} label="Field Name" required={true} />
+          <Field name={`fieldValue${index}`} component={renderTextField} label="Field Value" required={true} />
         </div>
       ))
     )
@@ -71,10 +71,8 @@ class Persona extends React.Component {
 
     Object.keys(values).forEach(function(field){
       if(field !== 'personaName'){
-        console.log(isFieldName)
         if(isFieldName){
           currentField = values[field]
-
           isFieldName = false
         } else {
           currentFieldValue = values[field]
@@ -106,17 +104,32 @@ class Persona extends React.Component {
     this.setState({
       persona: this.props.persona
     });
-    // this.props.loadPersona(this.props.persona)
+    let initial = {
+      personaName: this.props.persona.personaName,
+      fieldName0: 'FirstName',
+      fieldValue0: 'Phil',
+      fieldName1: 'LastName',
+      fieldValue1: 'Beadle'
+    }
+    // this.props.persona.personaFields.map((field, index) => (
+    //   initial[`fieldName${index}`] = field
+    //   initial[`fieldValue${index}`] = field
+    // ))
+    this.props.initialize(initial)
   }
   render() {
-    const { classes, handleSubmit, persona } = this.props;
+    const { classes, handleSubmit } = this.props;
     return (
       <div className={classes.root}>
-
+        <Typography variant='display1'>
+          Manage Your Personas
+        </Typography>
+        <Typography variant='body1' gutterBottom>
+          You can add a new Persona and add as many fields to it as you like. You will probably have a *Personal*, *Work* and a *Friends* persona.
+        </Typography>
         <form onSubmit={handleSubmit}>
           <div>
-            <p>Hi C</p>
-            <Field name="personaName" component={renderTextField} label="Persona Name" value={persona.name} required={true} />
+            <Field name="personaName" component={renderTextField} label="Persona Name" required={true} />
           </div>
           <PersonaFields persona={this.state.persona}/>
           <Button name='addField' variant='raised' className={classes.button} color='primary' onClick={this.handleAddPersonaField}>

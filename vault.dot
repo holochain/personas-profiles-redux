@@ -1,0 +1,70 @@
+digraph chain {
+graph [splines=line];
+node [shape=record fontname="Arial",fontsize="10",style="rounded, filled",penwidth=2,fontcolor="#c5c5c5",color="#8d00ff",fillcolor="#181818"];
+edge [penwidth=2, color="#8d00ff"];
+header0 [label=<{HEADER 0: GENESIS|
+{Type|%dna}|
+{Hash|QmRsbddpQpVgjEY3rijL68KR33QEs7bZHYc9dX3YDp2CUC}|
+{Timestamp|2018-04-26 07:18:54.614407 +1000 AEST}|
+{Next Header|1}|
+{Next|%dna: 1}|
+{Entry|QmaafMDHVuxaFkLgJrb3bgSyuaG4A3TmwfrUpV5JK5RZzb}
+}>];
+content0 [label=<{HOLOCHAIN DNA|See dna.json}>];
+header0->content0;
+header0->header1;
+header1 [label=<{HEADER 1|
+{Type|%agent}|
+{Hash|QmeqLxrXLSB2sspSbgoxAAZeK1nyKd9bZKHoSUXFKSc9Wc}|
+{Timestamp|2018-04-26 07:18:54.614933 +1000 AEST}|
+{Next Header|QmRsbddpQpVgjEY3rijL68KR33QEs7bZHYc9dX3YDp2CUC}|
+{Next|%agent: 1}|
+{Entry|QmPV1ZufTf8dhKjpUPFCMZQEAwFQVm21LBdoZTUze8M3i2}
+}>];
+content1 [label=<{AGENT ID|\{"Identity":"philipbeadle@Philips-MBP.lan",<br/>"Revocation":"",<br/>"PublicKey":"4XTTM3u4pQVoHKURZDteRboB8PZBCNbDkJRem9oy7bqFbyLvj"\}}>];
+header1->content1;
+header1->header2;
+header2 [label=<{HEADER 2|
+{Type|persona}|
+{Hash|Qmays5YaHvDcj6pr8fY8PQ7fhSoyKqCFyn5pLDTvW4btrw}|
+{Timestamp|2018-04-26 07:19:27.031032 +1000 AEST}|
+{Next Header|QmeqLxrXLSB2sspSbgoxAAZeK1nyKd9bZKHoSUXFKSc9Wc}|
+{Next|persona: 1}|
+{Entry|QmTdCPU9X53rXaz2YFBCS3SJgMyWhWyxA2XGJbx9bnGtsS}
+}>];
+content2 [label=<{ENTRY 2|\{"name":"TestPersona",<br/>"personaFields":[<br/>\{"first":"Phil"\},<br/>\{"last":"BBB"\}]\}}>];
+header2->content2;
+header2->header3;
+header3 [label=<{HEADER 3|
+{Type|persona}|
+{Hash|QmbmdCq84gZberL9o9NtLWP3FdEhvS1vPZktNeF9PFVNpG}|
+{Timestamp|2018-04-26 07:22:09.470864 +1000 AEST}|
+{Next Header|Qmays5YaHvDcj6pr8fY8PQ7fhSoyKqCFyn5pLDTvW4btrw}|
+{Next|persona: Qmays5YaHvDcj6pr8fY8PQ7fhSoyKqCFyn5pLDTvW4btrw}|
+{Entry|QmQSmHocdkZRk3qDJzAfnzHEHFkALBzc9sZWBA25M8Yy67}
+}>];
+content3 [label=<{ENTRY 3|\{"name":"Test",<br/>"personaFields":[<br/>\{"FirstName":"Phil"\},<br/>\{"Last":"Beadle"\}]\}}>];
+header3->content3;
+header3->header4;
+header4 [label=<{HEADER 4|
+{Type|persona}|
+{Hash|QmefjQjdwV42mFqug77ubrrmM3ngCcY41ACoc3GwyTJkMh}|
+{Timestamp|2018-04-26 07:24:03.380722 +1000 AEST}|
+{Next Header|QmbmdCq84gZberL9o9NtLWP3FdEhvS1vPZktNeF9PFVNpG}|
+{Next|persona: QmbmdCq84gZberL9o9NtLWP3FdEhvS1vPZktNeF9PFVNpG}|
+{Entry|QmRA4isMnNReVRLudMUxmTGTWkA2ATqbQHipQPA2F1LWW7}
+}>];
+content4 [label=<{ENTRY 4|\{"name":"Friends",<br/>"personaFields":[<br/>\{"First  NamenickName":"Phil@philt3r"\},<br/>\{"lastName":"Beadle"\}]\}}>];
+header4->content4;
+header4->header5;
+header5 [label=<{HEADER 5|
+{Type|persona}|
+{Hash|QmRupUbVnsWkeCTUPZNZgQmu7CViKrM1yzRMBMWwssAPYr}|
+{Timestamp|2018-04-26 07:24:03.478231 +1000 AEST}|
+{Next Header|QmefjQjdwV42mFqug77ubrrmM3ngCcY41ACoc3GwyTJkMh}|
+{Next|persona: QmefjQjdwV42mFqug77ubrrmM3ngCcY41ACoc3GwyTJkMh}|
+{Entry|QmRA4isMnNReVRLudMUxmTGTWkA2ATqbQHipQPA2F1LWW7}
+}>];
+content5 [label=<{ENTRY 5|\{"name":"Friends",<br/>"personaFields":[<br/>\{"First  NamenickName":"Phil@philt3r"\},<br/>\{"lastName":"Beadle"\}]\}}>];
+header5->content5;
+}

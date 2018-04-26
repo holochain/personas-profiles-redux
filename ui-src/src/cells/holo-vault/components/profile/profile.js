@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui/styles';
-import withRoot from '../../withRoot';
+import withRoot from '../../../../withRoot';
 import {Field, reduxForm} from 'redux-form'
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import FingerPrint from 'material-ui-icons/Fingerprint'
-import { MenuItem } from 'material-ui/Menu'
 import ProfileField from './profileField'
 const styles = theme => ({
   root: {
@@ -62,8 +61,8 @@ class Profile extends React.Component {
     newPersona: {}
   }
   handleCreateProfile = () => {
-    this.props.profileMappingCreate(profileMapping)
     this.props.personaCreate(this.state.newPersona)
+    this.props.profileMappingCreate(profileMapping)
   }
 
   //Gets the object from the field and creates the Profile mapping and if there are newField
@@ -94,7 +93,9 @@ class Profile extends React.Component {
   }
 
   componentDidMount(){
+    console.log(this.props.personas)
     this.props.personas.forEach(function(persona){
+
       persona.personaFields.forEach(function(field){
         let key = Object.keys(field)[0]
         suggestions.push({ 'persona': persona.name, 'field': key, 'label': field[key]})
@@ -113,7 +114,7 @@ class Profile extends React.Component {
   }
 
   render() {
-    const {classes, handleSubmit, profileHash, profileSpec} = this.props
+    const {classes, handleSubmit, profileSpec} = this.props
     return (<div className={classes.root}>
       <Typography variant='display1'>
         HoloVault
@@ -148,4 +149,4 @@ Profile.propTypes = {
 
 // const ProfileForm = reduxForm({form: 'Profile', validate})(Profile)
 const ProfileForm = reduxForm({form: 'Profile'})(Profile)
-export default withRoot(withStyles(styles)(ProfileForm));
+export default withRoot(withStyles(styles, { withTheme: true })(ProfileForm));
