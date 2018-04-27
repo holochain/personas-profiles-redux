@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
@@ -113,7 +113,7 @@ class Navigation extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant='title' color='inherit' noWrap>
-            Amaze yourself!
+              Holochain
             </Typography>
           </Toolbar>
         </AppBar>
@@ -133,8 +133,8 @@ class Navigation extends React.Component {
           <Route path='/persona/:name' component={PersonaContainer} />
           <Route path='/profiles' component={ProfilesContainer} />
           <Route path='/profile/:name' component={ProfileContainer} />
-          <Route path='/HoloChat' component={SetupContainer} />
           <Route path='/cells' component={CellsContainer} />
+          <Route path='/cell/:name' component={SetupContainer} />
         </main>
       </div>
     );

@@ -67,6 +67,7 @@ const styles = theme => ({
     color:'lightgrey'
   },
   messageImage:{
+    maxWidth:200,
     display: 'inline',
     marginLeft: 19,
     marginTop:  5,

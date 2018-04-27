@@ -31,7 +31,7 @@ class Cells extends React.Component {
           {
             cells.map((cell, index) => (
               <Route render={({ history}) => (
-                <ListItem key={index} button onClick={() => { history.push(cell.name) }}>
+                <ListItem key={index} button onClick={() => { history.push(`/cell/${cell.name}`) }}>
                   <ListItemAvatar >
                     <Avatar style={{marginTop: 10, borderRadius: 0 }}  src={cell.src} />
                   </ListItemAvatar>

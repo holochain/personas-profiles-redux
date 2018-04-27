@@ -68,6 +68,7 @@ class Profile extends React.Component {
   //Gets the object from the field and creates the Profile mapping and if there are newField
   //crestes the new Persona Object ready to save
   handleSelect = (personaProfileMapping) => {
+    console.log(profileMapping)
     if(personaProfileMapping !== undefined){
       profileMapping.profile[personaProfileMapping.specField]= personaProfileMapping.personaName + '.' + personaProfileMapping.personaField
       let persona = this.props.personas.filter(function (persona){
@@ -105,7 +106,6 @@ class Profile extends React.Component {
     })
     //iterate through this.props.mapping and get the values from query
     profileMapping = this.props.mapping
-    console.log(profileMapping)
     this.props.initialize(this.props.mapping)
   }
 

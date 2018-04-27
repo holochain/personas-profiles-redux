@@ -5,9 +5,14 @@ import {
   personaCreate
 } from '../actions'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+  const personaName = ownProps.match.params.name
+  let persona = state.profile.personas.filter(function (persona){
+    return personaName === persona.name
+  })[0]
   return {
-    persona: state.profile.persona
+    title: `Persona - ${personaName}`,
+    persona: persona
   }
 }
 
