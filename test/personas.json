@@ -55,6 +55,15 @@
       "Input": "%h%",
       "Output": "%h%",
       "Err": ""
+    },
+    {
+      "Convey": "You can list all of the Personas stored.",
+      "Details": "This enables you to keep your private information up to date in one place.",
+      "Zome": "personas",
+      "FnName": "personaList",
+      "Input": "",
+      "Output": "",
+      "Err": ""
     }
   ]
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'

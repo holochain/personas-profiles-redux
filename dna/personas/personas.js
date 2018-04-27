@@ -8,22 +8,13 @@
 //  Exposed functions with custom logic https://developer.holochain.org/API_reference
 // -----------------------------------------------------------------
 function personaList () {
-  var personaHash = commit("persona", personaEntry);
-  return personaHash;
+  var personas = query({Return: {Hashes: true, Entries: true},Constrain: {EntryTypes: ["persona"],Count:1}})
+  return personas;
 }
 
 function personaCreate (personaEntry) {
   debug('personaCreate')
   var personaHash = commit("persona", personaEntry);
-  commit('persona_links', {
-      Links: [
-        {
-          Base: App.Key.Hash,
-          Link: newHandleKey,
-          Tag: 'handle'
-        }
-      ]
-    })
   return personaHash;
 }
 
@@ -73,15 +64,9 @@ function genesis () {
 function validateCommit (entryName, entry, header, pkg, sources) {
   switch (entryName) {
     case "persona":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
       return true;
     case "persona_links":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
-      return false;
+      return true;
     default:
       // invalid entry name
       return false;
@@ -100,17 +85,10 @@ function validateCommit (entryName, entry, header, pkg, sources) {
 function validatePut (entryName, entry, header, pkg, sources) {
   switch (entryName) {
     case "persona":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
       return true;
     case "persona_links":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
-      return false;
+      return true;
     default:
-      // invalid entry name
       return false;
   }
 }
@@ -154,14 +132,8 @@ function validateMod (entryName, entry, header, replaces, pkg, sources) {
 function validateDel (entryName, hash, pkg, sources) {
   switch (entryName) {
     case "persona":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
       return true;
     case "persona_links":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
       return false;
     default:
       // invalid entry name
@@ -180,16 +152,8 @@ function validateDel (entryName, hash, pkg, sources) {
  */
 function validateLink (entryName, baseHash, links, pkg, sources) {
   switch (entryName) {
-    case "persona":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
-      return false;
     case "persona_links":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
-      return false;
+      return true;
     default:
       // invalid entry name
       return false;
