@@ -6,11 +6,21 @@ import {
 } from '../actions'
 
 const mapStateToProps = (state, ownProps) => {
+  let buttonText = 'Update Persona'
   const personaName = ownProps.match.params.name
   let persona = state.profile.personas.filter(function (persona){
     return personaName === persona.name
   })[0]
+  if (persona === undefined){
+    persona = {
+        "name": "New Persona",
+        "personaFields": [
+        ]
+    }
+    buttonText = "Create Persona"
+  }
   return {
+    buttonText: buttonText,
     title: `Persona - ${personaName}`,
     persona: persona
   }

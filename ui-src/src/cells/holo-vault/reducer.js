@@ -4,7 +4,6 @@ import  * as constants from './constants.js'
 import * as A from './actions'
 
 const initialState = {
-  title: 'Holochain',
   userHash: 'empty',
   profileSpec: constants.profile1.profileSpec,
   profiles: [constants.profile1, constants.profile2, constants.profile3, constants.profile4],

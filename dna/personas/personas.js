@@ -7,10 +7,23 @@
 // -----------------------------------------------------------------
 //  Exposed functions with custom logic https://developer.holochain.org/API_reference
 // -----------------------------------------------------------------
+function personaList () {
+  var personaHash = commit("persona", personaEntry);
+  return personaHash;
+}
 
 function personaCreate (personaEntry) {
   debug('personaCreate')
   var personaHash = commit("persona", personaEntry);
+  commit('persona_links', {
+      Links: [
+        {
+          Base: App.Key.Hash,
+          Link: newHandleKey,
+          Tag: 'handle'
+        }
+      ]
+    })
   return personaHash;
 }
 

@@ -105,8 +105,13 @@ class Profile extends React.Component {
         "personaFields": []
     })
     //iterate through this.props.mapping and get the values from query
+    let tempProfileValues = {
+      "firstName": "Phil",
+      "handle": "@philt3r",
+      "lastName": "Beadle"
+    }
     profileMapping = this.props.mapping
-    this.props.initialize(this.props.mapping)
+    this.props.initialize(tempProfileValues)
   }
 
   render() {

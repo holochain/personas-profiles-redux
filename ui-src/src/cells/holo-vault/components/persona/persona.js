@@ -139,7 +139,7 @@ class Persona extends React.Component {
           <Route render={({ history}) => (
             <Button name='createPersona' variant='raised' className={classes.button} color='secondary' onClick={handleSubmit(this.handlePersona)}>
               <FingerPrint/>
-              Create Persona
+              {this.props.buttonText}
             </Button>
           )} />
         </form>
