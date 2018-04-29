@@ -8,25 +8,36 @@
 //  Exposed functions with custom logic https://developer.holochain.org/API_reference
 // -----------------------------------------------------------------
 function personaList () {
-  var personas = query({Return: {Hashes: true, Entries: true},Constrain: {EntryTypes: ["persona"],Count:1}})
+  var personas = query({
+  Return: {
+    Hashes: true
+  },
+  Constrain: {
+    EntryTypes: ["persona"]
+  }
+})
   return personas;
 }
 
 function personaCreate (personaEntry) {
   debug('personaCreate')
   var personaHash = commit("persona", personaEntry);
+  debug(personaHash)
   return personaHash;
 }
 
 function personaRead (personaHash) {
+  debug(personaHash)
+
+  debug(get(personaHash))
   var persona = get(personaHash);
   return persona;
 }
 
 function personaUpdate (params) {
-  var replaces = params.replaces;
-  var newEntry = params.newEntry;
-  var personaHash = update("persona", newEntry, replaces);
+  var replaces = params.hash;
+  var persona = params.persona;
+  var personaHash = update("persona", persona, replaces);
   return personaHash;
 }
 

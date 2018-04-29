@@ -37,8 +37,8 @@ class Personas extends React.Component {
           {
             personas.map((persona, index) => (
               <Route render={({ history}) => (
-                <ListItem key={index} button onClick={() => { history.push(`/persona/${persona.name}`) }}>
-                  <ListItemText primary={persona.name} />
+                <ListItem key={index} button onClick={() => { history.push(`/persona/${persona.persona.name}`) }}>
+                  <ListItemText primary={persona.persona.name} />
                 </ListItem>
               )} />
             ))

@@ -181,7 +181,9 @@ export const profile4 = {
 }
 
 export const personas = [
-    {
+  {
+    "hash": "QmZqtKMs4pg9veqv3p4Sxzkgv2rdR7XoSn2TrLtAPLPSL7",
+    "persona": {
         "name": "Personal",
         "personaFields": [
             {"firstName": "Phil"},
@@ -190,8 +192,11 @@ export const personas = [
             {"suburb": "Burwood"},
             {"city": "Melbourne"}
         ]
-    },
-    {
+    }
+  },
+  {
+    "hash": "QmYQLnffCXXrYVdmFqKhryV4XBULunhGNoRzvrywyJen5C",
+    "persona": {
         "name": "Work",
         "personaFields": [
             {"firstName": "Philip"},
@@ -199,14 +204,18 @@ export const personas = [
             {"role": "Chief Engineer"},
             {"location": "Melbourne"}
         ]
-    },
-    {
+    }
+  },
+  {
+    "hash": "QmbzbwpLA8HjZCFqkPQE2TAEnugUPYz14W9Ux1hh8882Nr",
+    "persona": {
         "name": "Friends",
         "personaFields": [
             {"nickName": "@philt3r"},
             {"hobby": "DJ"}
         ]
     }
+  }
 ]
 
 export const mapping = {

@@ -83,9 +83,13 @@ class Persona extends React.Component {
       }
 
     })
-    let persona = {
+    let persona =
+    {
+      "hash": "QmbzbwpLA8HjZCFqkPQE2TAEnugUPYz14W9Ux1hh8882Nr",
+      "persona": {
         "name": values.personaName,
         "personaFields": fields
+      }
     }
     console.log(JSON.stringify(persona))
     this.props.personaCreate(persona)
@@ -114,7 +118,6 @@ class Persona extends React.Component {
     this.props.persona.personaFields.map((field, index) => (
       initial[`fieldValue${index}`] = field[Object.keys(field)]
     ))
-    console.log(initial)
     this.props.initialize(initial)
   }
   render() {
