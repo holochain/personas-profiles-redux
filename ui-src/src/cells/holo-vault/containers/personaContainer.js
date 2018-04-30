@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import PersonaForm from '../components/persona/persona'
 import {
   personaCreate,
-  personaUpdate
+  personaUpdate,
+  personasList
 } from '../actions'
 
 const mapStateToProps = (state, ownProps) => {
@@ -42,6 +43,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     personaUpdate: (persona) => {
       dispatch(personaUpdate(persona))
+    },
+    personasList: () => {
+      dispatch(personasList())
     }
   }
 }

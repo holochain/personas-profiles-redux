@@ -147,7 +147,7 @@ class Profile extends React.Component {
             <Field key={index} name={field.appLabel} specField={field.appLabel} onSelect={this.handleSelect} component={renderProfileField} label={field.display} suggestions={suggestions} usage={field.usage} personaField={profileSpec.id + ' (' + field.appLabel + ')'} className={classes.persona}/>
           </div>))
         }
-        <Button name='createProfile' variant='raised' className={classes.button} color='secondary' onClick={handleSubmit(this.handleCreateProfile)}>
+        <Button name='createProfile' variant='raised' className={classes.button} onClick={handleSubmit(this.handleCreateProfile)}>
           <FingerPrint/>
           Create Profile
         </Button>
