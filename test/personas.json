@@ -91,15 +91,6 @@
         ]
       },
       "Err": ""
-    },
-    {
-      "Convey": "You can list all of the Personas stored.",
-      "Details": "This enables you to keep your private information up to date in one place.",
-      "Zome": "personas",
-      "Input": "personasList().length === 2",
-      "Output": true,
-      "Err": "",
-      "Raw": true
     }
   ]
 }
