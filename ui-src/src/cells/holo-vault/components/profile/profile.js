@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui/styles';
 import withRoot from '../../../../withRoot';
@@ -162,4 +162,4 @@ Profile.propTypes = {
 
 // const ProfileForm = reduxForm({form: 'Profile', validate})(Profile)
 const ProfileForm = reduxForm({form: 'Profile'})(Profile)
-export default withRoot(withStyles(styles, { withTheme: true })(ProfileForm));
+export default withRoot(withStyles(styles, { withTheme: true })(withRouter(ProfileForm)));

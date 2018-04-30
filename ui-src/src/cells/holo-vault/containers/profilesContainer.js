@@ -1,7 +1,6 @@
 
 import { connect } from 'react-redux'
 import Profiles from '../components/profile/profiles'
-import  * as constants from '../constants.js'
 import {
   profilesList
 } from '../actions'

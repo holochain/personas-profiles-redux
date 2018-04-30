@@ -161,4 +161,4 @@ Persona.propTypes = {
 };
 
 const PersonaForm = reduxForm({form: 'Profile', validate})(Persona)
-export default withRoot(withStyles(styles)(PersonaForm));
+export default withRoot(withStyles(styles)(withRouter(PersonaForm)));

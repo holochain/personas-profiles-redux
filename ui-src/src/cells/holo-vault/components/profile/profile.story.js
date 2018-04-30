@@ -101,5 +101,5 @@ function getProfiles(profiles) {
 
 function getProfile(profileSpec, personas, mapping) {
   let history = []
-  return (<Provider store={store}><ProfileForm profileMappingCreate={action('Sent the Profile Map')} personaCreate={personaCreate('Click Create Persona')} profileSpec={profileSpec} personas={personas} mapping={mapping} history={history} /></Provider>)
+  return (<Provider store={store}><MemoryRouter initialEntries={['/']}><ProfileForm profileMappingCreate={action('Sent the Profile Map')} personaCreate={personaCreate('Click Create Persona')} profileSpec={profileSpec} personas={personas} mapping={mapping} history={history} /></MemoryRouter></Provider>)
 }

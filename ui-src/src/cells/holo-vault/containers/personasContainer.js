@@ -1,7 +1,6 @@
 
 import { connect } from 'react-redux'
 import Personas from '../components/persona/personas'
-import  * as constants from '../constants.js'
 import {
   personasList
 } from '../actions'
