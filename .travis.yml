@@ -11,6 +11,7 @@ before_install:
 - cd ui-src
 - npm install
 - npm run build
+- npm run start
 - cd ..
 - sudo rm /usr/local/bin/docker-compose
 - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
@@ -18,7 +19,7 @@ before_install:
 - chmod +x docker-compose
 - sudo mv docker-compose /usr/local/bin
 - TARGETDIR=$(pwd) docker-compose up -d
-- npm run start
+
 script:
 - docker run --rm -v "$(pwd):/holo-vault" holochain/holochain-proto:develop bash -c
   "cd /holo-vault; hcdev test"
