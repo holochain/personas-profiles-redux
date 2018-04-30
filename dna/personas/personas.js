@@ -10,24 +10,23 @@
 function personasList () {
   var personas = query({
     Return: {
+      Hashes: true,
       Entries: true
     },
     Constrain: {
-      EntryTypes: ["persona"],
-      Count:2
+      EntryTypes: ["persona"]
     }
   })
 
   var personasWithHash = []
   personas.forEach(function(persona){
     var personaWithHash = {
-      "hash": "testhash",
-      "persona": persona
+      "hash": persona.Hash,
+      "persona": persona.Entry
     }
     personasWithHash.push(personaWithHash)
   })
   debug(personasWithHash)
-  debug(personas)
   return personasWithHash;
 }
 

@@ -18,6 +18,7 @@ before_install:
 - chmod +x docker-compose
 - sudo mv docker-compose /usr/local/bin
 - TARGETDIR=$(pwd) docker-compose up -d
+- npm run start
 script:
 - docker run --rm -v "$(pwd):/holo-vault" holochain/holochain-proto:develop bash -c
   "cd /holo-vault; hcdev test"

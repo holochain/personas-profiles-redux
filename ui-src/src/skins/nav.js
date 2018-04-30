@@ -81,19 +81,19 @@ class Navigation extends React.Component {
         <List>
           <Route render={({ history}) => (
             <div>
-              <ListItem button onClick={() => { history.push('/cells') }}>
+              <ListItem name="cells" button onClick={() => { history.push('/cells') }}>
                 <ListItemIcon>
                   <GroupWorkIcon />
                 </ListItemIcon>
                 <ListItemText primary='Cells' />
               </ListItem>
-              <ListItem button onClick={() => { history.push('/personas') }}>
+              <ListItem id="personas" button onClick={() => { history.push('/personas') }}>
                 <ListItemIcon>
                   <PersonIcon />
                 </ListItemIcon>
                 <ListItemText primary='Personas' />
               </ListItem>
-              <ListItem button onClick={() => { history.push('/profiles') }}>
+              <ListItem name="profiles" button onClick={() => { history.push('/profiles') }}>
                 <ListItemIcon>
                   <PersonIcon />
                 </ListItemIcon>
