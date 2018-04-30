@@ -1,7 +1,6 @@
 
 import { connect } from 'react-redux'
 import Profiles from '../components/profile/profiles'
-import  * as constants from '../constants.js'
 import {
   profilesList
 } from '../actions'
@@ -11,7 +10,7 @@ import {
 
 const mapStateToProps = state => {
   return {
-    profiles: [constants.profile1, constants.profile2, constants.profile3, constants.profile4]
+    profiles: state.profile.profiles // [constants.profile1, constants.profile2, constants.profile3, constants.profile4]
   }
 }
 

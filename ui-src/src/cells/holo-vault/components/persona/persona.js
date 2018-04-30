@@ -7,7 +7,8 @@ import { Field, reduxForm } from 'redux-form'
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField'
-import FingerPrint from 'material-ui-icons/Fingerprint'
+import PersonAdd from 'material-ui-icons/PersonAdd'
+import TextFields from 'material-ui-icons/TextFields'
 
 const styles = theme => ({
   root: {
@@ -15,6 +16,7 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit,
   },
   button: {
+    marginRight: theme.spacing.unit,
     marginTop: theme.spacing.unit
   }
 });
@@ -91,12 +93,13 @@ class Persona extends React.Component {
         "personaFields": fields
       }
     }
-    console.log(JSON.stringify(persona))
+    console.log(JSON.stringify(this.props.hash))
     if(this.props.hash === ""){
       this.props.personaCreate(persona.persona)
     } else {
       this.props.personaUpdate(persona)
     }
+    this.props.personasList()
     this.props.history.push("/personas")
   }
 
@@ -113,7 +116,7 @@ class Persona extends React.Component {
   componentDidMount(){
     this.setState({
       persona: this.props.persona
-    });
+    })
     let initial = {
       personaName: this.props.persona.name
     }
@@ -140,13 +143,13 @@ class Persona extends React.Component {
             <Field name="personaName" component={renderTextField} label="Persona Name" required={true} />
           </div>
           <PersonaFields persona={this.state.persona}/>
-          <Button name='addField' variant='raised' className={classes.button} color='primary' onClick={this.handleAddPersonaField}>
-            <FingerPrint/>
+          <Button name='addField' variant='raised' className={classes.button} onClick={this.handleAddPersonaField}>
+            <TextFields/>
             Add Field
           </Button>
           <Route render={({ history}) => (
-            <Button name='createPersona' variant='raised' className={classes.button} color='secondary' onClick={handleSubmit(this.handlePersona)}>
-              <FingerPrint/>
+            <Button name='createPersona' variant='raised' className={classes.button} onClick={handleSubmit(this.handlePersona)}>
+              <PersonAdd/>
               {this.props.buttonText}
             </Button>
           )} />
@@ -161,4 +164,4 @@ Persona.propTypes = {
 };
 
 const PersonaForm = reduxForm({form: 'Profile', validate})(Persona)
-export default withRoot(withStyles(styles)(PersonaForm));
+export default withRoot(withStyles(styles)(withRouter(PersonaForm)));

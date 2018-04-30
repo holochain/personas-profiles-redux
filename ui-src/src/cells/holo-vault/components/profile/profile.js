@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui/styles';
 import withRoot from '../../../../withRoot';
@@ -62,7 +62,11 @@ class Profile extends React.Component {
     newPersona: {}
   }
   handleCreateProfile = () => {
-    this.props.personaCreate(this.state.newPersona)
+    if(this.state.newPersona.personaFields.length > 0){
+      this.props.personaCreate(this.state.newPersona)
+    } else {
+      this.props.personas.splice(this.props.personas.length - 1, 1)
+    }
     this.props.profileMappingCreate(profileMapping)
     this.props.history.push("/profiles")
   }
@@ -75,13 +79,9 @@ class Profile extends React.Component {
       let persona = this.props.personas.filter(function (persona){
         return persona.persona.name === personaProfileMapping.personaName
       })[0].persona
-      console.log(this.props.personas[this.props.personas.length - 1])
-
       let personaField = persona.personaFields.filter(function (field){
         return Object.keys(field)[0] === personaProfileMapping.personaField
       })
-      console.log(this.props.personas[this.props.personas.length - 1])
-
       if(personaField.length === 0){
         let newField = {}
         newField[personaProfileMapping.personaField] = personaProfileMapping.personaFieldValue
@@ -124,7 +124,6 @@ class Profile extends React.Component {
     }
     profileMapping = this.props.mapping
     this.props.initialize(tempProfileValues)
-    console.log(this.props.personas)
   }
 
   render() {
@@ -148,7 +147,7 @@ class Profile extends React.Component {
             <Field key={index} name={field.appLabel} specField={field.appLabel} onSelect={this.handleSelect} component={renderProfileField} label={field.display} suggestions={suggestions} usage={field.usage} personaField={profileSpec.id + ' (' + field.appLabel + ')'} className={classes.persona}/>
           </div>))
         }
-        <Button name='createProfile' variant='raised' className={classes.button} color='secondary' onClick={handleSubmit(this.handleCreateProfile)}>
+        <Button name='createProfile' variant='raised' className={classes.button} onClick={handleSubmit(this.handleCreateProfile)}>
           <FingerPrint/>
           Create Profile
         </Button>
@@ -163,4 +162,4 @@ Profile.propTypes = {
 
 // const ProfileForm = reduxForm({form: 'Profile', validate})(Profile)
 const ProfileForm = reduxForm({form: 'Profile'})(Profile)
-export default withRoot(withStyles(styles, { withTheme: true })(ProfileForm));
+export default withRoot(withStyles(styles, { withTheme: true })(withRouter(ProfileForm)));

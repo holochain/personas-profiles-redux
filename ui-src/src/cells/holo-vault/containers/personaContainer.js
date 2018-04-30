@@ -3,26 +3,31 @@ import { connect } from 'react-redux'
 import PersonaForm from '../components/persona/persona'
 import {
   personaCreate,
-  personaUpdate
+  personaUpdate,
+  personasList
 } from '../actions'
 
 const mapStateToProps = (state, ownProps) => {
   let buttonText = 'Update Persona'
+  let persona = {}
+  let hash = ""
   const personaName = ownProps.match.params.name
   let filteredPersona = state.profile.personas.filter(function (persona){
     return personaName === persona.persona.name
   })[0]
-  let persona = filteredPersona.persona
-  let hash = filteredPersona.hash
-  if (persona === undefined){
+  if (filteredPersona === undefined){
     persona = {
-        "name": "New Persona",
+        "name": "",
         "personaFields": [
         ]
     }
     hash = ""
     buttonText = "Create Persona"
+  } else {
+    persona = filteredPersona.persona
+    hash = filteredPersona.hash
   }
+
   return {
     buttonText: buttonText,
     title: `Persona - ${personaName}`,
@@ -38,6 +43,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     personaUpdate: (persona) => {
       dispatch(personaUpdate(persona))
+    },
+    personasList: () => {
+      dispatch(personasList())
     }
   }
 }

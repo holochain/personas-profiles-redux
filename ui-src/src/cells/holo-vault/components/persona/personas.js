@@ -7,8 +7,9 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import List from 'material-ui/List'
 import { ListItem, ListItemText } from 'material-ui/List'
-// import Avatar from 'material-ui/Avatar'
-// import Markdown from 'react-markdown'
+import Person from 'material-ui-icons/Person'
+import PersonAdd from 'material-ui-icons/PersonAdd'
+
 import FingerPrint from 'material-ui-icons/Fingerprint'
 
 const styles = theme => ({
@@ -19,9 +20,8 @@ const styles = theme => ({
 });
 
 class Personas extends React.Component {
-
-  handleAddPersona = values => {
-
+  componentDidMount(){
+    this.props.personasList()
   }
   render() {
     const { classes, personas } = this.props;
@@ -38,6 +38,7 @@ class Personas extends React.Component {
             personas.map((persona, index) => (
               <Route render={({ history}) => (
                 <ListItem key={index} button onClick={() => { history.push(`/persona/${persona.persona.name}`) }}>
+                  <Person/>
                   <ListItemText primary={persona.persona.name} />
                 </ListItem>
               )} />
@@ -45,8 +46,8 @@ class Personas extends React.Component {
           }
         </List>
         <Route render={({ history}) => (
-          <Button name='addPersona' variant='raised' className={classes.button} color='primary' onClick={() => { history.push(`/persona/new`) }}>
-            <FingerPrint/>
+          <Button name='addPersona' variant='raised' className={classes.button} onClick={() => { history.push(`/persona/new`) }}>
+            <PersonAdd/>
             Add Persona
           </Button>
         )} />

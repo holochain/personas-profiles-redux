@@ -67,7 +67,7 @@ storiesOf('HoloVault/Profile', module)
   .add('New Profile with Existing Personas', withNotes(threePersonas) (() => {
     specs(() => describe('HoloVault/New Profile Existing Personas', function () {
       it('Creating a Profile by adding new entries sends a full Persona and a PersonaMapping', () => {
-        const wrapper = mount(getProfile(constants.profile1.profileSpec, constants.personas))
+        const wrapper = mount(getProfile(constants.profile1.profileSpec, constants.personas, constants.mapping))
         wrapper.find('input[name="firstName"]').simulate('change', {target: {value: 'Phil'}})
         wrapper.find('input[name="lastName"]').simulate('change', {target: {value: 'Beadle'}})
         wrapper.find('input[name="handle"]').simulate('change', {target: {value: '@philt3r'}})
@@ -86,7 +86,7 @@ storiesOf('HoloVault/Profile', module)
   .add('Edit Profile', withNotes(editProfile) (() => {
     specs(() => describe('HoloVault/New Profile Existing Personas', function () {
       it('Creating a Profile by adding new entries sends a full Persona and a PersonaMapping', () => {
-        const wrapper = mount(getProfile(constants.profile1.profileSpec, constants.personas))
+        const wrapper = mount(getProfile(constants.profile1.profileSpec, constants.personas, constants.mapping))
         wrapper.find('input[name="firstName"]').simulate('change', {target: {value: 'Phil'}})
         wrapper.find('input[name="lastName"]').simulate('change', {target: {value: 'Beadle'}})
         wrapper.find('input[name="handle"]').simulate('change', {target: {value: '@philt3r'}})
@@ -100,5 +100,6 @@ function getProfiles(profiles) {
 }
 
 function getProfile(profileSpec, personas, mapping) {
-  return (<Provider store={store}><ProfileForm profileMappingCreate={action('Sent the Profile Map')} personaCreate={personaCreate('Click Create Persona')} profileSpec={profileSpec} personas={personas} mapping={mapping} /></Provider>)
+  let history = []
+  return (<Provider store={store}><MemoryRouter initialEntries={['/']}><ProfileForm profileMappingCreate={action('Sent the Profile Map')} personaCreate={personaCreate('Click Create Persona')} profileSpec={profileSpec} personas={personas} mapping={mapping} history={history} /></MemoryRouter></Provider>)
 }
