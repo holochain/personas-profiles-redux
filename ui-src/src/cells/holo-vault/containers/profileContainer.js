@@ -8,13 +8,17 @@ import {
 
 
 
-
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+  const profileName = ownProps.match.params.name
+  let selectedProfile = state.profile.profiles.filter(function (profile){
+    return profileName === profile.name
+  })[0]
+  console.log(selectedProfile.mapping)
   return {
     profileHash: state.profile.profileHash,
-    profile: state.profile.profile,
-    profileMapping: state.profile.profileMapping,
-    profileSpec: state.profile.profileSpec,
+    profile: selectedProfile,
+    mapping: selectedProfile.mapping,
+    profileSpec: selectedProfile.profileSpec,
     personas: state.profile.personas
   }
 }

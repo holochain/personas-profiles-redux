@@ -1,0 +1,29 @@
+
+import { connect } from 'react-redux'
+import Personas from '../components/persona/personas'
+import  * as constants from '../constants.js'
+import {
+  personasList
+} from '../actions'
+
+
+
+
+const mapStateToProps = state => {
+  return {
+    personas: constants.personas
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    personasList: () => {
+      dispatch(personasList())
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Personas)

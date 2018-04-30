@@ -1,6 +1,6 @@
 describe('How to work with Personas', function () {
   it('Add a new Persona by clicking the Add button', function () {
-    cy.visit('/')
+    cy.visit('/persona/new')
     cy.get('input[name="personaName"]').type('Friends', { delay: 25 })
     cy.log('Fill out the name you want to refer to this Persona as')
     cy.get('button[name="addField"]').click()

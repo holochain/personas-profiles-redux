@@ -1,8 +1,8 @@
 import React from 'react'
-import {Provider} from 'react-redux';
+import {Provider} from 'react-redux'
+import { MemoryRouter } from 'react-router'
 import {storiesOf} from '@storybook/react'
-import {action} from '@storybook/addon-actions'
-import { decorateAction } from '@storybook/addon-actions'
+import {action, decorateAction} from '@storybook/addon-actions'
 import { withNotes } from '@storybook/addon-notes'
 import {specs, describe, it} from 'storybook-addon-specifications'
 import {configure, mount} from 'enzyme'
@@ -13,7 +13,7 @@ import newPersonaNotes from './newPersona.md'
 import editPersonaNotes from './threePersonas.md'
 configure({adapter: new Adapter()})
 
-import CreateStore from '../../store'
+import CreateStore from '../../../../store'
 
 let store = CreateStore()
 let newPersona = {
@@ -41,8 +41,11 @@ const personaCreate = decorateAction([
   }
 ])
 
-storiesOf('Persona', module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
+storiesOf('HoloVault/Persona', module)
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+  ))
+  // .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add('New Persona', withNotes(newPersonaNotes) (() => {
     specs(() => describe('New Persona', function () {
       it('Creating a Persona by adding new fields and values, this will send a Persona to Holochain', () => {
@@ -54,7 +57,7 @@ storiesOf('Persona', module)
             {"lastName":"Beadle"}
           ]
         }
-        
+
         wrapper.find('input[name="personaName"]').simulate('change', {target: {value: 'Personal'}})
         wrapper.find('button[name="addField"]').simulate('click')
         wrapper.find('input[name="fieldName0"]').simulate('change', {target: {value: 'firstName'}})

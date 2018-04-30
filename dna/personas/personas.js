@@ -7,22 +7,38 @@
 // -----------------------------------------------------------------
 //  Exposed functions with custom logic https://developer.holochain.org/API_reference
 // -----------------------------------------------------------------
+function personaList () {
+  var personas = query({
+  Return: {
+    Hashes: true
+  },
+  Constrain: {
+    EntryTypes: ["persona"]
+  }
+})
+  return personas;
+}
 
 function personaCreate (personaEntry) {
   debug('personaCreate')
   var personaHash = commit("persona", personaEntry);
+  debug(personaHash)
   return personaHash;
 }
 
 function personaRead (personaHash) {
+  debug(personaHash)
+
+  debug(get(personaHash))
   var persona = get(personaHash);
   return persona;
 }
 
 function personaUpdate (params) {
-  var replaces = params.replaces;
-  var newEntry = params.newEntry;
-  var personaHash = update("persona", newEntry, replaces);
+  debug(params)
+  var replaces = params.hash;
+  var persona = params.persona;
+  var personaHash = update("persona", persona, replaces);
   return personaHash;
 }
 
@@ -60,15 +76,9 @@ function genesis () {
 function validateCommit (entryName, entry, header, pkg, sources) {
   switch (entryName) {
     case "persona":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
       return true;
     case "persona_links":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
-      return false;
+      return true;
     default:
       // invalid entry name
       return false;
@@ -87,17 +97,10 @@ function validateCommit (entryName, entry, header, pkg, sources) {
 function validatePut (entryName, entry, header, pkg, sources) {
   switch (entryName) {
     case "persona":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
       return true;
     case "persona_links":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
-      return false;
+      return true;
     default:
-      // invalid entry name
       return false;
   }
 }
@@ -141,14 +144,8 @@ function validateMod (entryName, entry, header, replaces, pkg, sources) {
 function validateDel (entryName, hash, pkg, sources) {
   switch (entryName) {
     case "persona":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
       return true;
     case "persona_links":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
       return false;
     default:
       // invalid entry name
@@ -167,16 +164,8 @@ function validateDel (entryName, hash, pkg, sources) {
  */
 function validateLink (entryName, baseHash, links, pkg, sources) {
   switch (entryName) {
-    case "persona":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
-      return false;
     case "persona_links":
-      // be sure to consider many edge cases for validating
-      // do not just flip this to true without considering what that means
-      // the action will ONLY be successfull if this returns true, so watch out!
-      return false;
+      return true;
     default:
       // invalid entry name
       return false;

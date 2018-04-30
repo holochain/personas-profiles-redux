@@ -1,20 +1,21 @@
 
 import { connect } from 'react-redux'
-import PersonaForm from '../components/persona/persona'
+import Messages from '../components/messages/messages'
+// import  * as constants from '../constants.js'
 import {
-  personaCreate
+  messagesList
 } from '../actions'
 
 const mapStateToProps = state => {
   return {
-    persona: state.profile.persona
+    messages: []
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    personaCreate: (mapping) => {
-      dispatch(personaCreate(mapping))
+    messagesList: () => {
+      dispatch(messagesList())
     }
   }
 }
@@ -22,4 +23,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PersonaForm)
+)(Messages)

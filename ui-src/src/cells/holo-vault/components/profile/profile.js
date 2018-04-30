@@ -1,12 +1,12 @@
 import React from 'react';
+import { Route, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui/styles';
-import withRoot from '../../withRoot';
+import withRoot from '../../../../withRoot';
 import {Field, reduxForm} from 'redux-form'
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import FingerPrint from 'material-ui-icons/Fingerprint'
-import { MenuItem } from 'material-ui/Menu'
 import ProfileField from './profileField'
 const styles = theme => ({
   root: {
@@ -62,21 +62,26 @@ class Profile extends React.Component {
     newPersona: {}
   }
   handleCreateProfile = () => {
-    this.props.profileMappingCreate(profileMapping)
     this.props.personaCreate(this.state.newPersona)
+    this.props.profileMappingCreate(profileMapping)
+    this.props.history.push("/profiles")
   }
 
   //Gets the object from the field and creates the Profile mapping and if there are newField
-  //crestes the new Persona Object ready to save
+  //creates the new Persona Object ready to save
   handleSelect = (personaProfileMapping) => {
     if(personaProfileMapping !== undefined){
       profileMapping.profile[personaProfileMapping.specField]= personaProfileMapping.personaName + '.' + personaProfileMapping.personaField
       let persona = this.props.personas.filter(function (persona){
-        return persona.name === personaProfileMapping.personaName
-      })[0]
-      let personaField = persona.personaFields.filter(function (persona){
-        return Object.keys(persona)[0] === personaProfileMapping.personaField
+        return persona.persona.name === personaProfileMapping.personaName
+      })[0].persona
+      console.log(this.props.personas[this.props.personas.length - 1])
+
+      let personaField = persona.personaFields.filter(function (field){
+        return Object.keys(field)[0] === personaProfileMapping.personaField
       })
+      console.log(this.props.personas[this.props.personas.length - 1])
+
       if(personaField.length === 0){
         let newField = {}
         newField[personaProfileMapping.personaField] = personaProfileMapping.personaFieldValue
@@ -84,36 +89,46 @@ class Profile extends React.Component {
       } else {
         personaField[0][personaProfileMapping.personaField] = personaProfileMapping.personaFieldValue
       }
+      // console.log(personaField)
+
       if(personaProfileMapping.removeTyped){
-        this.props.personas[this.props.personas.length - 1].persona = this.props.personas[this.props.personas.length - 1].personaFields.filter(function(personaField) {
+        this.props.personas[this.props.personas.length - 1].persona.personaFields = this.props.personas[this.props.personas.length - 1].persona.personaFields.filter(function(personaField) {
           return Object.keys(personaField)[0] !== personaProfileMapping.specField
         })
       }
-      this.setState({newPersona: this.props.personas[this.props.personas.length - 1]})
+      this.setState({newPersona: this.props.personas[this.props.personas.length - 1].persona})
     }
   }
 
   componentDidMount(){
     this.props.personas.forEach(function(persona){
-      persona.personaFields.forEach(function(field){
+      persona.persona.personaFields.forEach(function(field){
         let key = Object.keys(field)[0]
-        suggestions.push({ 'persona': persona.name, 'field': key, 'label': field[key]})
+        suggestions.push({ 'persona': persona.persona.name, 'field': key, 'label': field[key]})
       })
     })
-    this.props.personas.push({
-        "name": this.props.profileSpec.id,
-        "personaFields": []
-    })
-    profileMapping = {
-      'id': this.props.profileSpec.id,
-      'sourceDna': this.props.profileSpec.sourceDna,
-      'expiry': this.props.profileSpec.expiry,
-      'profile': {}
+    this.props.personas.push(
+      {
+        "hash": "",
+        "persona": {
+          "name": this.props.profileSpec.id,
+          "personaFields": []
+        }
+      }
+    )
+    //iterate through this.props.mapping and get the values from query
+    let tempProfileValues = {
+      "firstName": "Phil",
+      "handle": "@philt3r",
+      "lastName": "Beadle"
     }
+    profileMapping = this.props.mapping
+    this.props.initialize(tempProfileValues)
+    console.log(this.props.personas)
   }
 
   render() {
-    const {classes, handleSubmit, profileHash, profileSpec} = this.props
+    const {classes, handleSubmit, profileSpec} = this.props
     return (<div className={classes.root}>
       <Typography variant='display1'>
         HoloVault
@@ -148,4 +163,4 @@ Profile.propTypes = {
 
 // const ProfileForm = reduxForm({form: 'Profile', validate})(Profile)
 const ProfileForm = reduxForm({form: 'Profile'})(Profile)
-export default withRoot(withStyles(styles)(ProfileForm));
+export default withRoot(withStyles(styles, { withTheme: true })(ProfileForm));

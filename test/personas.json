@@ -55,6 +55,58 @@
       "Input": "%h%",
       "Output": "%h%",
       "Err": ""
+    },
+    {
+      "Convey": "Create a second Persona",
+      "Details": "You will typically have several Personas",
+      "Zome": "personas",
+      "FnName": "personaCreate",
+      "Input": {
+        "name": "Personal",
+        "personaFields": [
+            {"firstName": "Phil"},
+            {"lastName": "Beadle"},
+            {"address": "123 Holochain Road"},
+            {"suburb": "Burwood"},
+            {"city": "Melbourne"}
+        ]
+      },
+      "Output": "%h%",
+      "Err": ""
+    },
+    {
+      "Convey": "You can read the Persona entry from its hash key.",
+      "Details": "When a request for your persona comes in the Profile Mapping is used to find your Persona info.",
+      "Zome": "personas",
+      "FnName": "personaRead",
+      "Input": "%h%",
+      "Output": {
+        "name": "AwesomeApp",
+        "personaFields": [
+          {"userName": "@philt3r"},
+          {"dogsname": "Thor"}
+        ]
+      },
+      "Err": ""
+    },
+    {
+      "Convey": "You can list all of the Personas stored.",
+      "Details": "This enables you to keep your private information up to date in one place.",
+      "Zome": "personas",
+      "Input": "personaList().length === 2",
+      "Output": true,
+      "Err": "",
+      "Raw": true
+    },
+    {
+      "Convey": "You can list all of the Personas stored.",
+      "Details": "This enables you to keep your private information up to date in one place.",
+      "Zome": "personas",
+      "FnName": "personaList",
+      "Input": "",
+      "Output": true,
+      "Err": "",
+      "Raw": false
     }
   ]
 }

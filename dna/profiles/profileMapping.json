@@ -3,20 +3,20 @@
   "id": "holo-vault-profile-map",
   "type": "object",
   "properties": {
-    "name": {
+    "id": {
+      "type": "string",
+      "pattern": ".+"
+    },
+    "sourceDna": {
+      "type": "string",
+      "pattern": ".+"
+    },
+    "expiry": {
       "type": "string",
       "pattern": ".+"
     },
     "profile": {
-      "default": [],
-      "items": {
-        "anyOf": [
-          {
-            "type": "object"
-          }
-        ]
-      },
-      "type": "array"
+      "type": "object"
     }
   }
 }

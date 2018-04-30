@@ -1,0 +1,59 @@
+digraph chain {
+graph [splines=line];
+node [shape=record fontname="Arial",fontsize="10",style="rounded, filled",penwidth=2,fontcolor="#c5c5c5",color="#8d00ff",fillcolor="#181818"];
+edge [penwidth=2, color="#8d00ff"];
+header0 [label=<{HEADER 0: GENESIS|
+{Type|%dna}|
+{Hash|QmTqNhNyDnPFeiTnFBtLRJMZLVDvva8aPbHXE2wW1s8JRM}|
+{Timestamp|2018-04-30 09:36:00.879671 +1000 AEST}|
+{Next Header|1}|
+{Next|%dna: 1}|
+{Entry|QmdE7fhAFiQZF1Qjr29rZLjURgvFAinvxMaYm7KcwkfgJe}
+}>];
+content0 [label=<{HOLOCHAIN DNA|See dna.json}>];
+header0->content0;
+header0->header1;
+header1 [label=<{HEADER 1|
+{Type|%agent}|
+{Hash|QmcQVPx4XEupZyENhSv726Nv7QyR1zksFN88qLy5FsXBKg}|
+{Timestamp|2018-04-30 09:36:00.88005 +1000 AEST}|
+{Next Header|QmTqNhNyDnPFeiTnFBtLRJMZLVDvva8aPbHXE2wW1s8JRM}|
+{Next|%agent: 1}|
+{Entry|QmPV1ZufTf8dhKjpUPFCMZQEAwFQVm21LBdoZTUze8M3i2}
+}>];
+content1 [label=<{AGENT ID|\{"Identity":"philipbeadle@Philips-MBP.lan",<br/>"Revocation":"",<br/>"PublicKey":"4XTTM3u4pQVoHKURZDteRboB8PZBCNbDkJRem9oy7bqFbyLvj"\}}>];
+header1->content1;
+header1->header2;
+header2 [label=<{HEADER 2|
+{Type|persona}|
+{Hash|QmZFmx2TMadoHabn1XtJuCDTGs63BFJ1VbzuJfUYdfkMpV}|
+{Timestamp|2018-04-30 09:36:05.631801 +1000 AEST}|
+{Next Header|QmcQVPx4XEupZyENhSv726Nv7QyR1zksFN88qLy5FsXBKg}|
+{Next|persona: 1}|
+{Entry|QmRF75qAVTQwUir9pDaFvbPTAzHbcxAm4uHNmsYLmN45Lc}
+}>];
+content2 [label=<{ENTRY 2|\{"name":"Friends",<br/>"personaFields":[<br/>\{"nickName":"hobby"\},<br/>\{"@philt3r":"DJ"\}]\}}>];
+header2->content2;
+header2->header3;
+header3 [label=<{HEADER 3|
+{Type|persona}|
+{Hash|QmQvEGCRfb9Rkn3iVQ6r5FktE5avCPibsmciGesPS94USo}|
+{Timestamp|2018-04-30 09:43:54.853315 +1000 AEST}|
+{Next Header|QmZFmx2TMadoHabn1XtJuCDTGs63BFJ1VbzuJfUYdfkMpV}|
+{Next|persona: QmZFmx2TMadoHabn1XtJuCDTGs63BFJ1VbzuJfUYdfkMpV}|
+{Entry|QmY7j3cH5Bcq7Nc6cf2Yc7HY5ZgW3hD46M6PhBnazHvhcA}
+}>];
+content3 [label=<{ENTRY 3|\{"name":"Friends",<br/>"personaFields":[<br/>\{"nickName":"hobby"\},<br/>\{"@philt3r":"DJ"\},<br/>\{"venue":"ffff"\}]\}}>];
+header3->content3;
+header3->header4;
+header4 [label=<{HEADER 4|
+{Type|persona}|
+{Hash|Qma6Lk3S1nhGjdzJHbeX2T2pbFd3Hbk3HbpiX5eh348nPj}|
+{Timestamp|2018-04-30 10:01:22.16375 +1000 AEST}|
+{Next Header|QmQvEGCRfb9Rkn3iVQ6r5FktE5avCPibsmciGesPS94USo}|
+{Next|persona: QmQvEGCRfb9Rkn3iVQ6r5FktE5avCPibsmciGesPS94USo}|
+{Entry|QmY7j3cH5Bcq7Nc6cf2Yc7HY5ZgW3hD46M6PhBnazHvhcA}
+}>];
+content4 [label=<{ENTRY 4|\{"name":"Friends",<br/>"personaFields":[<br/>\{"nickName":"hobby"\},<br/>\{"@philt3r":"DJ"\},<br/>\{"venue":"ffff"\}]\}}>];
+header4->content4;
+}

@@ -24,25 +24,23 @@
       "RibosomeType": "js",
       "BridgeFuncs": null,
       "Config": {
-              "ErrorHandling": "throwErrors"
-            },
+        "ErrorHandling": "throwErrors"
+      },
       "Entries": [
         {
           "Name": "persona",
           "DataFormat": "json",
           "Schema": "",
           "SchemaFile": "",
-          "Sharing": "public"
-        },
-        {
-          "Name": "persona_links",
-          "DataFormat": "json",
-          "Schema": "",
-          "SchemaFile": "",
-          "Sharing": "public"
+          "Sharing": "private"
         }
       ],
       "Functions": [
+        {
+          "Name": "personaList",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
         {
           "Name": "personaCreate",
           "CallingType": "json",
@@ -86,6 +84,10 @@
           "Schema": "",
           "SchemaFile": "profileSpec.json",
           "Sharing": "public"
+        },
+        {
+          "Name": "persona_links",
+          "DataFormat": "links"
         }
       ],
       "Functions": [
