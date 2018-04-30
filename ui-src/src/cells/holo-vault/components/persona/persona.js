@@ -99,7 +99,7 @@ class Persona extends React.Component {
     } else {
       this.props.personaUpdate(persona)
     }
-    this.props.personasList()
+    // this.props.personasList()
     this.props.history.push("/personas")
   }
 

@@ -21,6 +21,7 @@ const styles = theme => ({
 
 class Personas extends React.Component {
   componentDidMount(){
+    console.log('personas mount')
     this.props.personasList()
   }
   render() {

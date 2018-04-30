@@ -10,7 +10,7 @@ const initialState = {
   profile: constants.profile1,
   profileMapping: constants.mapping,
   personas:constants.personas,
-  persona: constants.personas[0].persona
+  persona: null
 }
 
 function vaultReducer (state = initialState, action) {
