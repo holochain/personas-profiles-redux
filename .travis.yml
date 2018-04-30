@@ -20,7 +20,7 @@ before_install:
 - TARGETDIR=$(pwd) docker-compose up -d
 script:
 - docker run --rm -v "$(pwd):/holo-vault" holochain/holochain-proto:develop bash -c
-  "cd /holo-vault; hcdev -no-nat-upnp -mdns=true test"
+  "cd /holo-vault; hcdev test"
 - cd ui-automation
 - npm install
 - npm test
