@@ -2,34 +2,42 @@
 import { connect } from 'react-redux'
 import PersonaForm from '../components/persona/persona'
 import {
-  personaCreate
+  personaCreate,
+  personaUpdate
 } from '../actions'
 
 const mapStateToProps = (state, ownProps) => {
   let buttonText = 'Update Persona'
   const personaName = ownProps.match.params.name
-  let persona = state.profile.personas.filter(function (persona){
+  let filteredPersona = state.profile.personas.filter(function (persona){
     return personaName === persona.persona.name
-  })[0].persona
+  })[0]
+  let persona = filteredPersona.persona
+  let hash = filteredPersona.hash
   if (persona === undefined){
     persona = {
         "name": "New Persona",
         "personaFields": [
         ]
     }
+    hash = ""
     buttonText = "Create Persona"
   }
   return {
     buttonText: buttonText,
     title: `Persona - ${personaName}`,
-    persona: persona
+    persona: persona,
+    hash: hash
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    personaCreate: (mapping) => {
-      dispatch(personaCreate(mapping))
+    personaCreate: (persona) => {
+      dispatch(personaCreate(persona))
+    },
+    personaUpdate: (persona) => {
+      dispatch(personaUpdate(persona))
     }
   }
 }

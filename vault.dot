@@ -4,20 +4,20 @@ node [shape=record fontname="Arial",fontsize="10",style="rounded, filled",penwid
 edge [penwidth=2, color="#8d00ff"];
 header0 [label=<{HEADER 0: GENESIS|
 {Type|%dna}|
-{Hash|QmRsbddpQpVgjEY3rijL68KR33QEs7bZHYc9dX3YDp2CUC}|
-{Timestamp|2018-04-26 07:18:54.614407 +1000 AEST}|
+{Hash|QmTqNhNyDnPFeiTnFBtLRJMZLVDvva8aPbHXE2wW1s8JRM}|
+{Timestamp|2018-04-30 09:36:00.879671 +1000 AEST}|
 {Next Header|1}|
 {Next|%dna: 1}|
-{Entry|QmaafMDHVuxaFkLgJrb3bgSyuaG4A3TmwfrUpV5JK5RZzb}
+{Entry|QmdE7fhAFiQZF1Qjr29rZLjURgvFAinvxMaYm7KcwkfgJe}
 }>];
 content0 [label=<{HOLOCHAIN DNA|See dna.json}>];
 header0->content0;
 header0->header1;
 header1 [label=<{HEADER 1|
 {Type|%agent}|
-{Hash|QmeqLxrXLSB2sspSbgoxAAZeK1nyKd9bZKHoSUXFKSc9Wc}|
-{Timestamp|2018-04-26 07:18:54.614933 +1000 AEST}|
-{Next Header|QmRsbddpQpVgjEY3rijL68KR33QEs7bZHYc9dX3YDp2CUC}|
+{Hash|QmcQVPx4XEupZyENhSv726Nv7QyR1zksFN88qLy5FsXBKg}|
+{Timestamp|2018-04-30 09:36:00.88005 +1000 AEST}|
+{Next Header|QmTqNhNyDnPFeiTnFBtLRJMZLVDvva8aPbHXE2wW1s8JRM}|
 {Next|%agent: 1}|
 {Entry|QmPV1ZufTf8dhKjpUPFCMZQEAwFQVm21LBdoZTUze8M3i2}
 }>];
@@ -26,45 +26,34 @@ header1->content1;
 header1->header2;
 header2 [label=<{HEADER 2|
 {Type|persona}|
-{Hash|Qmays5YaHvDcj6pr8fY8PQ7fhSoyKqCFyn5pLDTvW4btrw}|
-{Timestamp|2018-04-26 07:19:27.031032 +1000 AEST}|
-{Next Header|QmeqLxrXLSB2sspSbgoxAAZeK1nyKd9bZKHoSUXFKSc9Wc}|
+{Hash|QmZFmx2TMadoHabn1XtJuCDTGs63BFJ1VbzuJfUYdfkMpV}|
+{Timestamp|2018-04-30 09:36:05.631801 +1000 AEST}|
+{Next Header|QmcQVPx4XEupZyENhSv726Nv7QyR1zksFN88qLy5FsXBKg}|
 {Next|persona: 1}|
-{Entry|QmTdCPU9X53rXaz2YFBCS3SJgMyWhWyxA2XGJbx9bnGtsS}
+{Entry|QmRF75qAVTQwUir9pDaFvbPTAzHbcxAm4uHNmsYLmN45Lc}
 }>];
-content2 [label=<{ENTRY 2|\{"name":"TestPersona",<br/>"personaFields":[<br/>\{"first":"Phil"\},<br/>\{"last":"BBB"\}]\}}>];
+content2 [label=<{ENTRY 2|\{"name":"Friends",<br/>"personaFields":[<br/>\{"nickName":"hobby"\},<br/>\{"@philt3r":"DJ"\}]\}}>];
 header2->content2;
 header2->header3;
 header3 [label=<{HEADER 3|
 {Type|persona}|
-{Hash|QmbmdCq84gZberL9o9NtLWP3FdEhvS1vPZktNeF9PFVNpG}|
-{Timestamp|2018-04-26 07:22:09.470864 +1000 AEST}|
-{Next Header|Qmays5YaHvDcj6pr8fY8PQ7fhSoyKqCFyn5pLDTvW4btrw}|
-{Next|persona: Qmays5YaHvDcj6pr8fY8PQ7fhSoyKqCFyn5pLDTvW4btrw}|
-{Entry|QmQSmHocdkZRk3qDJzAfnzHEHFkALBzc9sZWBA25M8Yy67}
+{Hash|QmQvEGCRfb9Rkn3iVQ6r5FktE5avCPibsmciGesPS94USo}|
+{Timestamp|2018-04-30 09:43:54.853315 +1000 AEST}|
+{Next Header|QmZFmx2TMadoHabn1XtJuCDTGs63BFJ1VbzuJfUYdfkMpV}|
+{Next|persona: QmZFmx2TMadoHabn1XtJuCDTGs63BFJ1VbzuJfUYdfkMpV}|
+{Entry|QmY7j3cH5Bcq7Nc6cf2Yc7HY5ZgW3hD46M6PhBnazHvhcA}
 }>];
-content3 [label=<{ENTRY 3|\{"name":"Test",<br/>"personaFields":[<br/>\{"FirstName":"Phil"\},<br/>\{"Last":"Beadle"\}]\}}>];
+content3 [label=<{ENTRY 3|\{"name":"Friends",<br/>"personaFields":[<br/>\{"nickName":"hobby"\},<br/>\{"@philt3r":"DJ"\},<br/>\{"venue":"ffff"\}]\}}>];
 header3->content3;
 header3->header4;
 header4 [label=<{HEADER 4|
 {Type|persona}|
-{Hash|QmefjQjdwV42mFqug77ubrrmM3ngCcY41ACoc3GwyTJkMh}|
-{Timestamp|2018-04-26 07:24:03.380722 +1000 AEST}|
-{Next Header|QmbmdCq84gZberL9o9NtLWP3FdEhvS1vPZktNeF9PFVNpG}|
-{Next|persona: QmbmdCq84gZberL9o9NtLWP3FdEhvS1vPZktNeF9PFVNpG}|
-{Entry|QmRA4isMnNReVRLudMUxmTGTWkA2ATqbQHipQPA2F1LWW7}
+{Hash|Qma6Lk3S1nhGjdzJHbeX2T2pbFd3Hbk3HbpiX5eh348nPj}|
+{Timestamp|2018-04-30 10:01:22.16375 +1000 AEST}|
+{Next Header|QmQvEGCRfb9Rkn3iVQ6r5FktE5avCPibsmciGesPS94USo}|
+{Next|persona: QmQvEGCRfb9Rkn3iVQ6r5FktE5avCPibsmciGesPS94USo}|
+{Entry|QmY7j3cH5Bcq7Nc6cf2Yc7HY5ZgW3hD46M6PhBnazHvhcA}
 }>];
-content4 [label=<{ENTRY 4|\{"name":"Friends",<br/>"personaFields":[<br/>\{"First  NamenickName":"Phil@philt3r"\},<br/>\{"lastName":"Beadle"\}]\}}>];
+content4 [label=<{ENTRY 4|\{"name":"Friends",<br/>"personaFields":[<br/>\{"nickName":"hobby"\},<br/>\{"@philt3r":"DJ"\},<br/>\{"venue":"ffff"\}]\}}>];
 header4->content4;
-header4->header5;
-header5 [label=<{HEADER 5|
-{Type|persona}|
-{Hash|QmRupUbVnsWkeCTUPZNZgQmu7CViKrM1yzRMBMWwssAPYr}|
-{Timestamp|2018-04-26 07:24:03.478231 +1000 AEST}|
-{Next Header|QmefjQjdwV42mFqug77ubrrmM3ngCcY41ACoc3GwyTJkMh}|
-{Next|persona: QmefjQjdwV42mFqug77ubrrmM3ngCcY41ACoc3GwyTJkMh}|
-{Entry|QmRA4isMnNReVRLudMUxmTGTWkA2ATqbQHipQPA2F1LWW7}
-}>];
-content5 [label=<{ENTRY 5|\{"name":"Friends",<br/>"personaFields":[<br/>\{"First  NamenickName":"Phil@philt3r"\},<br/>\{"lastName":"Beadle"\}]\}}>];
-header5->content5;
 }

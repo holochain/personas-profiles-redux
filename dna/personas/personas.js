@@ -35,6 +35,7 @@ function personaRead (personaHash) {
 }
 
 function personaUpdate (params) {
+  debug(params)
   var replaces = params.hash;
   var persona = params.persona;
   var personaHash = update("persona", persona, replaces);

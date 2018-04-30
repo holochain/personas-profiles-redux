@@ -1,5 +1,6 @@
 export const PROFILEMAPPINGCREATE = 'profileMappingCreate'
 export const PERSONACREATE = 'personaCreate'
+export const PERSONAUPDATE = 'personaUpdate'
 export const PROFILESLIST = 'profilesList'
 export const PERSONASLIST = 'personasList'
 
@@ -18,6 +19,17 @@ export function profileMappingCreate(profileMapping) {
 export function personaCreate(persona) {
   return {
     type: PERSONACREATE,
+    meta: {
+      isHc: true,
+      namespace: 'personas',
+      data: persona
+    }
+  }
+}
+
+export function personaUpdate(persona) {
+  return {
+    type: PERSONAUPDATE,
     meta: {
       isHc: true,
       namespace: 'personas',

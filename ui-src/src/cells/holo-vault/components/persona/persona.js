@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import withRoot from '../../../../withRoot';
@@ -85,14 +85,19 @@ class Persona extends React.Component {
     })
     let persona =
     {
-      "hash": "QmbzbwpLA8HjZCFqkPQE2TAEnugUPYz14W9Ux1hh8882Nr",
+      "hash": this.props.hash,
       "persona": {
         "name": values.personaName,
         "personaFields": fields
       }
     }
     console.log(JSON.stringify(persona))
-    this.props.personaCreate(persona)
+    if(this.props.hash === ""){
+      this.props.personaCreate(persona.persona)
+    } else {
+      this.props.personaUpdate(persona)
+    }
+    this.props.history.push("/personas")
   }
 
   handleAddPersonaField = () =>   {
