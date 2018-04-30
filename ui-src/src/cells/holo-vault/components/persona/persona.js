@@ -91,7 +91,7 @@ class Persona extends React.Component {
         "personaFields": fields
       }
     }
-    console.log(JSON.stringify(persona))
+    console.log(JSON.stringify(this.props.hash))
     if(this.props.hash === ""){
       this.props.personaCreate(persona.persona)
     } else {
@@ -113,7 +113,7 @@ class Persona extends React.Component {
   componentDidMount(){
     this.setState({
       persona: this.props.persona
-    });
+    })
     let initial = {
       personaName: this.props.persona.name
     }

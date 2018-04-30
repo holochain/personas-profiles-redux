@@ -32,12 +32,12 @@
           "DataFormat": "json",
           "Schema": "",
           "SchemaFile": "",
-          "Sharing": "private"
+          "Sharing": "public"
         }
       ],
       "Functions": [
         {
-          "Name": "personaList",
+          "Name": "personasList",
           "CallingType": "json",
           "Exposure": "public"
         },

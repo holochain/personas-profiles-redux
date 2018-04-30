@@ -19,9 +19,8 @@ const styles = theme => ({
 });
 
 class Personas extends React.Component {
-
-  handleAddPersona = values => {
-
+  componentDidMount(){
+    this.props.personasList()
   }
   render() {
     const { classes, personas } = this.props;

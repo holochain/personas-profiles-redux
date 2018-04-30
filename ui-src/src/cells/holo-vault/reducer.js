@@ -32,6 +32,7 @@ function vaultReducer (state = initialState, action) {
           profiles: payload
         }
     case A.PERSONASLIST:
+      console.log(state)
         return {
           ...state,
           personas: payload

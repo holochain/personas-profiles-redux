@@ -36,8 +36,8 @@
       "Zome": "personas",
       "FnName": "personaUpdate",
       "Input": {
-        "replaces": "%h%",
-        "newEntry":{
+        "hash": "%h%",
+        "persona":{
           "name": "UpdatedApp",
           "personaFields": [
             {"userName": "Pherrol"}
@@ -81,10 +81,13 @@
       "FnName": "personaRead",
       "Input": "%h%",
       "Output": {
-        "name": "AwesomeApp",
+        "name": "Personal",
         "personaFields": [
-          {"userName": "@philt3r"},
-          {"dogsname": "Thor"}
+            {"firstName": "Phil"},
+            {"lastName": "Beadle"},
+            {"address": "123 Holochain Road"},
+            {"suburb": "Burwood"},
+            {"city": "Melbourne"}
         ]
       },
       "Err": ""
@@ -93,20 +96,10 @@
       "Convey": "You can list all of the Personas stored.",
       "Details": "This enables you to keep your private information up to date in one place.",
       "Zome": "personas",
-      "Input": "personaList().length === 2",
+      "Input": "personasList().length === 2",
       "Output": true,
       "Err": "",
       "Raw": true
-    },
-    {
-      "Convey": "You can list all of the Personas stored.",
-      "Details": "This enables you to keep your private information up to date in one place.",
-      "Zome": "personas",
-      "FnName": "personaList",
-      "Input": "",
-      "Output": true,
-      "Err": "",
-      "Raw": false
     }
   ]
 }

@@ -62,7 +62,11 @@ class Profile extends React.Component {
     newPersona: {}
   }
   handleCreateProfile = () => {
-    this.props.personaCreate(this.state.newPersona)
+    if(this.state.newPersona.personaFields.length > 0){
+      this.props.personaCreate(this.state.newPersona)
+    } else {
+      this.props.personas.splice(this.props.personas.length - 1, 1)
+    }
     this.props.profileMappingCreate(profileMapping)
     this.props.history.push("/profiles")
   }
@@ -75,13 +79,9 @@ class Profile extends React.Component {
       let persona = this.props.personas.filter(function (persona){
         return persona.persona.name === personaProfileMapping.personaName
       })[0].persona
-      console.log(this.props.personas[this.props.personas.length - 1])
-
       let personaField = persona.personaFields.filter(function (field){
         return Object.keys(field)[0] === personaProfileMapping.personaField
       })
-      console.log(this.props.personas[this.props.personas.length - 1])
-
       if(personaField.length === 0){
         let newField = {}
         newField[personaProfileMapping.personaField] = personaProfileMapping.personaFieldValue
@@ -124,7 +124,6 @@ class Profile extends React.Component {
     }
     profileMapping = this.props.mapping
     this.props.initialize(tempProfileValues)
-    console.log(this.props.personas)
   }
 
   render() {

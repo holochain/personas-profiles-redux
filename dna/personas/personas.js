@@ -7,16 +7,28 @@
 // -----------------------------------------------------------------
 //  Exposed functions with custom logic https://developer.holochain.org/API_reference
 // -----------------------------------------------------------------
-function personaList () {
+function personasList () {
   var personas = query({
-  Return: {
-    Hashes: true
-  },
-  Constrain: {
-    EntryTypes: ["persona"]
-  }
-})
-  return personas;
+    Return: {
+      Entries: true
+    },
+    Constrain: {
+      EntryTypes: ["persona"],
+      Count:2
+    }
+  })
+
+  var personasWithHash = []
+  personas.forEach(function(persona){
+    var personaWithHash = {
+      "hash": "testhash",
+      "persona": persona
+    }
+    personasWithHash.push(personaWithHash)
+  })
+  debug(personasWithHash)
+  debug(personas)
+  return personasWithHash;
 }
 
 function personaCreate (personaEntry) {

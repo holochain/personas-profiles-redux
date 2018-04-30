@@ -17,39 +17,48 @@ import CreateStore from '../../../../store'
 
 let store = CreateStore()
 let newPersona = {
-    "name": "New Persona",
+    "name": "",
     "personaFields": [
     ]
 }
+let newHash = ""
+let newButtonText = "Create Persona"
 let persona =
-    {
-        "name": "Personal",
-        "personaFields": [
-            {"firstName": "Phil"},
-            {"lastName": "Beadle"},
-            {"address": "123 Holochain Road"},
-            {"suburb": "Burwood"},
-            {"city": "Melbourne"}
-        ]
-    }
-let clickPersona = {}
+{
+    "name": "Personal",
+    "personaFields": [
+        {"firstName": "Phil"},
+        {"lastName": "Beadle"},
+        {"address": "123 Holochain Road"},
+        {"suburb": "Burwood"},
+        {"city": "Melbourne"}
+    ]
+}
+let hash = "rtyeyyutyr"
+let buttonText = "Update Persona"
+let createPersona = {}
 const personaCreate = decorateAction([
   args => {
-    clickPersona = args[0]
+    createPersona = args[0]
+    console.log(createPersona)
+    return args
+  }
+])
+
+let updatePersona = {}
+const personaUpdate = decorateAction([
+  args => {
+    updatePersona = args[0]
     // console.log(clickPersona)
     return args
   }
 ])
 
 storiesOf('HoloVault/Persona', module)
-  .addDecorator(story => (
-    <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
-  ))
-  // .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add('New Persona', withNotes(newPersonaNotes) (() => {
     specs(() => describe('New Persona', function () {
       it('Creating a Persona by adding new fields and values, this will send a Persona to Holochain', () => {
-        const wrapper = mount(getPersona(newPersona))
+        const wrapper = mount(getPersona(newPersona, newHash, newButtonText))
         const testPersona = {
           "name":"Personal",
           "personaFields":[
@@ -66,17 +75,17 @@ storiesOf('HoloVault/Persona', module)
         wrapper.find('input[name="fieldName1"]').simulate('change', {target: {value: 'lastName'}})
         wrapper.find('input[name="fieldValue1"]').simulate('change', {target: {value: 'Beadle'}})
         wrapper.find('button[name="createPersona"]').simulate('click')
-        wrapper.update()
-        expect(clickPersona).toEqual(testPersona)
+        expect(createPersona).toEqual(testPersona)
       })
     }))
-    return getPersona(newPersona)
+    return getPersona(newPersona, newHash, newButtonText)
   }))
   .add('Edit Existing Persona', withNotes(editPersonaNotes) (() => {
-    return getPersona(persona)
+    return getPersona(persona, hash, buttonText)
   })
 )
 
-function getPersona(persona) {
-  return (<Provider store={store}><PersonaForm personaCreate={personaCreate('Click Create Persona')} persona={persona} /></Provider>)
+function getPersona(persona, hash, buttonText) {
+  let history = []
+  return (<Provider store={store}><MemoryRouter initialEntries={['/']}><PersonaForm personaCreate={personaCreate('Click Create Persona')} personaUpdate={personaUpdate('Click Update Persona')} history={history} persona={persona} hash={hash} buttonText ={buttonText} /></MemoryRouter></Provider>)
 }

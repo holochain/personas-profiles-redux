@@ -11,7 +11,7 @@ import {
 
 const mapStateToProps = state => {
   return {
-    profiles: [constants.profile1, constants.profile2, constants.profile3, constants.profile4]
+    profiles: state.profile.profiles // [constants.profile1, constants.profile2, constants.profile3, constants.profile4]
   }
 }
 

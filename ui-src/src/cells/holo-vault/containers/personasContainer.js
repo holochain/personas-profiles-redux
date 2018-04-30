@@ -11,7 +11,7 @@ import {
 
 const mapStateToProps = state => {
   return {
-    personas: constants.personas
+    personas: state.profile.personas
   }
 }
 
