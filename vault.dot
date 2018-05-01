@@ -4,20 +4,20 @@ node [shape=record fontname="Arial",fontsize="10",style="rounded, filled",penwid
 edge [penwidth=2, color="#8d00ff"];
 header0 [label=<{HEADER 0: GENESIS|
 {Type|%dna}|
-{Hash|QmRUeixwXjBEm6sJ3u6yjZ62UrnVFbZ83EDJqJMBcx7KF1}|
-{Timestamp|2018-04-30 12:58:05.80421 +1000 AEST}|
+{Hash|QmaAd4S2DCsbq6w3LjJSzjzhZRymEgF3R8GunYuXcxDuHj}|
+{Timestamp|2018-05-01 14:07:27.240905 +1000 AEST}|
 {Next Header|1}|
 {Next|%dna: 1}|
-{Entry|QmbGapgjwd86JDWS3qpzApFXgXS8kq7xe5yA19Bzg1vnxP}
+{Entry|QmYv6dcpj3ysMRtWLn1ZZJvR4cD1BAhsGHaa5jzpMvhbiW}
 }>];
 content0 [label=<{HOLOCHAIN DNA|See dna.json}>];
 header0->content0;
 header0->header1;
 header1 [label=<{HEADER 1|
 {Type|%agent}|
-{Hash|QmXTZkRhL2Rsg1KbodkNfenkPMkpHJkyMxUERduuYEicuj}|
-{Timestamp|2018-04-30 12:58:05.804697 +1000 AEST}|
-{Next Header|QmRUeixwXjBEm6sJ3u6yjZ62UrnVFbZ83EDJqJMBcx7KF1}|
+{Hash|QmWybVefghzKSmCjjmmrE6HdkJo8F6JLkkZadtqLRi7tFK}|
+{Timestamp|2018-05-01 14:07:27.241294 +1000 AEST}|
+{Next Header|QmaAd4S2DCsbq6w3LjJSzjzhZRymEgF3R8GunYuXcxDuHj}|
 {Next|%agent: 1}|
 {Entry|QmPV1ZufTf8dhKjpUPFCMZQEAwFQVm21LBdoZTUze8M3i2}
 }>];
@@ -26,12 +26,34 @@ header1->content1;
 header1->header2;
 header2 [label=<{HEADER 2|
 {Type|persona}|
-{Hash|QmQT6AAz8k45FLPEoXS8y9oRV1FBigBuR6xxkJ8YNfa72C}|
-{Timestamp|2018-04-30 13:20:40.87361 +1000 AEST}|
-{Next Header|QmXTZkRhL2Rsg1KbodkNfenkPMkpHJkyMxUERduuYEicuj}|
+{Hash|QmVmVB2tg1TFDyfniJZzXXDbtwpnPUCA2SGmiDwKUf5VAy}|
+{Timestamp|2018-05-01 14:12:20.550753 +1000 AEST}|
+{Next Header|QmWybVefghzKSmCjjmmrE6HdkJo8F6JLkkZadtqLRi7tFK}|
 {Next|persona: 1}|
-{Entry|QmaGrRRgY7ddJFgJV6B2dVtF7SdMMmvxbrAivymnaLXBxt}
+{Entry|QmbgbDeKZT8Eh8L4E2GEguJhAys2jZX53uXy4DEsoUsSEb}
 }>];
-content2 [label=<{ENTRY 2|\{"name":"Test",<br/>"personaFields":[<br/>\{"field":"value"\}]\}}>];
+content2 [label=<{ENTRY 2|\{"name":"Personal",<br/>"personaFields":[<br/>\{"firstName":"Phil"\},<br/>\{"lastName":"Beadle"\}]\}}>];
 header2->content2;
+header2->header3;
+header3 [label=<{HEADER 3|
+{Type|profileMapping}|
+{Hash|QmT8meRje5R86dbGqPt4wKjL7Vug5YETNrWPFJTujRBs3m}|
+{Timestamp|2018-05-01 14:17:24.444379 +1000 AEST}|
+{Next Header|QmVmVB2tg1TFDyfniJZzXXDbtwpnPUCA2SGmiDwKUf5VAy}|
+{Next|profileMapping: 1}|
+{Entry|QmSJ3TZrzbX4kKdjf2FXiKuAMknFGZ7wfdCAuxavkWeRqL}
+}>];
+content3 [label=<{ENTRY 3|\{"expiry":"2018-12-12T01:01:10+00:00",<br/>"id":"HoloChat",<br/>"profile":\{"firstName":"Personal.firstName",<br/>"handle":"HoloChat.handle",<br/>"lastName":"Personal.lastName"\},<br/>"source-dna":"QmZ4CP5unaghnmxbJkSBwobehgcF5VdcKLPimXEkwVTUYh",<br/>"type":"object"\}}>];
+header3->content3;
+header3->header4;
+header4 [label=<{HEADER 4|
+{Type|persona}|
+{Hash|QmNNypE8d5anSSTExXJrMPWkidD5yqmAeiSKawRXwGTF6m}|
+{Timestamp|2018-05-01 14:17:24.447237 +1000 AEST}|
+{Next Header|QmT8meRje5R86dbGqPt4wKjL7Vug5YETNrWPFJTujRBs3m}|
+{Next|persona: QmVmVB2tg1TFDyfniJZzXXDbtwpnPUCA2SGmiDwKUf5VAy}|
+{Entry|QmaLNgARFCFFnRkUUbEyhVZem576o71y8rHxDSAvsyjZFu}
+}>];
+content4 [label=<{ENTRY 4|\{"name":"HoloChat",<br/>"personaFields":[<br/>\{"handle":"@phil"\}]\}}>];
+header4->content4;
 }

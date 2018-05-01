@@ -13,11 +13,19 @@ const mapStateToProps = (state, ownProps) => {
   let selectedProfile = state.profile.profiles.filter(function (profile){
     return profileName === profile.name
   })[0]
+
+  //use the mapping to find the values, combine the values with the spec
+  let profile = selectedProfile.profileSpec
+  selectedProfile.profileSpec.profile[0].value = '@philt3r'
+  selectedProfile.profileSpec.profile[1].value = 'Phil'
+  selectedProfile.profileSpec.profile[2].value = 'BB'
+
+  console.log(profile)
+
   return {
     profileHash: state.profile.profileHash,
-    profile: selectedProfile,
     mapping: selectedProfile.mapping,
-    profileSpec: selectedProfile.profileSpec,
+    profileSpec: profile,
     personas: state.profile.personas
   }
 }
