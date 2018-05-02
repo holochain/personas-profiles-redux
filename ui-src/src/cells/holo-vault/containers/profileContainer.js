@@ -15,13 +15,18 @@ const mapStateToProps = (state, ownProps) => {
   })[0]
 
   //use the mapping to find the values, combine the values with the spec
+  if(selectedProfile.mapping !== undefined){
+    selectedProfile.profileSpec.profile.forEach(function(profile){
+      profile.personaField = selectedProfile.mapping.profile[profile.appLabel].replace('.', ' (') + ')'
+      profile.value = selectedProfile.mapping.profile[profile.appLabel]
+    })
+  } else {
+    selectedProfile.profileSpec.profile.forEach(function(profile){
+      profile.personaField = selectedProfile.profileSpec.id + ' (' + profile.appLabel + ')'
+      profile.value = ''
+    })
+  }
   let profile = selectedProfile.profileSpec
-  selectedProfile.profileSpec.profile[0].value = '@philt3r'
-  selectedProfile.profileSpec.profile[1].value = 'Phil'
-  selectedProfile.profileSpec.profile[2].value = 'BB'
-
-  console.log(profile)
-
   return {
     profileHash: state.profile.profileHash,
     mapping: selectedProfile.mapping,

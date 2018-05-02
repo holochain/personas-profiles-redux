@@ -20,19 +20,6 @@ configure({adapter: new Adapter()})
 import CreateStore from '../../../../store'
 
 let store = CreateStore()
-let profileMapping = {
-  'id': 'HoloChat',
-  'sourcedna': 'QmZ4CP5unaghnmxbJkSBwobehgcF5VdcKLPimXEkwVTUYh',
-  'type': 'object',
-  'expiry': '2018-12-12T01:01:10+00:00',
-  'profile':
-    {
-      'firstname': 'Work.firstname',
-      'address': 'Work.address',
-      'suburb': 'Work.suburb',
-      'city': 'Work.city'
-    }
-}
 
 let clickPersona = {}
 const personaCreate = decorateAction([
@@ -54,7 +41,7 @@ storiesOf('HoloVault/Profile', module)
     let noExistingPersonas = []
     specs(() => describe('New Profile no Existing Personas', function () {
       it('Creating a Profile with valid entries sends a Persona and a PersonaMapping', () => {
-        const wrapper = mount(getProfile(constants.profile4.profileSpec, noExistingPersonas, profileMapping))
+        const wrapper = mount(getProfile(constants.profile4.profileSpec, noExistingPersonas, constants.profile4.mapping))
         wrapper.find('input[name="timeZone"]').simulate('click')
         wrapper.find('input[name="timeZone"]').simulate('change', {target: {value: 'UTC+10'}})
         wrapper.find('input[name="avatar"]').simulate('change', {target: {value: 'base64'}})
@@ -62,44 +49,48 @@ storiesOf('HoloVault/Profile', module)
         wrapper.find('button[name="createProfile"]').simulate('click')
       })
     }))
-    return getProfile(constants.profile4.profileSpec, noExistingPersonas, profileMapping)
+    return getProfile(constants.profile4.profileSpec, noExistingPersonas, constants.profile4.mapping)
   }))
   .add('New Profile with Existing Personas', withNotes(threePersonas) (() => {
     specs(() => describe('HoloVault/New Profile Existing Personas', function () {
       it('Creating a Profile by adding new entries sends a full Persona and a PersonaMapping', () => {
-        const wrapper = mount(getProfile(constants.profile1.profileSpec, constants.personas, constants.mapping))
+        const wrapper = mount(getProfile(constants.profile1.profileSpec, constants.personas, constants.profile1.mapping))
         wrapper.find('input[name="firstName"]').simulate('change', {target: {value: 'Phil'}})
         wrapper.find('input[name="lastName"]').simulate('change', {target: {value: 'Beadle'}})
         wrapper.find('input[name="handle"]').simulate('change', {target: {value: '@philt3r'}})
         wrapper.find('button[name="createProfile"]').simulate('click')
       })
     }))
-    let profileMapping = {
-      id: 'HoloChat',
-      sourceDna: 'QmZ4CP5unaghnmxbJkSBwobehgcF5VdcKLPimXEkwVTUYh',
-      type: 'object',
-      expiry: '2018-12-12T01:01:10+00:00',
-      profile: {}
-    }
-    return getProfile(constants.profile1.profileSpec, constants.personas, profileMapping)
+    return getProfile(constants.profile1.profileSpec, constants.personas, constants.profile1.mapping)
   }))
   .add('Edit Profile', withNotes(editProfile) (() => {
-    specs(() => describe('HoloVault/New Profile Existing Personas', function () {
+    specs(() => describe('Edit Profile', function () {
       it('Creating a Profile by adding new entries sends a full Persona and a PersonaMapping', () => {
-        const wrapper = mount(getProfile(constants.profile1.profileSpec, constants.personas, constants.mapping))
+        const wrapper = mount(getProfile(constants.profile5.profileSpec, constants.personas, constants.profile5.mapping))
         wrapper.find('input[name="firstName"]').simulate('change', {target: {value: 'Phil'}})
         wrapper.find('input[name="lastName"]').simulate('change', {target: {value: 'Beadle'}})
         wrapper.find('input[name="handle"]').simulate('change', {target: {value: '@philt3r'}})
         wrapper.find('button[name="createProfile"]').simulate('click')
       })
     }))
-    return getProfile(constants.profile1.profileSpec, constants.personas, constants.mapping)
+    return getProfile(constants.profile5.profileSpec, constants.personas, constants.profile5.mapping, constants.profile5.profileValues)
   }))
 function getProfiles(profiles) {
   return (<Provider store={store}><Profiles profiles={profiles} /></Provider>)
 }
 
-function getProfile(profileSpec, personas, mapping) {
+function getProfile(profileSpec, personas, mapping, profileValues) {
+  if(mapping !== undefined){
+    profileSpec.profile.forEach(function(profile){
+      profile.personaField = mapping.profile[profile.appLabel].replace('.', ' (') + ')'
+      profile.value = profileValues[mapping.profile[profile.appLabel]]
+    })
+  } else {
+    profileSpec.profile.forEach(function(profile){
+      profile.personaField = profileSpec.id + ' (' + profile.appLabel + ')'
+      profile.value = ''
+    })
+  }
   let history = []
   return (<Provider store={store}><MemoryRouter initialEntries={['/']}><ProfileForm profileMappingCreate={action('Sent the Profile Map')} personaCreate={personaCreate('Click Create Persona')} profileSpec={profileSpec} personas={personas} mapping={mapping} history={history} /></MemoryRouter></Provider>)
 }

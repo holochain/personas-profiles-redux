@@ -144,7 +144,7 @@ class Profile extends React.Component {
       <form onSubmit={handleSubmit}>
         {
           profileSpec.profile.map((field, index) => (<div key={index}>
-            <Field key={index} name={field.appLabel} specField={field.appLabel} onSelect={this.handleSelect} component={renderProfileField} label={field.display} suggestions={suggestions} usage={field.usage} personaField={profileSpec.id + ' (' + field.appLabel + ')'} personaFieldValue={field.value} className={classes.persona}/>
+            <Field key={index} name={field.appLabel} specField={field.appLabel} onSelect={this.handleSelect} component={renderProfileField} label={field.display} suggestions={suggestions} usage={field.usage} personaField={field.personaField} personaFieldValue={field.value} className={classes.persona}/>
           </div>))
         }
         <Button name='createProfile' variant='raised' className={classes.button} onClick={handleSubmit(this.handleCreateProfile)}>
