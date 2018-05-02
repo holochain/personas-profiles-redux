@@ -1,2 +1,2 @@
 **List of Cells**
-Each of the "Cells" you are part of has a set of Apps in it, each of those Apps is listed here as an App. Clicking the App will take you to the running instance of the App and will show you content from all of the Cells that use that App.
+Each of the "Cells" you are part of consists of an "app" and the people you are communicating with. Clicking the Cell will take you to the App and show you the data for that group of people.

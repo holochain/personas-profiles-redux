@@ -32,7 +32,7 @@ storiesOf('Cells/Cells', module)
     <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
   ))
   .add('List of Cells', withNotes(listCells) (() => {
-        let cells = [constants.cell1, constants.cell2, constants.cell3, constants.cell4]
+        let cells = [constants.cell1, constants.cell2, constants.cell3, constants.cell4, constants.cell5, constants.cell6]
     // specs(() => describe('New Persona', function () {
     //   it('Creating a Persona by adding new fields and values, this will send a Persona to Holochain', () => {
     //     const wrapper = mount(getPersona(newPersona))

@@ -87,6 +87,12 @@ class Navigation extends React.Component {
                 </ListItemIcon>
                 <ListItemText primary='Cells' />
               </ListItem>
+              <ListItem name="features" button onClick={() => { history.push('/features') }}>
+                <ListItemIcon>
+                  <GroupWorkIcon />
+                </ListItemIcon>
+                <ListItemText primary='Features' />
+              </ListItem>
               <ListItem id="personas" button onClick={() => { history.push('/personas') }}>
                 <ListItemIcon>
                   <PersonIcon />
@@ -113,7 +119,7 @@ class Navigation extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant='title' color='inherit' noWrap>
-              Holochain
+              Holo Vault
             </Typography>
           </Toolbar>
         </AppBar>

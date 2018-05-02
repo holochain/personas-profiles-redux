@@ -8,7 +8,7 @@ import {
 
 const mapStateToProps = state => {
   return {
-    cells: [constants.cell1, constants.cell2, constants.cell3, constants.cell4]
+    cells: [constants.cell1, constants.cell2, constants.cell3, constants.cell4, constants.cell5, constants.cell6]
   }
 }
 

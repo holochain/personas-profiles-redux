@@ -6,7 +6,7 @@ import * as A from './actions'
 const initialState = {
   userHash: 'empty',
   profileSpec: constants.profile1.profileSpec,
-  profiles: [constants.profile1, constants.profile2, constants.profile3, constants.profile4, constants.profile5],
+  profiles: [constants.profile1, constants.profile6, constants.profile2, constants.profile3, constants.profile4, constants.profile5],
   profile: constants.profile1,
   profileMapping: constants.mapping,
   personas:constants.personas,

@@ -24,7 +24,7 @@ class Setup extends React.Component {
         <Typography variant='body1'>
           Please click
           <Route render={({ history}) => (
-            <Button onClick={() => { history.push('/profile/HoloChat') }}>Profile</Button>
+            <Button onClick={() => { history.push('/profile/HoloChat - Holo Team') }}>Profile</Button>
           )} />
           and join the fun.
         </Typography>

@@ -96,6 +96,7 @@ class Profile extends React.Component {
           return Object.keys(personaField)[0] !== personaProfileMapping.specField
         })
       }
+      console.log(this.props.personas[this.props.personas.length - 1].persona)
       this.setState({newPersona: this.props.personas[this.props.personas.length - 1].persona})
     }
   }
@@ -129,11 +130,8 @@ class Profile extends React.Component {
   render() {
     const {classes, handleSubmit, profileSpec} = this.props
     return (<div className={classes.root}>
-      <Typography variant='display1'>
-        HoloVault
-      </Typography>
       <Typography variant='subheading'>
-        The {this.props.profileSpec.id} app is requesting your personal information.
+        {this.props.profileSpec.id} is requesting your personal information.
       </Typography>
       <Typography variant='body1' gutterBottom>
         Your personal information is managed by you in 1 location, 'HoloVault'. Other applications

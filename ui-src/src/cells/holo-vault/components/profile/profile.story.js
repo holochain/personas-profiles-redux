@@ -35,7 +35,7 @@ storiesOf('HoloVault/Profile', module)
     <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
   ))
   .add('List of Profiles', withNotes(noPersonas) (() => {
-    return getProfiles([constants.profile1, constants.profile2, constants.profile3, constants.profile4])
+    return getProfiles([constants.profile1, constants.profile2, constants.profile3, constants.profile4, constants.profile5, constants.profile6])
   }))
   .add('New Profile no Existing Personas', withNotes(noPersonas) (() => {
     let noExistingPersonas = []
@@ -66,7 +66,7 @@ storiesOf('HoloVault/Profile', module)
   .add('Edit Profile', withNotes(editProfile) (() => {
     specs(() => describe('Edit Profile', function () {
       it('Creating a Profile by adding new entries sends a full Persona and a PersonaMapping', () => {
-        const wrapper = mount(getProfile(constants.profile5.profileSpec, constants.personas, constants.profile5.mapping))
+        const wrapper = mount(getProfile(constants.profile5.profileSpec, constants.personas, constants.profile5.mapping, constants.profile5.profileValues))
         wrapper.find('input[name="firstName"]').simulate('change', {target: {value: 'Phil'}})
         wrapper.find('input[name="lastName"]').simulate('change', {target: {value: 'Beadle'}})
         wrapper.find('input[name="handle"]').simulate('change', {target: {value: '@philt3r'}})

@@ -25,6 +25,13 @@ const mapStateToProps = (state, ownProps) => {
       profile.personaField = selectedProfile.profileSpec.id + ' (' + profile.appLabel + ')'
       profile.value = ''
     })
+    selectedProfile.mapping = {
+      "id": selectedProfile.profileSpec.id,
+      "sourceDna": selectedProfile.profileSpec.sourceDna,
+      "type": "object",
+      "expiry": selectedProfile.profileSpec.expiry,
+      "profile": {}
+    }
   }
   let profile = selectedProfile.profileSpec
   return {
