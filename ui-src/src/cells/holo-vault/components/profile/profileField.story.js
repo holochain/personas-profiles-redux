@@ -42,7 +42,6 @@ storiesOf('HoloVault/Profile Field', module)
       it('Type in a value that is not part of a suggestion.', () => {
         const wrapper = mount(getProfileField(constants.profile4.profileSpec.profile[0].appLabel, constants.profile4.profileSpec.profile[0].display, constants.profile4.profileSpec.profile[0].usage, suggestions, 'Test', constants.profile4.profileSpec.id + '.' + constants.profile4.profileSpec.profile[0].appLabel))
         // wrapper.find('input[name="timeZone"]').instance().value
-        console.log(wrapper.find('input[name="timeZone"]').instance().props())
         wrapper.find('input[name="timeZone"]').simulate('change', {target: {value: 'UTC+10'}})
         })
     }))

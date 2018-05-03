@@ -135,7 +135,7 @@ class Navigation extends React.Component {
         </Hidden>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Route path='/personas' component={PersonasContainer} />
+          <Route path='/personas' title='Personas' component={PersonasContainer} />
           <Route path='/persona/:name' component={PersonaContainer} />
           <Route path='/profiles' component={ProfilesContainer} />
           <Route path='/profile/:name' component={ProfileContainer} />
