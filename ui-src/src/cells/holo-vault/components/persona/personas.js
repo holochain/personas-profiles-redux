@@ -10,8 +10,6 @@ import { ListItem, ListItemText } from 'material-ui/List'
 import Person from 'material-ui-icons/Person'
 import PersonAdd from 'material-ui-icons/PersonAdd'
 
-import FingerPrint from 'material-ui-icons/Fingerprint'
-
 const styles = theme => ({
   root: {
     textAlign: 'left',
