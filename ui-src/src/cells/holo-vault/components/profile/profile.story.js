@@ -31,9 +31,6 @@ const personaCreate = decorateAction([
 ])
 
 storiesOf('HoloVault/Profile', module)
-  .addDecorator(story => (
-    <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
-  ))
   .add('List of Profiles', withNotes(noPersonas) (() => {
     return getProfiles([constants.profile1, constants.profile2, constants.profile3, constants.profile4, constants.profile5, constants.profile6])
   }))
@@ -45,7 +42,6 @@ storiesOf('HoloVault/Profile', module)
         wrapper.find('input[name="timeZone"]').simulate('click')
         wrapper.find('input[name="timeZone"]').simulate('change', {target: {value: 'UTC+10'}})
         wrapper.find('input[name="avatar"]').simulate('change', {target: {value: 'base64'}})
-        console.log(wrapper.find('ul').exists())
         wrapper.find('button[name="createProfile"]').simulate('click')
       })
     }))
@@ -67,7 +63,7 @@ storiesOf('HoloVault/Profile', module)
     specs(() => describe('Edit Profile', function () {
       it('Creating a Profile by adding new entries sends a full Persona and a PersonaMapping', () => {
         const wrapper = mount(getProfile(constants.profile5.profileSpec, constants.personas, constants.profile5.mapping, constants.profile5.profileValues))
-        wrapper.find('input[name="firstName"]').simulate('change', {target: {value: 'Phil'}})
+        wrapper.find('input[name="firstName"]').simulate('change', {target: {value: 'Phila'}})
         wrapper.find('input[name="lastName"]').simulate('change', {target: {value: 'Beadle'}})
         wrapper.find('input[name="handle"]').simulate('change', {target: {value: '@philt3r'}})
         wrapper.find('button[name="createProfile"]').simulate('click')
@@ -76,20 +72,29 @@ storiesOf('HoloVault/Profile', module)
     return getProfile(constants.profile5.profileSpec, constants.personas, constants.profile5.mapping, constants.profile5.profileValues)
   }))
 function getProfiles(profiles) {
-  return (<Provider store={store}><Profiles profiles={profiles} /></Provider>)
+  return (<Provider store={store}><MemoryRouter initialEntries={['/']}><Profiles profiles={profiles} /></MemoryRouter></Provider>)
 }
 
 function getProfile(profileSpec, personas, mapping, profileValues) {
   if(mapping !== undefined){
     profileSpec.profile.forEach(function(profile){
-      profile.personaField = mapping.profile[profile.appLabel].replace('.', ' (') + ')'
-      profile.value = profileValues[mapping.profile[profile.appLabel]]
+      if(mapping.profile[profile.appLabel] !== undefined){
+        profile.personaField = mapping.profile[profile.appLabel].replace('.', ' (') + ')'
+        profile.value = profileValues[mapping.profile[profile.appLabel]]
+      }
     })
   } else {
     profileSpec.profile.forEach(function(profile){
       profile.personaField = profileSpec.id + ' (' + profile.appLabel + ')'
       profile.value = ''
     })
+    mapping = {
+      "id": profileSpec.id,
+      "sourceDna": profileSpec.sourceDna,
+      "type": "object",
+      "expiry": profileSpec.expiry,
+      "profile": {}
+    }
   }
   let history = []
   return (<Provider store={store}><MemoryRouter initialEntries={['/']}><ProfileForm profileMappingCreate={action('Sent the Profile Map')} personaCreate={personaCreate('Click Create Persona')} profileSpec={profileSpec} personas={personas} mapping={mapping} history={history} /></MemoryRouter></Provider>)

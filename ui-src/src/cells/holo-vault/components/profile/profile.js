@@ -62,6 +62,7 @@ class Profile extends React.Component {
     newPersona: {}
   }
   handleCreateProfile = () => {
+    console.log(this.state.newPersona)
     if(this.state.newPersona.personaFields.length > 0){
       this.props.personaCreate(this.state.newPersona)
     } else {
@@ -75,6 +76,7 @@ class Profile extends React.Component {
   //creates the new Persona Object ready to save
   handleSelect = (personaProfileMapping) => {
     if(personaProfileMapping !== undefined){
+      console.log(profileMapping)
       profileMapping.profile[personaProfileMapping.specField]= personaProfileMapping.personaName + '.' + personaProfileMapping.personaField
       let persona = this.props.personas.filter(function (persona){
         return persona.persona.name === personaProfileMapping.personaName
@@ -82,6 +84,8 @@ class Profile extends React.Component {
       let personaField = persona.personaFields.filter(function (field){
         return Object.keys(field)[0] === personaProfileMapping.personaField
       })
+      console.log(personaField)
+
       if(personaField.length === 0){
         let newField = {}
         newField[personaProfileMapping.personaField] = personaProfileMapping.personaFieldValue
@@ -89,7 +93,7 @@ class Profile extends React.Component {
       } else {
         personaField[0][personaProfileMapping.personaField] = personaProfileMapping.personaFieldValue
       }
-      // console.log(personaField)
+      console.log(persona)
 
       if(personaProfileMapping.removeTyped){
         this.props.personas[this.props.personas.length - 1].persona.personaFields = this.props.personas[this.props.personas.length - 1].persona.personaFields.filter(function(personaField) {
@@ -112,19 +116,15 @@ class Profile extends React.Component {
       {
         "hash": "",
         "persona": {
-          "name": this.props.profileSpec.id,
+          "name": this.props.profileSpec.id.split('-')[0],
           "personaFields": []
         }
       }
     )
     //iterate through this.props.mapping and get the values from query
-    let tempProfileValues = {
-      "firstName": "Phil",
-      "handle": "@philt3r",
-      "lastName": "Beadle"
-    }
+
     profileMapping = this.props.mapping
-    this.props.initialize(tempProfileValues)
+    // this.props.initialize(tempProfileValues)
   }
 
   render() {
