@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
   let persona = {}
   let hash = ""
   const personaName = ownProps.match.params.name
-  let filteredPersona = state.profile.personas.filter(function (persona){
+  let filteredPersona = state.holoVault.profile.personas.filter(function (persona){
     return personaName === persona.persona.name
   })[0]
   if (filteredPersona === undefined){

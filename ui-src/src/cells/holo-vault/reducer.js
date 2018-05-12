@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
 import  * as constants from './constants.js'
 import * as A from './actions'
 
@@ -43,6 +42,5 @@ function vaultReducer (state = initialState, action) {
 }
 
 export default combineReducers({
-  profile: vaultReducer,
-  form: formReducer
+  profile: vaultReducer
 })

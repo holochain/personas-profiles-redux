@@ -305,7 +305,7 @@ export const personas = [
         "personaFields": [
             {"firstName": "Philip"},
             {"lastName": "Beadle"},
-            {"role": "Chief Engineer"},
+            {"role": "Engineer"},
             {"location": "Melbourne"}
         ]
     }

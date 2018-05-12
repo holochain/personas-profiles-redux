@@ -10,7 +10,7 @@ import {
 
 const mapStateToProps = state => {
   return {
-    personas: state.profile.personas
+    personas: state.holoVault.profile.personas
   }
 }
 

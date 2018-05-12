@@ -10,7 +10,7 @@ import {
 
 const mapStateToProps = (state, ownProps) => {
   const profileName = ownProps.match.params.name
-  let selectedProfile = state.profile.profiles.filter(function (profile){
+  let selectedProfile = state.holoVault.profile.profiles.filter(function (profile){
     return profileName === profile.name
   })[0]
   //use the mapping to find the values, combine the values with the spec
@@ -38,10 +38,10 @@ const mapStateToProps = (state, ownProps) => {
 
   let profile = selectedProfile.profileSpec
   return {
-    profileHash: state.profile.profileHash,
+    profileHash: state.holoVault.profile.profileHash,
     mapping: selectedProfile.mapping,
     profileSpec: profile,
-    personas: state.profile.personas
+    personas: state.holoVault.profile.personas
   }
 }
 

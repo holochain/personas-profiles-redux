@@ -10,7 +10,7 @@ import {
 
 const mapStateToProps = state => {
   return {
-    profiles: state.profile.profiles // [constants.profile1, constants.profile2, constants.profile3, constants.profile4]
+    profiles: state.holoVault.profile.profiles // [constants.profile1, constants.profile2, constants.profile3, constants.profile4]
   }
 }
 
