@@ -27,7 +27,7 @@ const personaCreate = decorateAction([
   }
 ])
 
-storiesOf('Cells/Cells', module)
+storiesOf('HoloVault/Cells', module)
   .addDecorator(story => (
     <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
   ))
