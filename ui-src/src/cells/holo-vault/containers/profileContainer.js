@@ -13,7 +13,6 @@ const mapStateToProps = (state, ownProps) => {
   let selectedProfile = state.profile.profiles.filter(function (profile){
     return profileName === profile.name
   })[0]
-  console.log(selectedProfile.mapping)
   return {
     profileHash: state.profile.profileHash,
     profile: selectedProfile,
