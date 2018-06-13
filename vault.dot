@@ -4,20 +4,20 @@ node [shape=record fontname="Arial",fontsize="10",style="rounded, filled",penwid
 edge [penwidth=2, color="#8d00ff"];
 header0 [label=<{HEADER 0: GENESIS|
 {Type|%dna}|
-{Hash|QmaAd4S2DCsbq6w3LjJSzjzhZRymEgF3R8GunYuXcxDuHj}|
-{Timestamp|2018-05-01 14:07:27.240905 +1000 AEST}|
+{Hash|QmVV2RKw2jfn9z81SXQbgG9XbTmqsif8Tfzzj1w9yfR3qR}|
+{Timestamp|2018-05-12 18:55:54.084182 -0300 -03}|
 {Next Header|1}|
 {Next|%dna: 1}|
-{Entry|QmYv6dcpj3ysMRtWLn1ZZJvR4cD1BAhsGHaa5jzpMvhbiW}
+{Entry|QmV7zn2gVrRAUe5rJ7hnHW6767eruyQjdo5LrCtrWhWYgD}
 }>];
 content0 [label=<{HOLOCHAIN DNA|See dna.json}>];
 header0->content0;
 header0->header1;
 header1 [label=<{HEADER 1|
 {Type|%agent}|
-{Hash|QmWybVefghzKSmCjjmmrE6HdkJo8F6JLkkZadtqLRi7tFK}|
-{Timestamp|2018-05-01 14:07:27.241294 +1000 AEST}|
-{Next Header|QmaAd4S2DCsbq6w3LjJSzjzhZRymEgF3R8GunYuXcxDuHj}|
+{Hash|QmaArvu1zP6GjgZmEmdkJf5WUQnmwCGhS24M7LmjQ4ELC2}|
+{Timestamp|2018-05-12 18:55:54.084576 -0300 -03}|
+{Next Header|QmVV2RKw2jfn9z81SXQbgG9XbTmqsif8Tfzzj1w9yfR3qR}|
 {Next|%agent: 1}|
 {Entry|QmPV1ZufTf8dhKjpUPFCMZQEAwFQVm21LBdoZTUze8M3i2}
 }>];
@@ -26,34 +26,34 @@ header1->content1;
 header1->header2;
 header2 [label=<{HEADER 2|
 {Type|persona}|
-{Hash|QmVmVB2tg1TFDyfniJZzXXDbtwpnPUCA2SGmiDwKUf5VAy}|
-{Timestamp|2018-05-01 14:12:20.550753 +1000 AEST}|
-{Next Header|QmWybVefghzKSmCjjmmrE6HdkJo8F6JLkkZadtqLRi7tFK}|
+{Hash|QmQBdFt9ctruoS8Vfn47dVe1jQ2uzZBM16uBd6nCVFMhb6}|
+{Timestamp|2018-05-12 18:58:13.653845 -0300 -03}|
+{Next Header|QmaArvu1zP6GjgZmEmdkJf5WUQnmwCGhS24M7LmjQ4ELC2}|
 {Next|persona: 1}|
-{Entry|QmbgbDeKZT8Eh8L4E2GEguJhAys2jZX53uXy4DEsoUsSEb}
+{Entry|QmWwL5Ajzsm15T78kw9EgB23EFD9krip8r7BXcMoLVSwrE}
 }>];
-content2 [label=<{ENTRY 2|\{"name":"Personal",<br/>"personaFields":[<br/>\{"firstName":"Phil"\},<br/>\{"lastName":"Beadle"\}]\}}>];
+content2 [label=<{ENTRY 2|\{"name":"Friends",<br/>"personaFields":[<br/>\{"nickName":"@philt3r"\},<br/>\{"hobby":"DJ"\}]\}}>];
 header2->content2;
 header2->header3;
 header3 [label=<{HEADER 3|
-{Type|profileMapping}|
-{Hash|QmT8meRje5R86dbGqPt4wKjL7Vug5YETNrWPFJTujRBs3m}|
-{Timestamp|2018-05-01 14:17:24.444379 +1000 AEST}|
-{Next Header|QmVmVB2tg1TFDyfniJZzXXDbtwpnPUCA2SGmiDwKUf5VAy}|
-{Next|profileMapping: 1}|
-{Entry|QmSJ3TZrzbX4kKdjf2FXiKuAMknFGZ7wfdCAuxavkWeRqL}
+{Type|persona}|
+{Hash|QmQwXub1C9A8JBGPPK4xngMPnvM9UtKqvgyLRmde7hfm73}|
+{Timestamp|2018-05-12 18:58:19.763004 -0300 -03}|
+{Next Header|QmQBdFt9ctruoS8Vfn47dVe1jQ2uzZBM16uBd6nCVFMhb6}|
+{Next|persona: QmQBdFt9ctruoS8Vfn47dVe1jQ2uzZBM16uBd6nCVFMhb6}|
+{Entry|QmZqtKMs4pg9veqv3p4Sxzkgv2rdR7XoSn2TrLtAPLPSL7}
 }>];
-content3 [label=<{ENTRY 3|\{"expiry":"2018-12-12T01:01:10+00:00",<br/>"id":"HoloChat",<br/>"profile":\{"firstName":"Personal.firstName",<br/>"handle":"HoloChat.handle",<br/>"lastName":"Personal.lastName"\},<br/>"source-dna":"QmZ4CP5unaghnmxbJkSBwobehgcF5VdcKLPimXEkwVTUYh",<br/>"type":"object"\}}>];
+content3 [label=<{ENTRY 3|\{"name":"Personal",<br/>"personaFields":[<br/>\{"firstName":"Phil"\},<br/>\{"lastName":"Beadle"\},<br/>\{"address":"123 Holochain Road"\},<br/>\{"suburb":"Burwood"\},<br/>\{"city":"Melbourne"\}]\}}>];
 header3->content3;
 header3->header4;
 header4 [label=<{HEADER 4|
 {Type|persona}|
-{Hash|QmNNypE8d5anSSTExXJrMPWkidD5yqmAeiSKawRXwGTF6m}|
-{Timestamp|2018-05-01 14:17:24.447237 +1000 AEST}|
-{Next Header|QmT8meRje5R86dbGqPt4wKjL7Vug5YETNrWPFJTujRBs3m}|
-{Next|persona: QmVmVB2tg1TFDyfniJZzXXDbtwpnPUCA2SGmiDwKUf5VAy}|
-{Entry|QmaLNgARFCFFnRkUUbEyhVZem576o71y8rHxDSAvsyjZFu}
+{Hash|Qmakq63nDoiws15qtc7ogyrshjnFXiwt6Wbxq1Nuyfh3qr}|
+{Timestamp|2018-05-12 18:58:24.561464 -0300 -03}|
+{Next Header|QmQwXub1C9A8JBGPPK4xngMPnvM9UtKqvgyLRmde7hfm73}|
+{Next|persona: QmQwXub1C9A8JBGPPK4xngMPnvM9UtKqvgyLRmde7hfm73}|
+{Entry|QmWATP5KA6i8W9yVaE2uMfUrrK7vkkzTk5h8wi3Sh9s7FP}
 }>];
-content4 [label=<{ENTRY 4|\{"name":"HoloChat",<br/>"personaFields":[<br/>\{"handle":"@phil"\}]\}}>];
+content4 [label=<{ENTRY 4|\{"name":"Work",<br/>"personaFields":[<br/>\{"firstName":"Philip"\},<br/>\{"lastName":"Beadle"\},<br/>\{"role":"Engineer"\},<br/>\{"location":"Melbourne"\}]\}}>];
 header4->content4;
 }

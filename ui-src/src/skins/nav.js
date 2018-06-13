@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
@@ -103,25 +104,25 @@ class Navigation extends React.Component {
               </ListItem>
               <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                  <ListItem name="features" button onClick={() => { history.push('/features') }}>
+                  <ListItem name="features" button onClick={() => { history.push('/holo-vault/features') }}>
                     <ListItemIcon>
                       <BuildIcon />
                     </ListItemIcon>
                     <ListItemText primary='Features' />
                   </ListItem>
-                  <ListItem name="cells" button onClick={() => { history.push('/cells') }}>
+                  <ListItem name="cells" button onClick={() => { history.push('/holo-vault/cells') }}>
                     <ListItemIcon>
                       <GroupWorkIcon />
                     </ListItemIcon>
                     <ListItemText primary='Cells' />
                   </ListItem>
-                  <ListItem id="personas" button onClick={() => { history.push('/personas') }}>
+                  <ListItem id="personas" button onClick={() => { history.push('/holo-vault/personas') }}>
                     <ListItemIcon>
                       <PersonIcon />
                     </ListItemIcon>
                     <ListItemText primary='Personas' />
                   </ListItem>
-                  <ListItem name="profiles" button onClick={() => { history.push('/profiles') }}>
+                  <ListItem name="profiles" button onClick={() => { history.push('/holo-vault/profiles') }}>
                     <ListItemIcon>
                       <PersonIcon />
                     </ListItemIcon>
@@ -144,7 +145,7 @@ class Navigation extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant='title' color='inherit' noWrap>
-              Holo Vault
+              {this.props.location.pathname.replace(/\//g, ' ').replace('holo-vault', 'Vault')}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -160,13 +161,13 @@ class Navigation extends React.Component {
         </Hidden>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Route path='/personas' title='Personas' component={PersonasContainer} />
-          <Route path='/persona/:name' component={PersonaContainer} />
-          <Route path='/profiles' component={ProfilesContainer} />
-          <Route path='/profile/:name' component={ProfileContainer} />
-          <Route path='/cells' component={CellsContainer} />
-          <Route path='/cell/:name' component={SetupContainer} />
-          <Route path='/features' component={FeaturesContainer} />
+          <Route path='/holo-vault/personas' title='Personas' component={PersonasContainer} />
+          <Route path='/holo-vault/persona/:name' component={PersonaContainer} />
+          <Route path='/holo-vault/profiles' component={ProfilesContainer} />
+          <Route path='/holo-vault/profile/:name' component={ProfileContainer} />
+          <Route path='/holo-vault/cells' component={CellsContainer} />
+          <Route path='/holo-vault/cell/:name' component={SetupContainer} />
+          <Route path='/holo-vault/features' component={FeaturesContainer} />
         </main>
       </div>
     );

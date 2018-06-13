@@ -69,7 +69,7 @@ class Profile extends React.Component {
       this.props.personas.splice(this.props.personas.length - 1, 1)
     }
     this.props.profileMappingCreate(profileMapping)
-    this.props.history.push("/profiles")
+    this.props.history.push("/holo-vault/profiles")
   }
 
   //Gets the object from the field and creates the Profile mapping and if there are newField

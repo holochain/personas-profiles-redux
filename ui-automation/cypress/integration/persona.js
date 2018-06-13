@@ -1,6 +1,6 @@
 describe('How to work with Personas', function () {
   it('Add a new Friends persona by clicking the Add button', function () {
-    cy.visit('/persona/new')
+    cy.visit('/holo-vault/persona/new')
     cy.title().should('eq', 'Holochain')
     cy.get('input[name="personaName"]').type('Friends', { delay: 25 })
     cy.log('Fill out the name you want to refer to this Persona as')
@@ -18,7 +18,7 @@ describe('How to work with Personas', function () {
     cy.log('Click the Create Persona button to save into your private data.')
   })
   it('Add a new Personal persona by clicking the Add button', function () {
-    cy.visit('/persona/new')
+    cy.visit('/holo-vault/persona/new')
     cy.title().should('eq', 'Holochain')
     cy.get('input[name="personaName"]').type('Personal', { delay: 25 })
     cy.log('Fill out the name you want to refer to this Persona as')
@@ -46,7 +46,7 @@ describe('How to work with Personas', function () {
     cy.log('Click the Create Persona button to save into your private data.')
   })
   it('Add a new Work persona by clicking the Add button', function () {
-    cy.visit('/persona/new')
+    cy.visit('/holo-vault/persona/new')
     cy.title().should('eq', 'Holochain')
     cy.get('input[name="personaName"]').type('Work', { delay: 25 })
     cy.log('Fill out the name you want to refer to this Persona as')

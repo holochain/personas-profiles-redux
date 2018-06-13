@@ -30,7 +30,7 @@ class Profiles extends React.Component {
           {
             profiles.map((profile, index) => (
               <Route render={({ history}) => (
-                <ListItem key={index} button onClick={() => { history.push(`/profile/${profile.name}`) }}>
+                <ListItem key={index} button onClick={() => { history.push(`/holo-vault/profile/${profile.name}`) }}>
                   <ListItemAvatar >
                     <Avatar style={{marginTop: 10, borderRadius: 0 }}  src={profile.src} />
                   </ListItemAvatar>

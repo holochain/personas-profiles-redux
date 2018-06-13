@@ -20,6 +20,5 @@ function holochatReducer (state = initialState, action) {
 }
 
 export default combineReducers({
-  holochat: holochatReducer,
-  form: formReducer
+  holochat: holochatReducer
 })
