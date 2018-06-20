@@ -7,6 +7,7 @@ import Typography from 'material-ui/Typography';
 import List from 'material-ui/List'
 import { ListItem, ListItemAvatar, ListItemText } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
+// import listCells from './listCells.md'
 // import Markdown from 'react-markdown'
 const styles = theme => ({
   root: {
@@ -15,26 +16,26 @@ const styles = theme => ({
   },
 });
 
-class Profiles extends React.Component {
+class Cells extends React.Component {
   render() {
-    const { classes, profiles } = this.props;
+    const { classes, cells } = this.props;
     return (
       <div className={classes.root}>
         <Typography variant='display1'>
-          Profiles
+          Cells
         </Typography>
         <Typography variant='body1' gutterBottom>
-          Each time an app asks for Profile Information it gets stored here so you can see exactly what your informaiton is being used for.
+          Each of the "Cells" you are part of has a set of Apps in it, each of those Apps is listed here. Clicking the App will take you to the running instance of the App and will show you content from all of the Cells that use that App.
         </Typography>
         <List>
           {
-            profiles.map((profile, index) => (
+            cells.map((cell, index) => (
               <Route render={({ history}) => (
-                <ListItem key={index} button onClick={() => { history.push(`/holo-vault/profile/${profile.name}`) }}>
+                <ListItem key={index} button onClick={() => { history.push(`/holo-vault/cell/${cell.name}`) }}>
                   <ListItemAvatar >
-                    <Avatar style={{marginTop: 10, borderRadius: 0 }}  src={profile.src} />
+                    <Avatar style={{marginTop: 10, borderRadius: 0 }}  src={cell.src} />
                   </ListItemAvatar>
-                  <ListItemText primary={profile.name} />
+                  <ListItemText primary={cell.name} secondary={cell.description} />
                 </ListItem>
               )} />
             ))
@@ -45,8 +46,8 @@ class Profiles extends React.Component {
   }
 }
 
-Profiles.propTypes = {
+Cells.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRoot(withStyles(styles)(Profiles));
+export default withRoot(withStyles(styles)(Cells));

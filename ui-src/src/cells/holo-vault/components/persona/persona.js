@@ -163,5 +163,5 @@ Persona.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const PersonaForm = reduxForm({form: 'Profile', validate})(Persona)
+const PersonaForm = reduxForm({form: 'Persona', validate})(Persona)
 export default withRoot(withStyles(styles)(withRouter(PersonaForm)));

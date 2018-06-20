@@ -1,6 +1,4 @@
 import { combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
-
 import * as A from './actions'
 
 const initialState = {
@@ -20,6 +18,5 @@ function holochatReducer (state = initialState, action) {
 }
 
 export default combineReducers({
-  holochat: holochatReducer,
-  form: formReducer
+  holochat: holochatReducer
 })

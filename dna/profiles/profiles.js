@@ -35,6 +35,28 @@ function profileSpecCreate (profileSpecEntry) {
   return profileSpecHash;
 }
 
+function prolfilesList () {
+  var personas = query({
+    Return: {
+      Hashes: true,
+      Entries: true
+    },
+    Constrain: {
+      EntryTypes: ["persona"]
+    }
+  })
+
+  var personasWithHash = []
+  personas.forEach(function(persona){
+    var personaWithHash = {
+      "hash": persona.Hash,
+      "persona": persona.Entry
+    }
+    personasWithHash.push(personaWithHash)
+  })
+  debug(personasWithHash)
+  return personasWithHash;
+}
 // -----------------------------------------------------------------
 //  The Genesis Function https://developer.holochain.org/genesis
 // -----------------------------------------------------------------

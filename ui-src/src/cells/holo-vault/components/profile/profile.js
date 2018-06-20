@@ -36,6 +36,7 @@ const renderProfileField = ({
   key,
   label,
   specField,
+  personaFieldValue,
   required,
   onSelect,
   meta: {
@@ -43,8 +44,7 @@ const renderProfileField = ({
     error
   },
   ...custom
-}) => (<ProfileField name={name} specField={specField} key={key} label={label} error={touched && error}
-    onSelect={onSelect} {...custom} suggestions={suggestions} />)
+}) => (<ProfileField name={name} personaFieldValue={personaFieldValue} specField={specField} key={key} label={label} error={touched && error} onSelect={onSelect} {...custom} suggestions={suggestions} />)
 
 // const validate = values => {
 //   const errors = {}
@@ -62,19 +62,21 @@ class Profile extends React.Component {
     newPersona: {}
   }
   handleCreateProfile = () => {
+    console.log(this.state.newPersona)
     if(this.state.newPersona.personaFields.length > 0){
       this.props.personaCreate(this.state.newPersona)
     } else {
       this.props.personas.splice(this.props.personas.length - 1, 1)
     }
     this.props.profileMappingCreate(profileMapping)
-    this.props.history.push("/profiles")
+    this.props.history.push("/holo-vault/profiles")
   }
 
   //Gets the object from the field and creates the Profile mapping and if there are newField
   //creates the new Persona Object ready to save
   handleSelect = (personaProfileMapping) => {
     if(personaProfileMapping !== undefined){
+      console.log(profileMapping)
       profileMapping.profile[personaProfileMapping.specField]= personaProfileMapping.personaName + '.' + personaProfileMapping.personaField
       let persona = this.props.personas.filter(function (persona){
         return persona.persona.name === personaProfileMapping.personaName
@@ -82,6 +84,8 @@ class Profile extends React.Component {
       let personaField = persona.personaFields.filter(function (field){
         return Object.keys(field)[0] === personaProfileMapping.personaField
       })
+      console.log(personaField)
+
       if(personaField.length === 0){
         let newField = {}
         newField[personaProfileMapping.personaField] = personaProfileMapping.personaFieldValue
@@ -89,13 +93,14 @@ class Profile extends React.Component {
       } else {
         personaField[0][personaProfileMapping.personaField] = personaProfileMapping.personaFieldValue
       }
-      // console.log(personaField)
+      console.log(persona)
 
       if(personaProfileMapping.removeTyped){
         this.props.personas[this.props.personas.length - 1].persona.personaFields = this.props.personas[this.props.personas.length - 1].persona.personaFields.filter(function(personaField) {
           return Object.keys(personaField)[0] !== personaProfileMapping.specField
         })
       }
+      console.log(this.props.personas[this.props.personas.length - 1].persona)
       this.setState({newPersona: this.props.personas[this.props.personas.length - 1].persona})
     }
   }
@@ -111,29 +116,22 @@ class Profile extends React.Component {
       {
         "hash": "",
         "persona": {
-          "name": this.props.profileSpec.id,
+          "name": this.props.profileSpec.id.split('-')[0],
           "personaFields": []
         }
       }
     )
     //iterate through this.props.mapping and get the values from query
-    let tempProfileValues = {
-      "firstName": "Phil",
-      "handle": "@philt3r",
-      "lastName": "Beadle"
-    }
+
     profileMapping = this.props.mapping
-    this.props.initialize(tempProfileValues)
+    // this.props.initialize(tempProfileValues)
   }
 
   render() {
     const {classes, handleSubmit, profileSpec} = this.props
     return (<div className={classes.root}>
-      <Typography variant='display1'>
-        HoloVault
-      </Typography>
       <Typography variant='subheading'>
-        The {this.props.profileSpec.id} app is requesting your personal information.
+        {this.props.profileSpec.id} is requesting your personal information.
       </Typography>
       <Typography variant='body1' gutterBottom>
         Your personal information is managed by you in 1 location, 'HoloVault'. Other applications
@@ -144,7 +142,7 @@ class Profile extends React.Component {
       <form onSubmit={handleSubmit}>
         {
           profileSpec.profile.map((field, index) => (<div key={index}>
-            <Field key={index} name={field.appLabel} specField={field.appLabel} onSelect={this.handleSelect} component={renderProfileField} label={field.display} suggestions={suggestions} usage={field.usage} personaField={profileSpec.id + ' (' + field.appLabel + ')'} className={classes.persona}/>
+            <Field key={index} name={field.appLabel} specField={field.appLabel} onSelect={this.handleSelect} component={renderProfileField} label={field.display} suggestions={suggestions} usage={field.usage} personaField={field.personaField} personaFieldValue={field.value} className={classes.persona}/>
           </div>))
         }
         <Button name='createProfile' variant='raised' className={classes.button} onClick={handleSubmit(this.handleCreateProfile)}>

@@ -4,20 +4,20 @@ node [shape=record fontname="Arial",fontsize="10",style="rounded, filled",penwid
 edge [penwidth=2, color="#8d00ff"];
 header0 [label=<{HEADER 0: GENESIS|
 {Type|%dna}|
-{Hash|QmRUeixwXjBEm6sJ3u6yjZ62UrnVFbZ83EDJqJMBcx7KF1}|
-{Timestamp|2018-04-30 12:58:05.80421 +1000 AEST}|
+{Hash|QmVV2RKw2jfn9z81SXQbgG9XbTmqsif8Tfzzj1w9yfR3qR}|
+{Timestamp|2018-05-12 18:55:54.084182 -0300 -03}|
 {Next Header|1}|
 {Next|%dna: 1}|
-{Entry|QmbGapgjwd86JDWS3qpzApFXgXS8kq7xe5yA19Bzg1vnxP}
+{Entry|QmV7zn2gVrRAUe5rJ7hnHW6767eruyQjdo5LrCtrWhWYgD}
 }>];
 content0 [label=<{HOLOCHAIN DNA|See dna.json}>];
 header0->content0;
 header0->header1;
 header1 [label=<{HEADER 1|
 {Type|%agent}|
-{Hash|QmXTZkRhL2Rsg1KbodkNfenkPMkpHJkyMxUERduuYEicuj}|
-{Timestamp|2018-04-30 12:58:05.804697 +1000 AEST}|
-{Next Header|QmRUeixwXjBEm6sJ3u6yjZ62UrnVFbZ83EDJqJMBcx7KF1}|
+{Hash|QmaArvu1zP6GjgZmEmdkJf5WUQnmwCGhS24M7LmjQ4ELC2}|
+{Timestamp|2018-05-12 18:55:54.084576 -0300 -03}|
+{Next Header|QmVV2RKw2jfn9z81SXQbgG9XbTmqsif8Tfzzj1w9yfR3qR}|
 {Next|%agent: 1}|
 {Entry|QmPV1ZufTf8dhKjpUPFCMZQEAwFQVm21LBdoZTUze8M3i2}
 }>];
@@ -26,12 +26,34 @@ header1->content1;
 header1->header2;
 header2 [label=<{HEADER 2|
 {Type|persona}|
-{Hash|QmQT6AAz8k45FLPEoXS8y9oRV1FBigBuR6xxkJ8YNfa72C}|
-{Timestamp|2018-04-30 13:20:40.87361 +1000 AEST}|
-{Next Header|QmXTZkRhL2Rsg1KbodkNfenkPMkpHJkyMxUERduuYEicuj}|
+{Hash|QmQBdFt9ctruoS8Vfn47dVe1jQ2uzZBM16uBd6nCVFMhb6}|
+{Timestamp|2018-05-12 18:58:13.653845 -0300 -03}|
+{Next Header|QmaArvu1zP6GjgZmEmdkJf5WUQnmwCGhS24M7LmjQ4ELC2}|
 {Next|persona: 1}|
-{Entry|QmaGrRRgY7ddJFgJV6B2dVtF7SdMMmvxbrAivymnaLXBxt}
+{Entry|QmWwL5Ajzsm15T78kw9EgB23EFD9krip8r7BXcMoLVSwrE}
 }>];
-content2 [label=<{ENTRY 2|\{"name":"Test",<br/>"personaFields":[<br/>\{"field":"value"\}]\}}>];
+content2 [label=<{ENTRY 2|\{"name":"Friends",<br/>"personaFields":[<br/>\{"nickName":"@philt3r"\},<br/>\{"hobby":"DJ"\}]\}}>];
 header2->content2;
+header2->header3;
+header3 [label=<{HEADER 3|
+{Type|persona}|
+{Hash|QmQwXub1C9A8JBGPPK4xngMPnvM9UtKqvgyLRmde7hfm73}|
+{Timestamp|2018-05-12 18:58:19.763004 -0300 -03}|
+{Next Header|QmQBdFt9ctruoS8Vfn47dVe1jQ2uzZBM16uBd6nCVFMhb6}|
+{Next|persona: QmQBdFt9ctruoS8Vfn47dVe1jQ2uzZBM16uBd6nCVFMhb6}|
+{Entry|QmZqtKMs4pg9veqv3p4Sxzkgv2rdR7XoSn2TrLtAPLPSL7}
+}>];
+content3 [label=<{ENTRY 3|\{"name":"Personal",<br/>"personaFields":[<br/>\{"firstName":"Phil"\},<br/>\{"lastName":"Beadle"\},<br/>\{"address":"123 Holochain Road"\},<br/>\{"suburb":"Burwood"\},<br/>\{"city":"Melbourne"\}]\}}>];
+header3->content3;
+header3->header4;
+header4 [label=<{HEADER 4|
+{Type|persona}|
+{Hash|Qmakq63nDoiws15qtc7ogyrshjnFXiwt6Wbxq1Nuyfh3qr}|
+{Timestamp|2018-05-12 18:58:24.561464 -0300 -03}|
+{Next Header|QmQwXub1C9A8JBGPPK4xngMPnvM9UtKqvgyLRmde7hfm73}|
+{Next|persona: QmQwXub1C9A8JBGPPK4xngMPnvM9UtKqvgyLRmde7hfm73}|
+{Entry|QmWATP5KA6i8W9yVaE2uMfUrrK7vkkzTk5h8wi3Sh9s7FP}
+}>];
+content4 [label=<{ENTRY 4|\{"name":"Work",<br/>"personaFields":[<br/>\{"firstName":"Philip"\},<br/>\{"lastName":"Beadle"\},<br/>\{"role":"Engineer"\},<br/>\{"location":"Melbourne"\}]\}}>];
+header4->content4;
 }

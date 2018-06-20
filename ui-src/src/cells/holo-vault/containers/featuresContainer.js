@@ -1,6 +1,6 @@
 
 import { connect } from 'react-redux'
-import Cells from '../components/cell/cells'
+import Features from '../components/feature/features'
 import  * as constants from '../constants.js'
 import {
   cellsList
@@ -8,7 +8,7 @@ import {
 
 const mapStateToProps = state => {
   return {
-    cells: [constants.cell1, constants.cell2, constants.cell3, constants.cell4]
+    features: [constants.feature1, constants.feature2, constants.feature3, constants.feature4]
   }
 }
 
@@ -23,4 +23,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Cells)
+)(Features)

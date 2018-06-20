@@ -1,16 +1,15 @@
 import { combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
 import  * as constants from './constants.js'
 import * as A from './actions'
 
 const initialState = {
   userHash: 'empty',
   profileSpec: constants.profile1.profileSpec,
-  profiles: [constants.profile1, constants.profile2, constants.profile3, constants.profile4],
+  profiles: [constants.profile1, constants.profile6, constants.profile2, constants.profile3, constants.profile4, constants.profile5],
   profile: constants.profile1,
   profileMapping: constants.mapping,
-  personas:constants.personas,
-  persona: constants.personas[0].persona
+  personas: [], //constants.personas,
+  persona: {} // constants.personas[0].persona
 }
 
 function vaultReducer (state = initialState, action) {
@@ -43,6 +42,5 @@ function vaultReducer (state = initialState, action) {
 }
 
 export default combineReducers({
-  profile: vaultReducer,
-  form: formReducer
+  profile: vaultReducer
 })

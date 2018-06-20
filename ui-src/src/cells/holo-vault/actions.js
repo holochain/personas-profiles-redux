@@ -3,7 +3,17 @@ export const PERSONACREATE = 'personaCreate'
 export const PERSONAUPDATE = 'personaUpdate'
 export const PROFILESLIST = 'profilesList'
 export const PERSONASLIST = 'personasList'
+export const CELLSLIST = 'cellsList'
 
+export function cellsList() {
+  return {
+    type: CELLSLIST,
+    meta: {
+      isHc: true,
+      namespace: 'cells'
+    }
+  }
+}
 
 export function profileMappingCreate(profileMapping) {
   return {

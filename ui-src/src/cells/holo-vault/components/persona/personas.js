@@ -10,8 +10,6 @@ import { ListItem, ListItemText } from 'material-ui/List'
 import Person from 'material-ui-icons/Person'
 import PersonAdd from 'material-ui-icons/PersonAdd'
 
-import FingerPrint from 'material-ui-icons/Fingerprint'
-
 const styles = theme => ({
   root: {
     textAlign: 'left',
@@ -37,7 +35,7 @@ class Personas extends React.Component {
           {
             personas.map((persona, index) => (
               <Route render={({ history}) => (
-                <ListItem key={index} button onClick={() => { history.push(`/persona/${persona.persona.name}`) }}>
+                <ListItem key={index} button onClick={() => { history.push(`/holo-vault/persona/${persona.persona.name}`) }}>
                   <Person/>
                   <ListItemText primary={persona.persona.name} />
                 </ListItem>
@@ -46,7 +44,7 @@ class Personas extends React.Component {
           }
         </List>
         <Route render={({ history}) => (
-          <Button name='addPersona' variant='raised' className={classes.button} onClick={() => { history.push(`/persona/new`) }}>
+          <Button name='addPersona' variant='raised' className={classes.button} onClick={() => { history.push(`/holo-vault/persona/new`) }}>
             <PersonAdd/>
             Add Persona
           </Button>

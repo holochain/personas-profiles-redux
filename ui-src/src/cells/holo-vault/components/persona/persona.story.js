@@ -87,5 +87,5 @@ storiesOf('HoloVault/Persona', module)
 
 function getPersona(persona, hash, buttonText) {
   let history = []
-  return (<Provider store={store}><MemoryRouter initialEntries={['/']}><PersonaForm personaCreate={personaCreate('Click Create Persona')} personaUpdate={personaUpdate('Click Update Persona')} history={history} persona={persona} hash={hash} buttonText ={buttonText} /></MemoryRouter></Provider>)
+  return (<Provider store={store}><MemoryRouter initialEntries={['/']}><PersonaForm personaCreate={personaCreate('Click Create Persona')} personaUpdate={personaUpdate('Click Update Persona')} personasList={action('Refresh Persona List')} history={history} persona={persona} hash={hash} buttonText ={buttonText} /></MemoryRouter></Provider>)
 }

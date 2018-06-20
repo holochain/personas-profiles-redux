@@ -154,6 +154,7 @@ class ProfileField extends React.Component {
   handleChange = (event, { newValue }) => {
     let personaFieldValue  = newValue.split(' - ')[0]
     let personaField = newValue.split(' - ')[1]
+    console.log(newValue)
     let removeTyped = false
     if(personaField === undefined)
     {
@@ -166,6 +167,7 @@ class ProfileField extends React.Component {
     personaField = personaField.replace(' (', '.').replace(')', '')
     let personaName = personaField.split('.')[0]
     personaField = personaField.split('.')[1]
+    console.log(event.currentTarget)
     if(event.target.value === undefined){
       removeTyped = true
     }
@@ -176,7 +178,8 @@ class ProfileField extends React.Component {
   componentDidMount(){
     setSuggestions(this.props.suggestions)
     this.setState({
-      personaField: this.props.personaField
+      personaField: this.props.personaField,
+      personaFieldValue: this.props.personaFieldValue
     });
   }
   render() {

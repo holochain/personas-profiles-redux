@@ -7,7 +7,7 @@ import Typography from 'material-ui/Typography';
 import List from 'material-ui/List'
 import { ListItem, ListItemAvatar, ListItemText } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
-// import listCells from './listCells.md'
+// import listfeatures from './listFeatures.md'
 // import Markdown from 'react-markdown'
 const styles = theme => ({
   root: {
@@ -16,26 +16,26 @@ const styles = theme => ({
   },
 });
 
-class Cells extends React.Component {
+class Features extends React.Component {
   render() {
-    const { classes, cells } = this.props;
+    const { classes, features } = this.props;
     return (
       <div className={classes.root}>
         <Typography variant='display1'>
-          Cells
+          Features
         </Typography>
         <Typography variant='body1' gutterBottom>
-          Each of the "Cells" you are part of has a set of Apps in it, each of those Apps is listed here. Clicking the App will take you to the running instance of the App and will show you content from all of the Cells that use that App.
+          Each of the "Features" you have is listed here. Click on one to see all the data associated with this feature across your networks.
         </Typography>
         <List>
           {
-            cells.map((cell, index) => (
+            features.map((feature, index) => (
               <Route render={({ history}) => (
-                <ListItem key={index} button onClick={() => { history.push(`/cell/${cell.name}`) }}>
+                <ListItem key={index} button onClick={() => { history.push(`/${feature.name}`) }}>
                   <ListItemAvatar >
-                    <Avatar style={{marginTop: 10, borderRadius: 0 }}  src={cell.src} />
+                    <Avatar style={{marginTop: 10, borderRadius: 0 }}  src={feature.src} />
                   </ListItemAvatar>
-                  <ListItemText primary={cell.name} secondary={cell.description} />
+                  <ListItemText primary={feature.name} secondary={feature.description} />
                 </ListItem>
               )} />
             ))
@@ -46,8 +46,8 @@ class Cells extends React.Component {
   }
 }
 
-Cells.propTypes = {
+Features.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRoot(withStyles(styles)(Cells));
+export default withRoot(withStyles(styles)(Features));
