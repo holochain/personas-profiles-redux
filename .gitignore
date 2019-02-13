@@ -1,16 +1,22 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 .DS_Store
 # dependencies
-ui-src/node_modules
+
+ui-src/build
 ui-automation/cypress/screenshots
-ui-automation/node_modules
+ui-automation/cypress/videos
 ui
+ui-automation/mochawesome-report
 
 # testing
 /coverage
-/videos
+ui-src/coverage
+
 # production
 /build
+/dna
+foo
+tmp-storage
 
 # misc
 .DS_Store
@@ -23,5 +29,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-yarn.lock
-package-lock.json*
+foo
+bundle.json
+node_modules
