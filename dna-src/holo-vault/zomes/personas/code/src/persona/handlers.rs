@@ -7,7 +7,6 @@ use crate::persona::{
 };
 use hdk::holochain_core_types::{
     json::{RawString},
-    hash::HashString,
     cas::content::Address,
     entry::{entry_type::AppEntryType, AppEntryValue, Entry},
 };
@@ -24,21 +23,15 @@ use crate::utils::{
 
 pub fn handle_create_persona(spec: PersonaSpec) -> ZomeApiResult<Address> {
 
-    let persona_entry = Entry::App(
-        AppEntryType::from("persona"),
-        AppEntryValue::from(spec),
-    );
-    let anchor_entry = Entry::App(
-        AppEntryType::from("persona_anchor"),
-        AppEntryValue::from(RawString::from(AGENT_ADDRESS.to_string())),
-    );
-
+    let persona_entry = Entry::App("persona".into(), spec.into());
+    let anchor_entry = Entry::App("persona_anchor".into(), RawString::from(AGENT_ADDRESS.to_string()).into());
+    hdk::debug("Check debug");
     let persona_address = hdk::commit_entry(&persona_entry)?;
     let anchor_address = hdk::commit_entry(&anchor_entry)?;
-
+    hdk::debug(&persona_address);
     hdk::link_entries(&anchor_address, &persona_address, "personas")?;
 
-    Ok(persona_address)
+    Ok(persona_address.to_string().into())
 }
 
 
@@ -68,7 +61,7 @@ pub fn handle_get_personas() -> ZomeApiResult<GetLinksLoadResult<Persona>> {
 }
 
 
-pub fn handle_add_field(persona_address: HashString, field: PersonaField) -> ZomeApiResult<()> {
+pub fn handle_add_field(persona_address: Address, field: PersonaField) -> ZomeApiResult<()> {
 
     let persona_field_entry = Entry::App(
         AppEntryType::from("personaField"),
@@ -80,7 +73,7 @@ pub fn handle_add_field(persona_address: HashString, field: PersonaField) -> Zom
     Ok(())
 }
 
-pub fn handle_get_field(persona_address: HashString, field_name: String) -> ZomeApiResult<RawString> {
+pub fn handle_get_field(persona_address: Address, field_name: String) -> ZomeApiResult<RawString> {
     let fields = get_fields(&persona_address)?;
     match fields.iter().filter(|field| {field.name == field_name}).next() {
         Some(field) => Ok(field.data.to_owned().into()),
@@ -92,7 +85,7 @@ pub fn handle_get_field(persona_address: HashString, field_name: String) -> Zome
 /*=====  End of public fn handlers  ======*/
 
 
-fn get_fields(persona_address: &HashString) -> ZomeApiResult<Vec<PersonaField>> {
+fn get_fields(persona_address: &Address) -> ZomeApiResult<Vec<PersonaField>> {
     get_links_and_load_type(persona_address, "fields").map(|result: GetLinksLoadResult<PersonaField>| {
         result.iter().map(|elem| {
             elem.entry.clone()

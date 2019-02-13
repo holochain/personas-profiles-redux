@@ -2,9 +2,8 @@
 
 use hdk::holochain_core_types::error::HolochainError;
 use hdk::holochain_core_types::json::JsonString;
-use hdk::holochain_core_types::hash::HashString;
 use hdk::{
-    self, 
+    self,
     entry_definition::ValidatingEntryType,
 };
 
@@ -20,7 +19,7 @@ pub mod handlers;
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
 pub struct ProfileSpec {
     pub name: String,
-    pub sourceDNA: HashString,
+    pub sourceDNA: Address,
     pub fields: Vec<ProfileFieldSpec>
 }
 
@@ -42,24 +41,24 @@ pub enum UsageType {
 
 #[derive(Serialize, Deserialize, Debug, DefaultJson)]
 pub struct ProfileMapping {
-    pub retrieverDNA: HashString,
+    pub retrieverDNA: Address,
     pub profileFieldName: String,
-    pub personaAddress: HashString,
+    pub personaAddress: Address,
     pub personaFieldName: String
 }
 
 #[derive(Serialize, Deserialize, Debug, DefaultJson)]
 pub struct Profile {
     pub name: String,
-    pub sourceDNA: HashString,
-    pub hash: HashString,
+    pub sourceDNA: Address,
+    pub hash: Address,
     pub fields: Vec<ProfileField>,
     pub expiry: u32
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
 pub struct FieldMapping {
-    pub personaAddress: HashString,
+    pub personaAddress: Address,
     pub personaFieldName: String
 }
 
@@ -129,7 +128,7 @@ pub fn field_mapping_definition() -> ValidatingEntryType {
 }
 
 impl Profile {
-    pub fn from_spec(spec: ProfileSpec, hash: HashString, fields: Vec<ProfileField>) -> Profile {
+    pub fn from_spec(spec: ProfileSpec, hash: Address, fields: Vec<ProfileField>) -> Profile {
         Profile {
             fields: fields,
             hash: hash,
