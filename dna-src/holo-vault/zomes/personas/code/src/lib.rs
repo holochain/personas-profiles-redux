@@ -84,7 +84,7 @@ pub mod utils;
         }
 	]
 
-    capabilities: {
-        public (Public) [create_persona, get_personas, add_field, get_field]
+    traits: {
+        hc_public [create_persona, get_personas, add_field, get_field]
     }
  }

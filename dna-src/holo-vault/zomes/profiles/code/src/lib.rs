@@ -78,7 +78,7 @@ define_zome! {
         }
 	]
 
-    capabilities: {
-        public (Public) [register_app, get_profiles, create_mapping, retrieve]
+    traits: {
+        hc_public [register_app, get_profiles, create_mapping, retrieve]
     }
  }
