@@ -8,23 +8,23 @@ import { Login as LoginType } from './types/login'
 
 /*----------  Login Actions  ----------*/
 
-export const Login = createHolochainAsyncAction<{spec: LoginType}, string>(`holo-chat`, 'login', 'main', 'login')
+export const Login = createHolochainAsyncAction<{spec: LoginType}, string>(`holo-vault`, 'login', 'login')
 
 /*----------  Persona Actions  ----------*/
 
-export const CreatePersona = createHolochainAsyncAction<{spec: PersonaSpec}, string>(`holo-chat`, 'personas', 'main', 'create_persona')
+export const CreatePersona = createHolochainAsyncAction<{spec: PersonaSpec}, string>(`holo-vault`, 'personas', 'create_persona')
 
-export const GetPersonas = createHolochainAsyncAction<{}, Array<{address: string, entry: Persona}>>(`holo-chat`, 'personas', 'main', 'get_personas')
+export const GetPersonas = createHolochainAsyncAction<{}, Array<{address: string, entry: Persona}>>(`holo-vault`, 'personas', 'get_personas')
 
-export const AddField = createHolochainAsyncAction<{persona_address: string, field: PersonaField}, null>(`holo-chat`, 'personas', 'main', 'add_field')
+export const AddField = createHolochainAsyncAction<{persona_address: string, field: PersonaField}, null>(`holo-vault`, 'personas', 'add_field')
 
 /*----------  Profile Actions  ----------*/
 
-export const GetProfiles = createHolochainAsyncAction<{}, Array<Profile>>(`holo-chat`, 'profiles', 'main', 'get_profiles')
+export const GetProfiles = createHolochainAsyncAction<{}, Array<Profile>>(`holo-vault`, 'profiles', 'get_profiles')
 
-export const CreateMapping = createHolochainAsyncAction<{mapping: ProfileMapping}, {mappings_created: number}>(`holo-chat`, 'profiles', 'main', 'create_mapping')
+export const CreateMapping = createHolochainAsyncAction<{mapping: ProfileMapping}, {mappings_created: number}>(`holo-vault`, 'profiles', 'create_mapping')
 
-// export const GetProfileFields = createHolochainAsyncAction<Hash, Array<ProfileField>>(`holo-chat`, 'profiles', 'main', 'get_profile_fields')
+// export const GetProfileFields = createHolochainAsyncAction<Hash, Array<ProfileField>>(`holo-vault`, 'profiles', 'get_profile_fields')
 
 /*----------  non holochain actions  ----------*/
 

@@ -62,7 +62,7 @@ class Personas extends React.Component<Props & RouterProps, {}> {
                   id={persona.hash}
                   button={true}
                   onClick={() => {
-                    history.push(`/holo-vault/persona/${persona.name}`)
+                    history.push(`/persona/${persona.name}`)
                   }}
                 >
                   <ListItemIcon>
@@ -80,7 +80,7 @@ class Personas extends React.Component<Props & RouterProps, {}> {
             variant='contained'
             className={classes.button}
             onClick={() => {
-              history.push(`/holo-vault/persona/new`)
+              history.push(`/persona/new`)
             }}
           >
           <PersonAdd/>

@@ -22,14 +22,14 @@ key_file = "holo_tester.key"
 
 
 [[dnas]]
-id = "chat_dna"
-file = "dna/holo-chat.hcpkg"
+id = "personas_profiles"
+file = "dna/holo-vault.hcpkg"
 hash = "Qm328wyq38924y"
 
 
 [[instances]]
-id = "holo-chat"
-dna = "chat_dna"
+id = "holo-vault"
+dna = "personas_profiles"
 agent = "test_agent2"
 [instances.logger]
 type = "simple"
@@ -46,4 +46,4 @@ id = "websocket_interface"
 type = "websocket"
 port = 3400
 [[interfaces.instances]]
-id = "holo-chat"
+id = "holo-vault"
