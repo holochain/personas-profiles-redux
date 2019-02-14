@@ -5,7 +5,7 @@
   "scripts": {
     "hc:start": "mkdir -p tmp-storage && holochain_container -c ./container-config.toml",
     "hc:build": "rm -rf tmp-storage && mkdir -p dna && cd dna-src/holo-vault && hc package --output ../../dna/holo-vault.hcpkg --strip-meta",
-    "hc:test": "cd dna-src/holo-vault && hc test"
+    "hc:test": "cd dna-src/holo-vault && node test/index.js"
   },
   "repository": {
     "type": "git",
