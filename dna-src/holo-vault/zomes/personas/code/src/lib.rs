@@ -13,7 +13,7 @@ use hdk::{
     error::{ZomeApiError, ZomeApiResult},
     holochain_core_types::{cas::content::Address, entry::Entry, json::JsonString, json::RawString, error::HolochainError},
     holochain_wasm_utils::api_serialization::get_links::GetLinksResult,
-    dna::entry_types::Sharing,
+    holochain_core_types::dna::entry_types::Sharing,
 };
 
 pub mod persona;
@@ -73,18 +73,18 @@ pub mod utils;
 			handler: persona::handlers::handle_get_personas
 		}
         add_field: {
-            inputs: |persona_address: HashString, field: persona::PersonaField|,
+            inputs: |persona_address: Address, field: persona::PersonaField|,
             outputs: |result: ZomeApiResult<()>|,
             handler: persona::handlers::handle_add_field
         }
         get_field: {
-            inputs: |persona_address: HashString, field_name: String|,
+            inputs: |persona_address: Address, field_name: String|,
             outputs: |result: ZomeApiResult<RawString>|,
             handler: persona::handlers::handle_get_field
         }
 	]
 
-    capabilities: {
-        public (Public) [create_persona, get_personas, add_field, get_field]
+    traits: {
+        hc_public [create_persona, get_personas, add_field, get_field]
     }
  }

@@ -384,18 +384,6 @@ version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
-name = "personas"
-version = "0.1.0"
-dependencies = [
- "hdk 0.0.4-alpha",
- "holochain_core_types_derive 0.0.4-alpha",
- "holochain_wasm_utils 0.0.4-alpha",
- "serde 1.0.87 (registry+https://github.com/rust-lang/crates.io-index)",
- "serde_derive 1.0.87 (registry+https://github.com/rust-lang/crates.io-index)",
- "serde_json 1.0.38 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
 name = "pin-utils"
 version = "0.1.0-alpha.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -430,6 +418,18 @@ version = "0.4.27"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "unicode-xid 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "profiles"
+version = "0.1.0"
+dependencies = [
+ "hdk 0.0.4-alpha",
+ "holochain_core_types_derive 0.0.4-alpha",
+ "holochain_wasm_utils 0.0.4-alpha",
+ "serde 1.0.87 (registry+https://github.com/rust-lang/crates.io-index)",
+ "serde_derive 1.0.87 (registry+https://github.com/rust-lang/crates.io-index)",
+ "serde_json 1.0.38 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]

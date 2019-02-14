@@ -2,7 +2,7 @@ use core::convert::TryFrom;
 use hdk::AGENT_ADDRESS;
 
 use hdk::holochain_core_types::{
-    hash::HashString,
+    cas::content::Address,
 	error::HolochainError,
     json::{JsonString, RawString},
     entry::{entry_type::AppEntryType, AppEntryValue, Entry},
@@ -68,13 +68,13 @@ pub fn handle_get_profiles() -> ZomeApiResult<Vec<Profile>> {
 				return matching_map.entry.clone() // return the first if there are multiple mappings for the same fieldSpec
 			}
 
-			profile::ProfileField::from_spec(field_spec.clone(), None)			
+			profile::ProfileField::from_spec(field_spec.clone(), None)
 
 		}).collect();
 
 		profile::Profile::from_spec(
-			spec, 
-			elem.address.to_owned(), 
+			spec,
+			elem.address.to_owned(),
 			fields,
 		)
 
@@ -109,7 +109,7 @@ pub fn handle_create_mapping(mapping: profile::ProfileMapping) -> ZomeApiResult<
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
 struct GetFieldCallStruct {
-	persona_address: HashString,
+	persona_address: Address,
 	field_name: String
 }
 
@@ -120,7 +120,7 @@ struct CallResult {
     value: String
 }
 
-pub fn handle_retrieve(retriever_dna: HashString, profile_field: String) -> ZomeApiResult<RawString> {
+pub fn handle_retrieve(retriever_dna: Address, profile_field: String) -> ZomeApiResult<RawString> {
 
 	let profiles: Vec<profile::Profile> = handle_get_profiles()?;
 
@@ -129,7 +129,7 @@ pub fn handle_retrieve(retriever_dna: HashString, profile_field: String) -> Zome
 
 			match &field.entry.mapping {
 				Some(mapping) => {
-					let maybe_get_field_result = hdk::call(hdk::THIS_INSTANCE, "personas", "main", "get_field", "fake token", GetFieldCallStruct{
+					let maybe_get_field_result = hdk::call(hdk::THIS_INSTANCE, "personas", "get_field", "fake token", GetFieldCallStruct{
 						persona_address: mapping.personaAddress.clone(),
 						field_name: mapping.personaFieldName.clone()
 					}.into())?;
@@ -164,7 +164,6 @@ pub fn handle_retrieve(retriever_dna: HashString, profile_field: String) -> Zome
 
 /*=====  End of Public zome functions  ======*/
 
-fn get_mapped_profile_fields(profile_address: &HashString) -> ZomeApiResult<GetLinksLoadResult<ProfileField>> {
+fn get_mapped_profile_fields(profile_address: &Address) -> ZomeApiResult<GetLinksLoadResult<ProfileField>> {
 	get_links_and_load_type(profile_address, "field_mappings")
 }
-

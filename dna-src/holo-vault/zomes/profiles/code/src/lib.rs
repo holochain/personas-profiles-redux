@@ -11,7 +11,7 @@ use hdk::{
     error::{ZomeApiError, ZomeApiResult},
     holochain_core_types::{cas::content::Address, entry::Entry, json::JsonString, json::RawString, error::HolochainError},
     holochain_wasm_utils::api_serialization::get_links::GetLinksResult,
-    dna::entry_types::Sharing,
+    holochain_core_types::dna::entry_types::Sharing,
 };
 
 pub mod profile;
@@ -72,13 +72,13 @@ define_zome! {
             handler: profile::handlers::handle_create_mapping
         }
         retrieve: {
-            inputs: |retriever_DNA: HashString, profile_field: String|,
+            inputs: |retriever_DNA: Address, profile_field: String|,
             outputs: |result: ZomeApiResult<RawString>|,
             handler: profile::handlers::handle_retrieve
         }
 	]
 
-    capabilities: {
-        public (Public) [register_app, get_profiles, create_mapping, retrieve]
+    traits: {
+        hc_public [register_app, get_profiles, create_mapping, retrieve]
     }
  }
