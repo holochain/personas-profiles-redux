@@ -104,7 +104,7 @@ class Persona extends React.Component<Props & RouterProps, State> {
         // .then(this.props.getPersonas)
         // .catch(err => console.error(err))
     }
-    this.props.history.push('/holo-vault/personas')
+    this.props.history.push('/personas')
   }
 
   handleConfirmDelete = () => {
@@ -118,7 +118,7 @@ class Persona extends React.Component<Props & RouterProps, State> {
       open: false
     })
     this.props.delete(this.state.persona)
-    this.props.history.push('/holo-vault/personas')
+    this.props.history.push('/personas')
   }
 
   handleCloseDialog = () => {
