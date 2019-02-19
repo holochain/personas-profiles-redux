@@ -94,6 +94,12 @@ class Persona extends React.Component<Props & RouterProps, State> {
   handleSubmit = () => {
 
     if (this.state.persona.hash === '') {
+
+      if (this.state.persona.name === 'new') {
+        alert(`Cannot name a persona 'new'`)
+        return
+      }
+
       const personaSpec: PersonaSpec = { 'name': this.state.persona.name }
       const personaFields: Array<PersonaField> = this.state.persona.fields
       this.props.create(personaSpec, personaFields)
