@@ -4,7 +4,8 @@ import { connect } from '@holochain/hc-web-client'
 import holoVault from './hApps/holo-vault/reducer'
 let rootReducer = combineReducers({ holoVault: holoVault })
 
-const middleware: Array<any> = [holochainMiddleware(connect())]
+const url = process.env.NODE_ENV === 'development' ? `ws://localhost:3400` : undefined
+const middleware: Array<any> = [holochainMiddleware(connect(url))]
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
