@@ -32,3 +32,4 @@ yarn-error.log*
 foo
 bundle.json
 node_modules
+Cargo.lock

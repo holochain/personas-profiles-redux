@@ -25,10 +25,8 @@ pub fn handle_create_persona(spec: PersonaSpec) -> ZomeApiResult<Address> {
 
     let persona_entry = Entry::App("persona".into(), spec.into());
     let anchor_entry = Entry::App("persona_anchor".into(), RawString::from(AGENT_ADDRESS.to_string()).into());
-    hdk::debug("Check debug");
     let persona_address = hdk::commit_entry(&persona_entry)?;
     let anchor_address = hdk::commit_entry(&anchor_entry)?;
-    hdk::debug(&persona_address);
     hdk::link_entries(&anchor_address, &persona_address, "personas")?;
 
     Ok(persona_address.to_string().into())

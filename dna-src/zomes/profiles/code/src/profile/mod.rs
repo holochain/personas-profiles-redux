@@ -83,26 +83,20 @@ pub fn profile_definition() -> ValidatingEntryType {
         name: "profile",
         description: "A data schema provided by a hApp that describes what data it is requiesting and how it will use it",
         sharing: Sharing::Public,
-        native_type: ProfileSpec,
-
         validation_package: || {
             hdk::ValidationPackageDefinition::Entry
         },
-
-        validation: |_profile: ProfileSpec, _ctx: hdk::ValidationData| {
+        validation: | _validation_data: hdk::EntryValidationData<ProfileSpec>| {
             Ok(())
         },
-
         links: [
             to!(
                 "field_mapping",
                 tag: "field_mappings",
-
                 validation_package: || {
                     hdk::ValidationPackageDefinition::Entry
                 },
-
-                validation: |_base: Address, _target: Address, _ctx: hdk::ValidationData| {
+                validation: | _validation_data: hdk::LinkValidationData| {
                     Ok(())
                 }
             )
@@ -115,13 +109,10 @@ pub fn field_mapping_definition() -> ValidatingEntryType {
         name: "field_mapping",
         description: "A single piece of data that is attached to a persona",
         sharing: Sharing::Public,
-        native_type: ProfileField,
-
         validation_package: || {
             hdk::ValidationPackageDefinition::Entry
         },
-
-        validation: |_profile_field: ProfileField, _ctx: hdk::ValidationData| {
+        validation: | _validation_data: hdk::EntryValidationData<ProfileField>| {
             Ok(())
         }
     )
