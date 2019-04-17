@@ -12,12 +12,12 @@ use hdk::holochain_core_types::{
 
 pub mod handlers;
 
-#[derive(Serialize, Deserialize, Debug, DefaultJson)]
+#[derive(Serialize, Deserialize, Clone, Debug, DefaultJson)]
 pub struct PersonaSpec {
 	pub name: String
 }
 
-#[derive(Serialize, Deserialize, Debug, DefaultJson)]
+#[derive(Serialize, Deserialize, Clone, Debug, DefaultJson)]
 pub struct Persona {
 	name: String,
 	fields: Vec<PersonaField> // use &vec if there is a lot of data or it gets copied frequently
@@ -35,26 +35,21 @@ pub fn persona_definition() -> ValidatingEntryType {
         name: "persona",
         description: "A grouping of data about a user",
         sharing: Sharing::Public,
-        native_type: PersonaSpec,
-
         validation_package: || {
             hdk::ValidationPackageDefinition::Entry
         },
-
-        validation: |_persona: PersonaSpec, _ctx: hdk::ValidationData| {
-        	Ok(())
+        validation: | _validation_data: hdk::EntryValidationData<PersonaSpec>| {
+            Ok(())
         },
 
         links: [
             to!(
                 "personaField",
                 tag: "fields",
-
                 validation_package: || {
                     hdk::ValidationPackageDefinition::Entry
                 },
-
-                validation: |_base: Address, _target: Address, _ctx: hdk::ValidationData| {
+                validation: | _validation_data: hdk::LinkValidationData| {
                     Ok(())
                 }
             )
@@ -67,14 +62,11 @@ pub fn field_definition() -> ValidatingEntryType {
         name: "personaField",
         description: "A single piece of data that is attached to a persona",
         sharing: Sharing::Public,
-        native_type: PersonaField,
-
         validation_package: || {
             hdk::ValidationPackageDefinition::Entry
         },
-
-        validation: |_persona: PersonaField, _ctx: hdk::ValidationData| {
-        	Ok(())
+        validation: | _validation_data: hdk::EntryValidationData<PersonaField>| {
+            Ok(())
         }
 	)
 }

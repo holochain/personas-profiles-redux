@@ -129,7 +129,7 @@ pub fn handle_retrieve(retriever_dna: Address, profile_field: String) -> ZomeApi
 
 			match &field.entry.mapping {
 				Some(mapping) => {
-					let maybe_get_field_result = hdk::call(hdk::THIS_INSTANCE, "personas", "get_field", "fake token", GetFieldCallStruct{
+					let maybe_get_field_result = hdk::call(hdk::THIS_INSTANCE, "personas", Address::from(hdk::PUBLIC_TOKEN.to_string()), "get_field", GetFieldCallStruct{
 						persona_address: mapping.personaAddress.clone(),
 						field_name: mapping.personaFieldName.clone()
 					}.into())?;

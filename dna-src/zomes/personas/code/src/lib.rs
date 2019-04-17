@@ -18,6 +18,7 @@ use hdk::{
 
 pub mod persona;
 pub mod utils;
+pub type Base = RawString;
 
  define_zome! {
 
@@ -28,26 +29,22 @@ pub mod utils;
 			name: "persona_anchor",
 	        description: "",
 	        sharing: Sharing::Public,
-	        native_type: RawString,
 
-	        validation_package: || {
-	            hdk::ValidationPackageDefinition::Entry
-	        },
-
-	        validation: |_name: RawString, _ctx: hdk::ValidationData| {
-	        	Ok(())
-	        },
+            validation_package: || {
+                hdk::ValidationPackageDefinition::Entry
+            },
+            validation: | _validation_data: hdk::EntryValidationData<Base>| {
+                Ok(())
+            },
 
             links: [
                 to!(
                     "persona",
                     tag: "personas",
-
                     validation_package: || {
                         hdk::ValidationPackageDefinition::Entry
                     },
-
-                    validation: |_base: Address, _target: Address, _ctx: hdk::ValidationData| {
+                    validation: | _validation_data: hdk::LinkValidationData| {
                         Ok(())
                     }
                 )

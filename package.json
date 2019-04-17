@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "A Holochain app (hApp) for managing your personal private information.",
   "scripts": {
-    "hc:start": "mkdir -p tmp-storage && holochain -c ./container-config.toml",
-    "hc:build": "rm -rf tmp-storage && mkdir -p dna && cd dna-src/holo-vault && hc package --output ../../dna/holo-vault.hcpkg --strip-meta",
-    "hc:test": "cd dna-src/holo-vault && node test/index.js"
+    "hc:build": "echo `pwd` && rm -rf tmp-storage && mkdir -p dna && cd dna-src && ../../holochain/hc package --strip-meta -o ../dna/personas-profiles.dna.json",
+    "hc:start": "mkdir -p tmp-storage && ../holochain/holochain -c ./conductor-config.toml",
+    "hc:test": "cd dna-src && ../../holochain/hc test"
   },
   "repository": {
     "type": "git",

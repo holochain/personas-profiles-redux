@@ -16,6 +16,7 @@ use hdk::{
 
 pub mod profile;
 mod utils;
+pub type Base = RawString;
 
 define_zome! {
 
@@ -26,26 +27,20 @@ define_zome! {
             name: "profile_anchor",
             description: "",
             sharing: Sharing::Public,
-            native_type: RawString,
-
             validation_package: || {
                 hdk::ValidationPackageDefinition::Entry
             },
-
-            validation: |_name: RawString, _ctx: hdk::ValidationData| {
+            validation: | _validation_data: hdk::EntryValidationData<Base>| {
                 Ok(())
             },
-
             links: [
                 to!(
                     "profile",
                     tag: "profiles",
-
                     validation_package: || {
                         hdk::ValidationPackageDefinition::Entry
                     },
-
-                    validation: |_base: Address, _target: Address, _ctx: hdk::ValidationData| {
+                    validation: | _validation_data: hdk::LinkValidationData| {
                         Ok(())
                     }
                 )
