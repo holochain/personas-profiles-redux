@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import MediaQuery from 'react-responsive'
 import PersonasContainer from '../hApps/holo-vault/containers/personasContainer'
 import PersonaContainer from '../hApps/holo-vault/containers/personaContainer'
@@ -28,6 +28,7 @@ class MiniDrawer extends React.Component {
     return (
       <div className={classes.root}>
         <main className={classes.content}>
+          <Redirect from="/" to="personas" />
           <Route exact path='/login' title='Holo' render={props =>
             <div>
               <LoginContainer {...props} />
