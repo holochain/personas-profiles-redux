@@ -1,0 +1,14 @@
+// <Route path='/holo-chat/:channel/:subject' title='Holochain' render={props =>
+//   <Grid container={true} spacing={0}>
+//     <Grid item={true} xs={3}>
+//       <ChannelsContainer {...props} title={'Public Channels'} isPublic={true} />
+//       <ChannelsContainer {...props} title={'Direct Messages'} isPublic={false} />
+//     </Grid>
+//     <Grid item={true} xs={7}>
+//       <MessagesContainer />
+//     </Grid>
+//     <Grid item={true} xs={2}>
+//       <Paper><Typography variant='h5'>Ideas</Typography></Paper>
+//     </Grid>
+//   </Grid>
+// } />

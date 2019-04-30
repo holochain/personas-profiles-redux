@@ -1,0 +1,15 @@
+language: node_js
+
+node_js:
+- '10'
+services:
+- docker
+
+before_install:
+- cd ui-src
+- npm install
+- cd ..
+script:
+- docker run -v "$(pwd):/holochain-ui" willemolding/holochain:bleeding bash /holochain-ui/docker/run-hc-tests.sh
+- cd ui-src
+- npm run test
