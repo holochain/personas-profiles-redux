@@ -42,6 +42,7 @@
     "build": "react-scripts-ts build && mv ./build ../ui",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
+    "clean": "rm -rf ../ui",
     "coverage": "react-scripts-ts test --env=jsdom --coverage --collectCoverageFrom=!src/index.tsx --collectCoverageFrom=!src/root.tsx --collectCoverageFrom=!src/**/*.d.ts --collectCoverageFrom=!src/**/types/*.ts --collectCoverageFrom=!src/**/*.stories.tsx --collectCoverageFrom=!src/**/data/*.ts --collectCoverageFrom=src/**/*.ts --collectCoverageFrom=src/**/*.tsx",
     "release:files": "node copy-release.js",
     "storybook": "start-storybook -p 6006 -c .storybook -s ./public",
