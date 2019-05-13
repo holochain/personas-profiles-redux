@@ -1,0 +1,48 @@
+
+
+[[agents]]
+id = "test_agent1"
+name = "HoloTester1"
+public_address = "HcScIn5BH4E7odxp3bZcU9qDUf573wpzqM5OmSMUcOa4aqjo8KjYH66J4BXGq5z"
+key_file = "holo_tester.key"
+
+
+[[dnas]]
+id = "personas_profiles"
+file = "dna/personas-profiles.dna.json"
+hash = "Qm328wyq38924y"
+
+
+[[instances]]
+id = "holo-vault"
+dna = "personas_profiles"
+agent = "test_agent2"
+[instances.logger]
+type = "simple"
+file = "app_spec.log"
+[instances.storage]
+type = "file"
+path = "tmp-storage"
+
+
+
+[[interfaces]]
+id = "websocket_interface"
+[interfaces.driver]
+type = "websocket"
+port = 3400
+[[interfaces.instances]]
+id = "holo-vault"
+
+# -----------  UI  -----------
+
+[[ui_bundles]]
+id = "main"
+root_dir = "./ui"
+hash = "Qm000"
+
+[[ui_interfaces]]
+id = "ui-interface"
+bundle = "main"
+port = 3000
+dna_interface = "websocket_interface"

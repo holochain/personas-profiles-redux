@@ -53,7 +53,6 @@ module.exports = (scenario) => {
     const persona_address = result.Ok
     const add_result = await alice.callSync("personas", "add_field", {persona_address: persona_address, field: {name: "test_field", data: "string data"}})
 
-
     // can callSync the function to create a mapping
     const map_result2 = await alice.callSync("profiles", "create_mapping",
       {
