@@ -1,11 +1,11 @@
 {
-  "name": "holochain-ui",
-  "version": "1.0.0",
+  "name": "personas-profiles",
+  "version": "0.0.1",
   "description": "A Holochain app (hApp) for managing your personal private information.",
   "scripts": {
-    "hc:build": "echo `pwd` && rm -rf tmp-storage && mkdir -p dna && cd dna-src && ../../holochain/hc package --strip-meta -o ../dna/personas-profiles.dna.json",
-    "hc:start": "mkdir -p tmp-storage && ../holochain/holochain -c ./conductor-config.toml",
-    "hc:test": "cd dna-src && ../../holochain/hc test"
+    "hc:build": "echo `pwd` && rm -rf tmp-storage && mkdir -p dna && cd dna-src && hc package --strip-meta -o ../dna/personas-profiles.dna.json",
+    "hc:start": "mkdir -p tmp-storage && holochain -c ./conductor-config.toml",
+    "hc:test": "cd dna-src && hc test"
   },
   "repository": {
     "type": "git",

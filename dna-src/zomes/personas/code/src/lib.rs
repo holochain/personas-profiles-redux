@@ -10,9 +10,8 @@ extern crate holochain_core_types_derive;
 use crate::persona::Persona;
 use crate::utils::GetLinksLoadResult;
 use hdk::{
-    error::{ZomeApiError, ZomeApiResult},
-    holochain_core_types::{cas::content::Address, entry::Entry, json::JsonString, json::RawString, error::HolochainError},
-    holochain_wasm_utils::api_serialization::get_links::GetLinksResult,
+    error::{ZomeApiResult},
+    holochain_core_types::{cas::content::Address, json::JsonString, json::RawString, error::HolochainError},
     holochain_core_types::dna::entry_types::Sharing,
 };
 

@@ -12,6 +12,7 @@ ui
 
 # production
 /build
+/dna
 
 # misc
 .DS_Store

@@ -86,13 +86,13 @@ pub fn handle_create_mapping(mapping: profile::ProfileMapping) -> ZomeApiResult<
 	let profiles: Vec<profile::Profile> = handle_get_profiles()?;
 	let mut mappings_created = 0;
 
-	for profile in profiles.iter().filter(|profile| profile.sourceDNA == mapping.retrieverDNA) {
-		for field in profile.fields.iter().filter(|field| field.name == mapping.profileFieldName) {
+	for profile in profiles.iter().filter(|profile| profile.source_dna == mapping.retriever_dna) {
+		for field in profile.fields.iter().filter(|field| field.name == mapping.profile_field_name) {
 			mappings_created += 1;
 
 			let new_field = field.new_with_mapping(Some(profile::FieldMapping {
-				personaAddress: mapping.personaAddress.to_owned(),
-				personaFieldName: mapping.personaFieldName.to_owned()
+				persona_address: mapping.persona_address.to_owned(),
+				persona_field_name: mapping.persona_field_name.to_owned()
 			}));
 
 			let field_entry = Entry::App(
@@ -124,14 +124,14 @@ pub fn handle_retrieve(retriever_dna: Address, profile_field: String) -> ZomeApi
 
 	let profiles: Vec<profile::Profile> = handle_get_profiles()?;
 
-	for profile in profiles.iter().filter(|profile| profile.sourceDNA == retriever_dna) {
+	for profile in profiles.iter().filter(|profile| profile.source_dna == retriever_dna) {
 		for field in get_mapped_profile_fields(&profile.hash).unwrap().iter().filter(|elem| elem.entry.name == profile_field) {
 
 			match &field.entry.mapping {
 				Some(mapping) => {
 					let maybe_get_field_result = hdk::call(hdk::THIS_INSTANCE, "personas", Address::from(hdk::PUBLIC_TOKEN.to_string()), "get_field", GetFieldCallStruct{
-						persona_address: mapping.personaAddress.clone(),
-						field_name: mapping.personaFieldName.clone()
+						persona_address: mapping.persona_address.clone(),
+						field_name: mapping.persona_field_name.clone()
 					}.into())?;
 
 

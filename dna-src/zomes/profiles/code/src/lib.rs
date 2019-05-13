@@ -8,9 +8,8 @@ extern crate serde_derive;
 extern crate holochain_core_types_derive;
 
 use hdk::{
-    error::{ZomeApiError, ZomeApiResult},
-    holochain_core_types::{cas::content::Address, entry::Entry, json::JsonString, json::RawString, error::HolochainError},
-    holochain_wasm_utils::api_serialization::get_links::GetLinksResult,
+    error::{ZomeApiResult},
+    holochain_core_types::{cas::content::Address, json::JsonString, json::RawString, error::HolochainError},
     holochain_core_types::dna::entry_types::Sharing,
 };
 
@@ -67,7 +66,7 @@ define_zome! {
             handler: profile::handlers::handle_create_mapping
         }
         retrieve: {
-            inputs: |retriever_DNA: Address, profile_field: String|,
+            inputs: |retriever_dna: Address, profile_field: String|,
             outputs: |result: ZomeApiResult<RawString>|,
             handler: profile::handlers::handle_retrieve
         }

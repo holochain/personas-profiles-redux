@@ -59,9 +59,9 @@ pub fn get_links_and_load_type<
         } else { Err(ZomeApiError::Internal("fail".to_string())) }
 	}).collect::<ZomeApiResult<GetLinksLoadResult<R>>>()
 }
-
-pub fn link_entries_bidir<S: Into<String>>(a: &Address, b: &Address, tag_a_b: &str, tag_b_a: S) -> ZomeApiResult<()> {
-    hdk::link_entries(a, b, tag_a_b)?;
-    hdk::link_entries(b, a, tag_b_a)?;
-    Ok(())
-}
+// 
+// pub fn link_entries_bidir<S: Into<String>>(a: &Address, b: &Address, tag_a_b: &str, tag_b_a: S) -> ZomeApiResult<()> {
+//     hdk::link_entries(a, b, tag_a_b)?;
+//     hdk::link_entries(b, a, tag_b_a)?;
+//     Ok(())
+// }
