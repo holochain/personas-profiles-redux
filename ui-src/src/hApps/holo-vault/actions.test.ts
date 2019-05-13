@@ -39,7 +39,7 @@ const asyncActionTestTable: Array<[string, any, any, any]> = [
     'create_mapping',
     vaultActions.CreateMapping,
     {
-      retrieverDNA: 'XYZ',
+      retrieverDna: 'XYZ',
       profileFieldName: 'handle',
       personaHash: 'QmbzbwpLA8HjZCFqkPQE2TAEnugUPYz14W9Ux1hh8882Nr', // implies field is already mapped
       personaFieldName: 'nickName'
