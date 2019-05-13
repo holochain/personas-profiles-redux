@@ -5,6 +5,7 @@
 ui-src/build
 ui-automation/cypress/screenshots
 ui-automation/cypress/videos
+ui-automation/node_modules
 ui
 ui-automation/mochawesome-report
 
@@ -15,6 +16,7 @@ ui-src/coverage
 # production
 /build
 /dna
+/release
 foo
 tmp-storage
 

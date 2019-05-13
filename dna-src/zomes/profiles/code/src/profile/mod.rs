@@ -12,21 +12,19 @@ use hdk::holochain_core_types::{
     cas::content::Address,
 };
 
-use serde_json;
-
 pub mod handlers;
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
 pub struct ProfileSpec {
     pub name: String,
-    pub sourceDNA: Address,
+    pub source_dna: Address,
     pub fields: Vec<ProfileFieldSpec>
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
 pub struct ProfileFieldSpec {
     pub name: String,
-    pub displayName: String,
+    pub display_name: String,
     pub required: bool,
     pub description: String,
     pub usage: UsageType,
@@ -41,16 +39,16 @@ pub enum UsageType {
 
 #[derive(Serialize, Deserialize, Debug, DefaultJson)]
 pub struct ProfileMapping {
-    pub retrieverDNA: Address,
-    pub profileFieldName: String,
-    pub personaAddress: Address,
-    pub personaFieldName: String
+    pub retriever_dna: Address,
+    pub profile_field_name: String,
+    pub persona_address: Address,
+    pub persona_field_name: String
 }
 
 #[derive(Serialize, Deserialize, Debug, DefaultJson)]
 pub struct Profile {
     pub name: String,
-    pub sourceDNA: Address,
+    pub source_dna: Address,
     pub hash: Address,
     pub fields: Vec<ProfileField>,
     pub expiry: u32
@@ -58,14 +56,14 @@ pub struct Profile {
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
 pub struct FieldMapping {
-    pub personaAddress: Address,
-    pub personaFieldName: String
+    pub persona_address: Address,
+    pub persona_field_name: String
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
 pub struct ProfileField {
     pub name: String,
-    pub displayName: String,
+    pub display_name: String,
     pub required: bool,
     pub description: String,
     pub usage: UsageType,
@@ -124,7 +122,7 @@ impl Profile {
             fields: fields,
             hash: hash,
             name: spec.name,
-            sourceDNA: spec.sourceDNA,
+            source_dna: spec.source_dna,
             expiry: 0
         }
     }
@@ -137,7 +135,7 @@ impl ProfileField {
             mapping: mapping,
             name: spec.name,
             description: spec.description,
-            displayName: spec.displayName,
+            display_name: spec.display_name,
             required: spec.required,
             schema: spec.schema,
             usage: spec.usage
@@ -149,7 +147,7 @@ impl ProfileField {
             mapping: mapping,
             name: self.name.clone(),
             description: self.description.clone(),
-            displayName: self.displayName.clone(),
+            display_name: self.display_name.clone(),
             required: self.required.clone(),
             schema: self.schema.clone(),
             usage: self.usage.clone()

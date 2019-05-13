@@ -4,7 +4,7 @@ import { JSONSchema6 } from 'json-schema'
 
 export interface ProfileSpec {
   name: string,
-  sourceDNA: string, // the DNA of the hApp requesting data
+  sourceDna: string, // the DNA of the hApp requesting data
   fields: Array<ProfileFieldSpec>, // array of fields this app requires
 }
 
@@ -25,7 +25,7 @@ export enum UsageType {
 /*-------------------------------------------*/
 
 export interface ProfileMapping {
-  retrieverDNA: string,
+  retrieverDna: string,
   profileFieldName: string,
   personaAddress: string,
   personaFieldName: string
