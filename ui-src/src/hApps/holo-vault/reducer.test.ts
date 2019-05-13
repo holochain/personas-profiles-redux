@@ -21,8 +21,8 @@ describe('Vault Reducer', () => {
   it('adds retrieved profiles to the state in response to GetProfiles.success', () => {
 
     const testProfiles = [
-    { name: 'profile1', id: '1', fields: [], hash: '', expiry: 0, sourceDNA: '' },
-    { name: 'profile1', id: '1', fields: [], hash: '', expiry: 0, sourceDNA: '' }]
+    { name: 'profile1', id: '1', fields: [], hash: '', expiry: 0, sourceDna: '' },
+    { name: 'profile1', id: '1', fields: [], hash: '', expiry: 0, sourceDna: '' }]
 
     expect(vaultReducer(undefined, vaultActions.GetProfiles.success(testProfiles))).toEqual({
       ...initialState,

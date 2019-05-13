@@ -24,7 +24,7 @@ const mapStateToProps = (state: any, ownProps: Props & RouterProps): StateProps 
   if (ownProps.match) {
     const hash = ownProps.match.params.hash
     profile = state.holoVault.profile.profiles.filter((profile: ProfileType) => {
-      return profile.sourceDNA === hash
+      return profile.sourceDna === hash
     })[0]
   } else { // otherwise use the current profile from the state
     profile = state.holoVault.profile.currentProfile
@@ -71,7 +71,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
           console.log('creating map for ', field)
           actions.push(dispatch(CreateMapping.create({mapping: {
             ...field.mapping!,
-            retrieverDNA: profile.sourceDNA,
+            retrieverDna: profile.sourceDna,
             profileFieldName: field.name
           }})))
 

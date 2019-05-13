@@ -56,7 +56,7 @@ class Profiles extends React.Component<Props, {}> {
               <Route
                 key={index}
                 render={({ history }) => (
-                  <ListItem button={true} onClick={() => { history.push(`/holo-vault/profile/${profile.sourceDNA}`) }}>
+                  <ListItem button={true} onClick={() => { history.push(`/holo-vault/profile/${profile.sourceDna}`) }}>
                     <ListItemText primary={profile.name} />
                   </ListItem>
                 )}

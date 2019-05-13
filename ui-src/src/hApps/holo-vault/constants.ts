@@ -50,7 +50,7 @@ export const exampleProfile: Profile = {
   name:  'Holo-Chat',
   hash: 'QQQ',
   expiry: 10,
-  sourceDNA:  'DNAXYZ',
+  sourceDna:  'DNAXYZ',
   fields: [
     {
       name: 'handle',
@@ -84,14 +84,14 @@ export const exampleProfile: Profile = {
 }
 
 export const exampleHandleMapping: ProfileMapping = {
-  retrieverDNA:  'DNAXYZ',
+  retrieverDna:  'DNAXYZ',
   profileFieldName: 'handle',
   personaAddress: 'QmbzbwpLA8HjZCFqkPQE2TAEnugUPYz14W9Ux1hh8882Nr',
   personaFieldName: 'nickName'
 }
 
 export const exampleFirstNameMapping: ProfileMapping = {
-  retrieverDNA:  'DNAXYZ',
+  retrieverDna:  'DNAXYZ',
   profileFieldName: 'first_name',
   personaAddress: 'QmZqtKMs4pg9veqv3p4Sxzkgv2rdR7XoSn2TrLtAPLPSL7',
   personaFieldName: 'firstName'
@@ -101,7 +101,7 @@ export const exampleFaultyProfile: Profile = {
   name:  'Holo-Chat',
   hash: 'QQQ',
   expiry: 10,
-  sourceDNA:  'DNAXYZ2',
+  sourceDna:  'DNAXYZ2',
   fields: [
     {
       name: 'handle',
@@ -142,7 +142,7 @@ export const exampleProfileNotMapped: Profile = {
   name:  'Holo-Chat',
   hash: 'QQQ',
   expiry: 10,
-  sourceDNA:  'DNAXYZ',
+  sourceDna:  'DNAXYZ',
   fields: [
     {
       name: 'handle',
@@ -175,7 +175,7 @@ export const exampleProfileNotMappedNoDefaults: Profile = {
   name:  'Holo-Chat',
   hash: 'QQQ',
   expiry: 10,
-  sourceDNA:  'DNAXYZ',
+  sourceDna:  'DNAXYZ',
   fields: [
     {
       name: 'genre',
@@ -200,7 +200,7 @@ export const exampleProfileNotMappedNoDefaultsManualMap: Profile = {
   name:  'Errand',
   hash: 'QQQ',
   expiry: 10,
-  sourceDNA:  'DNAXYZErrand',
+  sourceDna:  'DNAXYZErrand',
   fields: [
     {
       name: 'locale',
@@ -225,7 +225,7 @@ export const exampleProfileMappedCorrectly: Profile = {
   name:  'Holo-Git',
   hash: 'QQQ',
   expiry: 10,
-  sourceDNA:  'DNAXYZ123',
+  sourceDna:  'DNAXYZ123',
   fields: [
     {
       name: 'handle',

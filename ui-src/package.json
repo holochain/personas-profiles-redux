@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@holochain/hc-redux-middleware": "^1.0.9",
-    "@holochain/hc-web-client": "^0.1.0",
+    "@holochain/hc-redux-middleware": "^1.1.1",
+    "@holochain/hc-web-client": "^0.4.0",
     "@types/autosuggest-highlight": "^3.1.0",
     "@types/immutable": "^3.8.7",
     "@types/json-schema": "^7.0.1",
@@ -42,6 +42,7 @@
     "build": "react-scripts-ts build && mv ./build ../ui",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
+    "clean": "rm -rf ../ui",
     "coverage": "react-scripts-ts test --env=jsdom --coverage --collectCoverageFrom=!src/index.tsx --collectCoverageFrom=!src/root.tsx --collectCoverageFrom=!src/**/*.d.ts --collectCoverageFrom=!src/**/types/*.ts --collectCoverageFrom=!src/**/*.stories.tsx --collectCoverageFrom=!src/**/data/*.ts --collectCoverageFrom=src/**/*.ts --collectCoverageFrom=src/**/*.tsx",
     "release:files": "node copy-release.js",
     "storybook": "start-storybook -p 6006 -c .storybook -s ./public",
