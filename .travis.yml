@@ -9,6 +9,7 @@ script:
 - cd release/ui
 - ls
 - zip -r $PACKAGE_NAME-$PACKAGE_VERSION.zip *
+- cd ..
 deploy:
   provider: releases
   api_key:
