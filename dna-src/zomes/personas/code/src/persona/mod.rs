@@ -44,7 +44,7 @@ pub fn persona_definition() -> ValidatingEntryType {
         links: [
             to!(
                 "personaField",
-                tag: "fields",
+                link_type: "fields",
                 validation_package: || {
                     hdk::ValidationPackageDefinition::Entry
                 },

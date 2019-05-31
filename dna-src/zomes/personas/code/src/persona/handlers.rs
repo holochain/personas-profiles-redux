@@ -27,7 +27,7 @@ pub fn handle_create_persona(spec: PersonaSpec) -> ZomeApiResult<Address> {
     let anchor_entry = Entry::App("persona_anchor".into(), RawString::from(AGENT_ADDRESS.to_string()).into());
     let persona_address = hdk::commit_entry(&persona_entry)?;
     let anchor_address = hdk::commit_entry(&anchor_entry)?;
-    hdk::link_entries(&anchor_address, &persona_address, "personas")?;
+    hdk::link_entries(&anchor_address, &persona_address, "personas", "")?;
 
     Ok(persona_address.to_string().into())
 }
@@ -45,17 +45,32 @@ pub fn handle_get_personas() -> ZomeApiResult<GetLinksLoadResult<Persona>> {
 
     let persona_specs: GetLinksLoadResult<PersonaSpec> = get_links_and_load_type(&anchor_address, "personas")?;
 
-    let result = persona_specs.iter().map(|elem| {
-        GetLinksLoadElement{
+    if persona_specs.len() == 0  {
+        hdk::debug("create Default persona")?;
+        let persona_address = handle_create_persona(PersonaSpec { name : "Default".to_string() })?;
+        let default_result = GetLinksLoadElement{
             entry: Persona{
-                name: elem.entry.name.to_owned(),
-                fields: get_fields(&elem.address).unwrap_or(Vec::new())
+                name: "Default".to_string(),
+                fields: Vec::new()
             },
-            address: elem.address.clone()
-        }
-    }).collect::<GetLinksLoadResult<Persona>>();
+            address: persona_address
+        };
+        let mut default_personas = GetLinksLoadResult::<Persona>::new();
+        default_personas.push(default_result);
+        Ok(default_personas)
+    } else {
+        let result = persona_specs.iter().map(|elem| {
+            GetLinksLoadElement{
+                entry: Persona{
+                    name: elem.entry.name.to_owned(),
+                    fields: get_fields(&elem.address).unwrap_or(Vec::new())
+                },
+                address: elem.address.clone()
+            }
+        }).collect::<GetLinksLoadResult<Persona>>();
+        Ok(result)
+    }
 
-    Ok(result)
 }
 
 
@@ -67,7 +82,7 @@ pub fn handle_add_field(persona_address: Address, field: PersonaField) -> ZomeAp
     );
 
     let field_address = hdk::commit_entry(&persona_field_entry)?;
-    hdk::link_entries(&persona_address, &field_address, "fields")?;
+    hdk::link_entries(&persona_address, &field_address, "fields", "")?;
     Ok(())
 }
 

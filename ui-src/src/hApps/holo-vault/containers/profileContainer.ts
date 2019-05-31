@@ -24,8 +24,13 @@ const mapStateToProps = (state: any, ownProps: Props & RouterProps): StateProps 
   if (ownProps.match) {
     const hash = ownProps.match.params.hash
     profile = state.holoVault.profile.profiles.filter((profile: ProfileType) => {
+      console.log(profile.sourceDna === hash)
       return profile.sourceDna === hash
     })[0]
+    const returnUrl = ownProps.match.params.returnUrl
+    if (returnUrl) {
+      ownProps.onSubmit = () => window.location.replace(returnUrl)
+    }
   } else { // otherwise use the current profile from the state
     profile = state.holoVault.profile.currentProfile
   }

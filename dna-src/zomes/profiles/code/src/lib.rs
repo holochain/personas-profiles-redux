@@ -35,7 +35,7 @@ define_zome! {
             links: [
                 to!(
                     "profile",
-                    tag: "profiles",
+                    link_type: "profiles",
                     validation_package: || {
                         hdk::ValidationPackageDefinition::Entry
                     },

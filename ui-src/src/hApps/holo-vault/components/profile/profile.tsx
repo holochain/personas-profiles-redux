@@ -47,7 +47,7 @@ const styles: StyleRulesCallback = theme => ({
   }
 })
 
-export interface RouterProps extends RouteComponentProps<{hash: string}> {}
+export interface RouterProps extends RouteComponentProps<{hash: string, returnUrl: string}> {}
 
 export interface OwnProps {
   classes?: any,
