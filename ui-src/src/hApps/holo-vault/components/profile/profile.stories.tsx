@@ -21,6 +21,7 @@ storiesOf('HoloVault/Profile', module)
     // specs(() => profileTests)
     let props: Props
     props = {
+      returnUrl: '',
       personas: constants.personas,
       selectedPersona: constants.personas[0],
       profile: constants.exampleProfileNotMappedNoDefaultsManualMap,
@@ -35,6 +36,7 @@ storiesOf('HoloVault/Profile', module)
     // specs(() => profileTests)
     let props: Props
     props = {
+      returnUrl: '',
       personas: constants.personas,
       selectedPersona: constants.personas[0],
       profile: constants.exampleProfileNotMappedNoDefaults,
@@ -49,6 +51,7 @@ storiesOf('HoloVault/Profile', module)
     // specs(() => profileTests)
     let props: Props
     props = {
+      returnUrl: '',
       personas: constants.personas,
       selectedPersona: constants.personas[0],
       profile: constants.exampleProfileNotMapped,
@@ -63,6 +66,7 @@ storiesOf('HoloVault/Profile', module)
     specs(() => profileTests)
     let props: Props
     props = {
+      returnUrl: '',
       personas: constants.personas,
       selectedPersona: constants.personas[0],
       profile: constants.exampleProfileMappedCorrectly,
@@ -76,6 +80,7 @@ storiesOf('HoloVault/Profile', module)
   .add('Faulty mapping', withNotes(profileFaultyMapping)(() => {
     let props: Props
     props = {
+      returnUrl: '',
       personas: constants.personas,
       selectedPersona: constants.personas[0],
       profile: constants.exampleFaultyProfile,

@@ -31,6 +31,7 @@ export const profileTests = describe('', () => {
 
   it('A new Profile has an empty AutoCompleteProfileField for each field in the Profile request', () => {
     props = {
+      returnUrl: '',
       personas: constants.personas,
       selectedPersona: constants.personas[0],
       profile: constants.exampleProfileNotMappedNoDefaults,
@@ -47,6 +48,7 @@ export const profileTests = describe('', () => {
 
   it('When an invalid mapping is used, the Profile has an empty AutoCompleteProfileField for each field in the Profile request', () => {
     props = {
+      returnUrl: '',
       personas: constants.personas,
       selectedPersona: constants.personas[0],
       profile: constants.exampleFaultyProfile,
@@ -64,6 +66,7 @@ export const profileTests = describe('', () => {
 
   it('When an valid mapping is used, the Profile form has a populated AutoCompleteProfileField for each field in the Profile request', () => {
     props = {
+      returnUrl: '',
       personas: constants.personas,
       selectedPersona: constants.personas[0],
       profile: constants.exampleProfileMappedCorrectly,
@@ -81,6 +84,7 @@ export const profileTests = describe('', () => {
 
   it('Mapping or entering new info into a field updates the Profile state', () => {
     props = {
+      returnUrl: '',
       personas: constants.personas,
       selectedPersona: constants.personas[0],
       profile: constants.exampleProfileNotMappedNoDefaults,
@@ -101,6 +105,7 @@ export const profileTests = describe('', () => {
 
   it('Clicking Save Profile fires the event', () => {
     props = {
+      returnUrl: '',
       personas: constants.personas,
       selectedPersona: constants.personas[0],
       profile: constants.exampleProfileMappedCorrectly,
@@ -116,6 +121,7 @@ export const profileTests = describe('', () => {
 
   it('Entering a value into an unmapped field adds the field to the selected Persona', () => {
     props = {
+      returnUrl: '',
       personas: constants.personas,
       selectedPersona: constants.personas[0],
       profile: constants.exampleProfileNotMappedNoDefaults,
@@ -131,6 +137,7 @@ export const profileTests = describe('', () => {
 
   it('Check getDerivedStateFromProps returns null when props dont set a profile', () => {
     props = {
+      returnUrl: '',
       personas: constants.personas,
       selectedPersona: constants.personas[0],
       profile: constants.exampleProfileNotMappedNoDefaults,
@@ -148,6 +155,7 @@ export const profileTests = describe('', () => {
   })
   it('Check getDerivedStateFromProps returns correct state update when props set a profile', () => {
     props = {
+      returnUrl: '',
       personas: constants.personas,
       selectedPersona: constants.personas[0],
       profile: constants.exampleProfileNotMappedNoDefaults,

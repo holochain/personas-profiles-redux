@@ -19,7 +19,7 @@ const mapStateToProps = (state: any, ownProps: Props & RouterProps): StateProps 
   // will return undefined if non-existent
 
   let profile: ProfileType
-
+  let returnUrl: string = '/profiles'
   // get the current profile from the url if possible
   if (ownProps.match) {
     const hash = ownProps.match.params.hash
@@ -27,15 +27,18 @@ const mapStateToProps = (state: any, ownProps: Props & RouterProps): StateProps 
       console.log(profile.sourceDna === hash)
       return profile.sourceDna === hash
     })[0]
-    const returnUrl = ownProps.match.params.returnUrl
-    if (returnUrl) {
-      ownProps.onSubmit = () => window.location.replace(returnUrl)
+    if (ownProps.match.params.returnUrl) {
+      returnUrl = ownProps.match.params.returnUrl
+    } else {
+      returnUrl = '/profiles'
     }
+    console.log('returnUrl ' + returnUrl)
   } else { // otherwise use the current profile from the state
     profile = state.holoVault.profile.currentProfile
   }
 
   return {
+    returnUrl: returnUrl,
     personas: state.holoVault.profile.personas,
     selectedPersona: state.holoVault.profile.currentPersona,
     profile: profile
