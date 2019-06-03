@@ -51,7 +51,7 @@
     "tslint:fix": "tslint --project ./tsconfig.json --fix"
   },
   "devDependencies": {
-    "@material-ui/core": "latest",
+    "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^2.0.2",
     "@storybook/addon-info": "^3.4.0",
     "@storybook/addon-knobs": "^3.4.0",

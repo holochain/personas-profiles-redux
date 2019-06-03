@@ -39,7 +39,7 @@ pub type Base = RawString;
             links: [
                 to!(
                     "persona",
-                    tag: "personas",
+                    link_type: "personas",
                     validation_package: || {
                         hdk::ValidationPackageDefinition::Entry
                     },

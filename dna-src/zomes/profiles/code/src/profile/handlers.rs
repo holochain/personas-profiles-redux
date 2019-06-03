@@ -8,7 +8,7 @@ use hdk::holochain_core_types::{
     entry::{entry_type::AppEntryType, AppEntryValue, Entry},
 };
 
-use crate::utils::{
+use hdk::utils::{
 	GetLinksLoadResult,
 	get_links_and_load_type,
 };
@@ -30,7 +30,7 @@ extern crate serde_json;
 
 
 pub fn handle_register_app(spec: ProfileSpec) -> ZomeApiResult<()> {
-
+    hdk::debug("bridge register profile spec")?;
 	let persona_entry = Entry::App(
         AppEntryType::from("profile"),
         AppEntryValue::from(spec),
@@ -43,8 +43,8 @@ pub fn handle_register_app(spec: ProfileSpec) -> ZomeApiResult<()> {
 	let profile_address = hdk::commit_entry(&persona_entry)?;
 	let anchor_address = hdk::commit_entry(&anchor_entry)?;
 
-	hdk::link_entries(&anchor_address, &profile_address, "profiles")?;
-
+	hdk::link_entries(&anchor_address, &profile_address, "profiles", "")?;
+    hdk::debug("finish bridge register profile spec")?;
 	Ok(())
 }
 
@@ -100,7 +100,7 @@ pub fn handle_create_mapping(mapping: profile::ProfileMapping) -> ZomeApiResult<
 		        AppEntryValue::from(new_field),
 		    );
 			let field_hash = hdk::commit_entry(&field_entry)?;
-			hdk::link_entries(&profile.hash, &field_hash, "field_mappings")?;
+			hdk::link_entries(&profile.hash, &field_hash, "field_mappings", "")?;
 		}
 	}
 	Ok(MapFieldsResult{mappings_created})

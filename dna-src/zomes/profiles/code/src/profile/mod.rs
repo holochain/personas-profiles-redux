@@ -15,6 +15,7 @@ use hdk::holochain_core_types::{
 pub mod handlers;
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct ProfileSpec {
     pub name: String,
     pub source_dna: Address,
@@ -22,6 +23,7 @@ pub struct ProfileSpec {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct ProfileFieldSpec {
     pub name: String,
     pub display_name: String,
@@ -38,6 +40,7 @@ pub enum UsageType {
 }
 
 #[derive(Serialize, Deserialize, Debug, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct ProfileMapping {
     pub retriever_dna: Address,
     pub profile_field_name: String,
@@ -46,6 +49,7 @@ pub struct ProfileMapping {
 }
 
 #[derive(Serialize, Deserialize, Debug, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct Profile {
     pub name: String,
     pub source_dna: Address,
@@ -55,12 +59,14 @@ pub struct Profile {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct FieldMapping {
     pub persona_address: Address,
     pub persona_field_name: String
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct ProfileField {
     pub name: String,
     pub display_name: String,
@@ -72,6 +78,7 @@ pub struct ProfileField {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct MapFieldsResult {
     pub mappings_created: i32,
 }
@@ -90,7 +97,7 @@ pub fn profile_definition() -> ValidatingEntryType {
         links: [
             to!(
                 "field_mapping",
-                tag: "field_mappings",
+                link_type: "field_mappings",
                 validation_package: || {
                     hdk::ValidationPackageDefinition::Entry
                 },
