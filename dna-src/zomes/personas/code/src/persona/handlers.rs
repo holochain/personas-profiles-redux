@@ -11,7 +11,7 @@ use hdk::holochain_core_types::{
     entry::{entry_type::AppEntryType, AppEntryValue, Entry},
 };
 
-use hdk::utils::{
+use crate::utils::{
     GetLinksLoadResult,
     GetLinksLoadElement,
     get_links_and_load_type

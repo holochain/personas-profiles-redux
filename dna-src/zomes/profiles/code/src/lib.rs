@@ -14,7 +14,6 @@ use hdk::{
 };
 
 pub mod profile;
-mod utils;
 pub type Base = RawString;
 
 define_zome! {
