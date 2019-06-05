@@ -1,4 +1,4 @@
-use core::convert::TryFrom;
+use std::convert::TryInto;
 use hdk::AGENT_ADDRESS;
 
 use hdk::holochain_core_types::{
@@ -113,13 +113,6 @@ struct GetFieldCallStruct {
 	field_name: String
 }
 
-#[derive(Serialize, Deserialize, Debug, DefaultJson)]
-struct CallResult {
-    ok: bool,
-    error: Option<String>,
-    value: String
-}
-
 pub fn handle_retrieve(retriever_dna: Address, profile_field: String) -> ZomeApiResult<RawString> {
 
 	let profiles: Vec<profile::Profile> = handle_get_profiles()?;
@@ -129,26 +122,14 @@ pub fn handle_retrieve(retriever_dna: Address, profile_field: String) -> ZomeApi
 
 			match &field.entry.mapping {
 				Some(mapping) => {
-					let maybe_get_field_result = hdk::call(hdk::THIS_INSTANCE, "personas", Address::from(hdk::PUBLIC_TOKEN.to_string()), "get_field", GetFieldCallStruct{
+					let result_json = hdk::call(hdk::THIS_INSTANCE, "personas", Address::from(hdk::PUBLIC_TOKEN.to_string()), "get_field", GetFieldCallStruct{
 						persona_address: mapping.persona_address.clone(),
 						field_name: mapping.persona_field_name.clone()
 					}.into())?;
 
 
-					let get_field_result = CallResult::try_from(maybe_get_field_result)?;
-
-				    if !get_field_result.ok {
-				        return Err(ZomeApiError::Internal("Could not call Vault".into()))
-				    }
-
-				    let response_json: serde_json::Value = serde_json::from_str(&get_field_result.value).unwrap();
-
-				    match response_json["Ok"].clone() {
-				        serde_json::Value::String(value) => {
-				        	return Ok(RawString::from(value))
-				        },
-				        _ => return Err(ZomeApiError::Internal("Field value could not be retrieved".to_string()))
-				    }
+                    let entry: ZomeApiResult<RawString> = result_json.try_into()?;
+                    return entry
 				},
 				None => {
 					return Err(ZomeApiError::Internal("Field not mapped".to_string()))
