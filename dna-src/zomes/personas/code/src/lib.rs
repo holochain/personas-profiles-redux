@@ -8,7 +8,7 @@ extern crate serde_derive;
 extern crate holochain_core_types_derive;
 
 use crate::persona::Persona;
-use crate::utils::GetLinksLoadResult;
+use hdk::utils::GetLinksLoadResult;
 use hdk::{
     error::{ZomeApiResult},
     holochain_core_types::{cas::content::Address, json::JsonString, json::RawString, error::HolochainError},
@@ -16,7 +16,6 @@ use hdk::{
 };
 
 pub mod persona;
-pub mod utils;
 pub type Base = RawString;
 
  define_zome! {
@@ -65,7 +64,7 @@ pub type Base = RawString;
 		}
 		get_personas: {
 			inputs: | |,
-			outputs: |personas: ZomeApiResult<GetLinksLoadResult<Persona>>|,
+			outputs: |personas: ZomeApiResult<Vec<GetLinksLoadResult<Persona>>>|,
 			handler: persona::handlers::handle_get_personas
 		}
         add_field: {

@@ -13,7 +13,6 @@ use hdk::holochain_core_types::{
 
 use hdk::utils::{
     GetLinksLoadResult,
-    GetLinksLoadElement,
     get_links_and_load_type
 };
 
@@ -35,7 +34,7 @@ pub fn handle_create_persona(spec: PersonaSpec) -> ZomeApiResult<Address> {
 
 
 
-pub fn handle_get_personas() -> ZomeApiResult<GetLinksLoadResult<Persona>> {
+pub fn handle_get_personas() -> ZomeApiResult<Vec<GetLinksLoadResult<Persona>>> {
     let anchor_address = hdk::commit_entry(
         &Entry::App(
             AppEntryType::from("persona_anchor"),
@@ -43,31 +42,29 @@ pub fn handle_get_personas() -> ZomeApiResult<GetLinksLoadResult<Persona>> {
         )
     )?;
 
-    let persona_specs: GetLinksLoadResult<PersonaSpec> = get_links_and_load_type(&anchor_address, "personas")?;
+    let persona_specs: Vec<GetLinksLoadResult<PersonaSpec>> = get_links_and_load_type(&anchor_address, Some("personas".into()), None)?;
 
     if persona_specs.len() == 0  {
         hdk::debug("create Default persona")?;
         let persona_address = handle_create_persona(PersonaSpec { name : "Default".to_string() })?;
-        let default_result = GetLinksLoadElement{
+        let default_result = GetLinksLoadResult{
             entry: Persona{
                 name: "Default".to_string(),
                 fields: Vec::new()
             },
             address: persona_address
         };
-        let mut default_personas = GetLinksLoadResult::<Persona>::new();
-        default_personas.push(default_result);
-        Ok(default_personas)
+        Ok(vec![default_result])
     } else {
         let result = persona_specs.iter().map(|elem| {
-            GetLinksLoadElement{
+            GetLinksLoadResult{
                 entry: Persona{
                     name: elem.entry.name.to_owned(),
                     fields: get_fields(&elem.address).unwrap_or(Vec::new())
                 },
                 address: elem.address.clone()
             }
-        }).collect::<GetLinksLoadResult<Persona>>();
+        }).collect();
         Ok(result)
     }
 
@@ -99,7 +96,7 @@ pub fn handle_get_field(persona_address: Address, field_name: String) -> ZomeApi
 
 
 fn get_fields(persona_address: &Address) -> ZomeApiResult<Vec<PersonaField>> {
-    get_links_and_load_type(persona_address, "fields").map(|result: GetLinksLoadResult<PersonaField>| {
+    get_links_and_load_type(persona_address, Some("fields".into()), None).map(|result: Vec<GetLinksLoadResult<PersonaField>>| {
         result.iter().map(|elem| {
             elem.entry.clone()
         }).collect()
