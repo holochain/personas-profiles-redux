@@ -49,27 +49,29 @@ pub fn handle_get_personas() -> ZomeApiResult<Vec<GetLinksLoadResult<Persona>>> 
 
     let persona_specs: Vec<GetLinksLoadResult<PersonaSpec>> = get_links_and_load_type(&anchor_address, Some(PERSONA_ANCHOR_LINK_TYPE.into()), None)?;
 
-    if persona_specs.len() == 0  {
-        hdk::debug("create Default persona")?;
-        let persona_address = create_default_persona()?;
-        let default_result = GetLinksLoadResult{
-            entry: Persona::default(),
-            address: persona_address
-        };
-        Ok(vec![default_result])
-    } else {
-        let result = persona_specs.iter().map(|elem| {
-            GetLinksLoadResult {
-                entry: Persona {
-                    name: elem.entry.name.to_owned(),
-                    fields: get_fields(&elem.address).unwrap_or(Vec::new())
-                },
-                address: elem.address.clone()
-            }
-        }).collect();
-        Ok(result)
+    match persona_specs.len() {
+        0 => {
+            hdk::debug("create Default persona")?;
+            let persona_address = create_default_persona()?;
+            let default_result = GetLinksLoadResult{
+                entry: Persona::default(),
+                address: persona_address
+            };
+            Ok(vec![default_result])
+        },
+        _ => {
+            let result = persona_specs.iter().map(|elem| {
+                GetLinksLoadResult {
+                    entry: Persona {
+                        name: elem.entry.name.to_owned(),
+                        fields: get_fields(&elem.address).unwrap_or(Vec::new())
+                    },
+                    address: elem.address.clone()
+                }
+            }).collect();
+            Ok(result)
+        }
     }
-
 }
 
 
