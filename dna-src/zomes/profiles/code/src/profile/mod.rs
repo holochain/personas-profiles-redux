@@ -12,6 +12,12 @@ use hdk::holochain_core_types::{
     cas::content::Address,
 };
 
+use crate::{
+    PROFILE_ENTRY,
+    FIELD_MAPPING_ENTRY,
+    FIELD_MAPPINGS_LINK_TYPE,
+};
+
 pub mod handlers;
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
@@ -85,7 +91,7 @@ pub struct MapFieldsResult {
 
 pub fn profile_definition() -> ValidatingEntryType {
     entry!(
-        name: "profile",
+        name: PROFILE_ENTRY,
         description: "A data schema provided by a hApp that describes what data it is requiesting and how it will use it",
         sharing: Sharing::Public,
         validation_package: || {
@@ -96,8 +102,8 @@ pub fn profile_definition() -> ValidatingEntryType {
         },
         links: [
             to!(
-                "field_mapping",
-                link_type: "field_mappings",
+                FIELD_MAPPING_ENTRY,
+                link_type: FIELD_MAPPINGS_LINK_TYPE,
                 validation_package: || {
                     hdk::ValidationPackageDefinition::Entry
                 },
@@ -111,7 +117,7 @@ pub fn profile_definition() -> ValidatingEntryType {
 
 pub fn field_mapping_definition() -> ValidatingEntryType {
     entry!(
-        name: "field_mapping",
+        name: FIELD_MAPPING_ENTRY,
         description: "A single piece of data that is attached to a persona",
         sharing: Sharing::Public,
         validation_package: || {

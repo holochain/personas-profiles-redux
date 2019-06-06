@@ -12,6 +12,14 @@ use hdk::utils::{
 	get_links_and_load_type,
 };
 
+use crate::{
+	PROFILE_ENTRY,
+	PROFILE_ANCHOR_ENTRY,
+	FIELD_MAPPING_ENTRY,
+	FIELD_MAPPINGS_LINK_TYPE,
+	PROFILES_LINK_TYPE,
+};
+
 use crate::profile::{
 	Profile,
 	ProfileSpec,
@@ -33,18 +41,18 @@ extern crate serde_json;
 pub fn handle_register_app(spec: ProfileSpec) -> ZomeApiResult<()> {
     hdk::debug("bridge register profile spec")?;
 	let persona_entry = Entry::App(
-        AppEntryType::from("profile"),
+        AppEntryType::from(PROFILE_ENTRY),
         AppEntryValue::from(spec),
     );
     let anchor_entry = Entry::App(
-        AppEntryType::from("profile_anchor"),
+        AppEntryType::from(PROFILE_ANCHOR_ENTRY),
         AppEntryValue::from(RawString::from(AGENT_ADDRESS.to_string())),
     );
 
 	let profile_address = hdk::commit_entry(&persona_entry)?;
 	let anchor_address = hdk::commit_entry(&anchor_entry)?;
 
-	hdk::link_entries(&anchor_address, &profile_address, "profiles", "")?;
+	hdk::link_entries(&anchor_address, &profile_address, PROFILES_LINK_TYPE, "")?;
     hdk::debug("finish bridge register profile spec")?;
 	Ok(())
 }
@@ -52,12 +60,12 @@ pub fn handle_register_app(spec: ProfileSpec) -> ZomeApiResult<()> {
 
 pub fn handle_get_profiles() -> ZomeApiResult<Vec<Profile>> {
 	let anchor_entry = Entry::App(
-        AppEntryType::from("profile_anchor"),
+        AppEntryType::from(PROFILE_ANCHOR_ENTRY),
         AppEntryValue::from(RawString::from(AGENT_ADDRESS.to_string())),
     );
 	let anchor_address = hdk::commit_entry(&anchor_entry)?;
 
-	let result: Vec<GetLinksLoadResult<ProfileSpec>> = get_links_and_load_type(&anchor_address, Some("profiles".into()), None)?;
+	let result: Vec<GetLinksLoadResult<ProfileSpec>> = get_links_and_load_type(&anchor_address, Some(PROFILES_LINK_TYPE.into()), None)?;
 
 	let profiles = result.iter().map(|elem| {
 		let spec = elem.entry.clone();
@@ -100,11 +108,11 @@ pub fn handle_create_mapping(mapping: profile::ProfileMapping) -> ZomeApiResult<
 		}));
 
 		let field_entry = Entry::App(
-	        AppEntryType::from("field_mapping"),
+	        AppEntryType::from(FIELD_MAPPING_ENTRY),
 	        AppEntryValue::from(new_field),
 	    );
 		let field_hash = hdk::commit_entry(&field_entry)?;
-		hdk::link_entries(&profile.hash, &field_hash, "field_mappings", "")?;
+		hdk::link_entries(&profile.hash, &field_hash, FIELD_MAPPINGS_LINK_TYPE, "")?;
 		Ok(())
 	}).partition(|result| result.is_ok());
 
@@ -155,5 +163,5 @@ pub fn handle_retrieve(retriever_dna: Address, profile_field: String) -> ZomeApi
 /*=====  End of Public zome functions  ======*/
 
 fn get_mapped_profile_fields(profile_address: &Address) -> ZomeApiResult<Vec<GetLinksLoadResult<ProfileField>>> {
-	get_links_and_load_type(profile_address, Some("field_mappings".into()), None)
+	get_links_and_load_type(profile_address, Some(FIELD_MAPPINGS_LINK_TYPE.into()), None)
 }

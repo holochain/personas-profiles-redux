@@ -16,13 +16,20 @@ use hdk::{
 pub mod profile;
 pub type Base = RawString;
 
+pub static PROFILE_ENTRY: &str = "profile";
+pub static FIELD_MAPPING_ENTRY: &str = "field_mapping";
+pub static PROFILE_ANCHOR_ENTRY: &str = "profile_anchor";
+
+pub static FIELD_MAPPINGS_LINK_TYPE: &str = "field_mappings";
+pub static PROFILES_LINK_TYPE: &str = "profiles";
+
 define_zome! {
 
 	entries: [
 	   profile::profile_definition(),
 	   profile::field_mapping_definition(),
         entry!(
-            name: "profile_anchor",
+            name: PROFILE_ANCHOR_ENTRY,
             description: "",
             sharing: Sharing::Public,
             validation_package: || {
@@ -33,8 +40,8 @@ define_zome! {
             },
             links: [
                 to!(
-                    "profile",
-                    link_type: "profiles",
+                    PROFILE_ENTRY,
+                    link_type: PROFILES_LINK_TYPE,
                     validation_package: || {
                         hdk::ValidationPackageDefinition::Entry
                     },
