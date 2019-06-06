@@ -1,28 +1,57 @@
-#![feature(try_from)]
+#![feature(try_from, proc_macro_hygiene)]
 #[macro_use]
 extern crate hdk;
+extern crate hdk_proc_macros;
 extern crate serde;
 #[macro_use]
 extern crate serde_derive;
 #[macro_use]
 extern crate holochain_core_types_derive;
 
+use hdk_proc_macros::zome;
+
 use hdk::{
     error::{ZomeApiResult},
-    holochain_core_types::{cas::content::Address, json::JsonString, json::RawString, error::HolochainError},
-    holochain_core_types::dna::entry_types::Sharing,
+    entry_definition::ValidatingEntryType,
+    holochain_core_types::{
+        cas::content::Address,
+        json::RawString,
+        dna::entry_types::Sharing,
+    },
 };
 
 pub mod profile;
 pub type Base = RawString;
 
-define_zome! {
+pub static PROFILE_ENTRY: &str = "profile";
+pub static FIELD_MAPPING_ENTRY: &str = "field_mapping";
+pub static PROFILE_ANCHOR_ENTRY: &str = "profile_anchor";
 
-	entries: [
-	   profile::profile_definition(),
-	   profile::field_mapping_definition(),
+pub static FIELD_MAPPINGS_LINK_TYPE: &str = "field_mappings";
+pub static PROFILES_LINK_TYPE: &str = "profiles";
+
+
+#[zome]
+pub mod profiles {
+    #[genesis]
+    fn genesis() {
+        Ok(())
+    }
+
+    #[entry_def]
+    pub fn profile_entry_def() -> ValidatingEntryType {
+        profile::profile_definition()
+    }
+
+    #[entry_def]
+    pub fn field_mapping_entry_def() -> ValidatingEntryType {
+        profile::field_mapping_definition()
+    }
+
+    #[entry_def]
+    pub fn profile_anchor_entry_def() -> ValidatingEntryType {
         entry!(
-            name: "profile_anchor",
+            name: PROFILE_ANCHOR_ENTRY,
             description: "",
             sharing: Sharing::Public,
             validation_package: || {
@@ -33,8 +62,8 @@ define_zome! {
             },
             links: [
                 to!(
-                    "profile",
-                    link_type: "profiles",
+                    PROFILE_ENTRY,
+                    link_type: PROFILES_LINK_TYPE,
                     validation_package: || {
                         hdk::ValidationPackageDefinition::Entry
                     },
@@ -43,35 +72,28 @@ define_zome! {
                     }
                 )
             ]
-        )
-	]
-
-    genesis: || {{ Ok(()) }}
-
-    functions: [
-		register_app: {
-			inputs: |spec: profile::ProfileSpec|,
-			outputs: |result: ZomeApiResult<()>|,
-			handler: profile::handlers::handle_register_app
-		}
-		get_profiles: {
-			inputs: | |,
-			outputs: |profiles: ZomeApiResult<Vec<profile::Profile>>|,
-			handler: profile::handlers::handle_get_profiles
-		}
-        create_mapping: {
-            inputs: |mapping: profile::ProfileMapping|,
-            outputs: |result: ZomeApiResult<profile::MapFieldsResult>|,
-            handler: profile::handlers::handle_create_mapping
-        }
-        retrieve: {
-            inputs: |retriever_dna: Address, profile_field: String|,
-            outputs: |result: ZomeApiResult<RawString>|,
-            handler: profile::handlers::handle_retrieve
-        }
-	]
-
-    traits: {
-        hc_public [register_app, get_profiles, create_mapping, retrieve]
+        )    
     }
- }
+
+    #[zome_fn("hc_public")]
+    pub fn register_app(spec: profile::ProfileSpec) -> ZomeApiResult<()> {
+        profile::handlers::handle_register_app(spec)
+    }   
+
+    #[zome_fn("hc_public")]
+    pub fn get_profiles() -> ZomeApiResult<Vec<profile::Profile>> {
+        profile::handlers::handle_get_profiles()
+    }   
+
+    #[zome_fn("hc_public")]
+    pub fn create_mapping(mapping: profile::ProfileMapping) -> ZomeApiResult<profile::MapFieldsResult> {
+        profile::handlers::handle_create_mapping(mapping)
+    }            
+
+
+    #[zome_fn("hc_public")]
+    pub fn retrieve(retriever_dna: Address, profile_field: String) -> ZomeApiResult<RawString> {
+        profile::handlers::handle_retrieve(retriever_dna, profile_field)
+    }       
+
+}
