@@ -1,4 +1,3 @@
-use std::convert::TryInto;
 use hdk::AGENT_ADDRESS;
 
 use hdk::holochain_core_types::{
@@ -19,6 +18,8 @@ use crate::profile::{
 	ProfileField,
 	MapFieldsResult,
 };
+
+use std::convert::TryInto;
 
 use hdk::error::{ZomeApiResult, ZomeApiError};
 use crate::profile;
@@ -86,7 +87,7 @@ pub fn handle_create_mapping(mapping: profile::ProfileMapping) -> ZomeApiResult<
 	let profiles: Vec<profile::Profile> = handle_get_profiles()?;
 	let mut mappings_created = 0;
 
-	for profile in profiles.iter().filter(|profile| profile.source_dna == mapping.retriever_dna) {
+	for profile in profiles.iter().filter(|profile| profile.source_dna == mapping.retriever_dna)  {
 		for field in profile.fields.iter().filter(|field| field.name == mapping.profile_field_name) {
 			mappings_created += 1;
 
@@ -116,30 +117,28 @@ struct GetFieldCallStruct {
 pub fn handle_retrieve(retriever_dna: Address, profile_field: String) -> ZomeApiResult<RawString> {
 
 	let profiles: Vec<profile::Profile> = handle_get_profiles()?;
+	let profile = profiles.iter().find(|profile| profile.source_dna == retriever_dna)
+		.ok_or(ZomeApiError::Internal("Nothing in the vault".to_string()))?;
 
-	for profile in profiles.iter().filter(|profile| profile.source_dna == retriever_dna) {
-		for field in get_mapped_profile_fields(&profile.hash).unwrap().iter().filter(|elem| elem.entry.name == profile_field) {
+	let fields = get_mapped_profile_fields(&profile.hash)?;
+	let field = fields.iter().find(|elem| elem.entry.name == profile_field)
+		.ok_or(ZomeApiError::Internal("No matching mapped field found in profile".to_string()))?;
+		
+	let mapping = field.entry.mapping.clone()
+		.ok_or(ZomeApiError::Internal("Field is not mapped".to_string()))?;
 
-			match &field.entry.mapping {
-				Some(mapping) => {
-					let result_json = hdk::call(hdk::THIS_INSTANCE, "personas", Address::from(hdk::PUBLIC_TOKEN.to_string()), "get_field", GetFieldCallStruct{
-						persona_address: mapping.persona_address.clone(),
-						field_name: mapping.persona_field_name.clone()
-					}.into())?;
-
-
-                    let entry: ZomeApiResult<RawString> = result_json.try_into()?;
-                    return entry
-				},
-				None => {
-					return Err(ZomeApiError::Internal("Field not mapped".to_string()))
-				}
-			}
-
-
-		}
-	}
-	Err(ZomeApiError::Internal("Nothing in the vault".to_string()))
+	let call_result = hdk::call(
+		hdk::THIS_INSTANCE,
+		"personas",
+		Address::from(hdk::PUBLIC_TOKEN.to_string()),
+		"get_field",
+		GetFieldCallStruct{
+			persona_address: mapping.persona_address.clone(),
+			field_name: mapping.persona_field_name.clone()
+		}.into()
+	)?;
+	hdk::debug(format!("Result of calling persona get_field from profiles: {:?}", call_result))?;
+	return call_result.try_into()?
 }
 
 

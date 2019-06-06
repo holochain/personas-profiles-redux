@@ -86,7 +86,7 @@ pub fn handle_add_field(persona_address: Address, field: PersonaField) -> ZomeAp
 pub fn handle_get_field(persona_address: Address, field_name: String) -> ZomeApiResult<RawString> {
     let fields = get_fields(&persona_address)?;
     match fields.iter().filter(|field| {field.name == field_name}).next() {
-        Some(field) => Ok(field.data.to_owned().into()),
+        Some(field) => Ok(RawString::from(field.data.to_owned())),
         None => Err(ZomeApiError::Internal("No matching field names".into()))
     }
 }
