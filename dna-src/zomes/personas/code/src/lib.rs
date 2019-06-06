@@ -34,7 +34,7 @@ pub static PERSONA_FIELDS_LINK_TYPE: &str = "fields";
 pub static PERSONA_ANCHOR_LINK_TYPE: &str = "personas";
 
 #[zome]
-pub mod persona {
+pub mod personas {
 
     #[genesis]
     fn genesis() {
