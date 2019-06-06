@@ -18,13 +18,21 @@ use hdk::{
 pub mod persona;
 pub type Base = RawString;
 
+pub static PERSONA_ENTRY: &str = "persona";
+pub static PERSONA_FIELD_ENTRY: &str = "persona_field";
+pub static PERSONA_ANCHOR_ENTRY: &str = "persona_anchor";
+
+pub static PERSONA_FIELDS_LINK_TYPE: &str = "fields";
+pub static PERSONA_ANCHOR_LINK_TYPE: &str = "personas";
+
+
  define_zome! {
 
 	entries: [
 		persona::persona_definition(),
         persona::field_definition(),
 		entry!(
-			name: "persona_anchor",
+			name: PERSONA_ANCHOR_ENTRY,
 	        description: "",
 	        sharing: Sharing::Public,
 
@@ -37,8 +45,8 @@ pub type Base = RawString;
 
             links: [
                 to!(
-                    "persona",
-                    link_type: "personas",
+                    PERSONA_ENTRY,
+                    link_type: PERSONA_ANCHOR_LINK_TYPE,
                     validation_package: || {
                         hdk::ValidationPackageDefinition::Entry
                     },

@@ -9,6 +9,12 @@ use hdk::holochain_core_types::{
     dna::entry_types::Sharing,
 };
 
+use crate::{
+    PERSONA_ENTRY,
+    PERSONA_FIELD_ENTRY,
+    PERSONA_FIELDS_LINK_TYPE
+};
+
 pub mod handlers;
 
 #[derive(Serialize, Deserialize, Clone, Debug, DefaultJson)]
@@ -16,10 +22,27 @@ pub struct PersonaSpec {
 	pub name: String
 }
 
+impl Default for PersonaSpec {
+    fn default() -> Self {
+        Self {
+            name: "Default".to_string(),
+        }
+    }
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, DefaultJson)]
 pub struct Persona {
 	name: String,
 	fields: Vec<PersonaField> // use &vec if there is a lot of data or it gets copied frequently
+}
+
+impl Default for Persona {
+    fn default() -> Self {
+        Self {
+            name: "Default".to_string(),
+            fields: Vec::new(),
+        }
+    }
 }
 
 
@@ -31,7 +54,7 @@ pub struct PersonaField {
 
 pub fn persona_definition() -> ValidatingEntryType {
 	entry!(
-        name: "persona",
+        name: PERSONA_ENTRY,
         description: "A grouping of data about a user",
         sharing: Sharing::Public,
         validation_package: || {
@@ -43,8 +66,8 @@ pub fn persona_definition() -> ValidatingEntryType {
 
         links: [
             to!(
-                "personaField",
-                link_type: "fields",
+                PERSONA_FIELD_ENTRY,
+                link_type: PERSONA_FIELDS_LINK_TYPE,
                 validation_package: || {
                     hdk::ValidationPackageDefinition::Entry
                 },
@@ -58,7 +81,7 @@ pub fn persona_definition() -> ValidatingEntryType {
 
 pub fn field_definition() -> ValidatingEntryType {
 	entry!(
-        name: "personaField",
+        name: PERSONA_FIELD_ENTRY,
         description: "A single piece of data that is attached to a persona",
         sharing: Sharing::Public,
         validation_package: || {
