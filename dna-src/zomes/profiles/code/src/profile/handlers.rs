@@ -59,17 +59,15 @@ pub fn handle_get_profiles() -> ZomeApiResult<Vec<Profile>> {
 
 	let result: Vec<GetLinksLoadResult<ProfileSpec>> = get_links_and_load_type(&anchor_address, Some("profiles".into()), None)?;
 
-	Ok(result.iter().map(|elem| {
+	let profiles = result.iter().map(|elem| {
 		let spec = elem.entry.clone();
 		let mapped_fields = get_mapped_profile_fields(&elem.address).unwrap_or(Vec::new());
 
 		let fields: Vec<profile::ProfileField> = spec.fields.iter().map(|field_spec| {
 
-			for matching_map in mapped_fields.iter().filter(|mapped_field| { mapped_field.entry.name == field_spec.name }) {
-				return matching_map.entry.clone() // return the first if there are multiple mappings for the same fieldSpec
-			}
-
-			profile::ProfileField::from_spec(field_spec.clone(), None)
+			mapped_fields.iter().find(|mapped_field| { mapped_field.entry.name == field_spec.name })
+				.map(|matching_map| matching_map.entry.clone())
+				.unwrap_or(profile::ProfileField::from_spec(field_spec.clone(), None))
 
 		}).collect();
 
@@ -79,32 +77,44 @@ pub fn handle_get_profiles() -> ZomeApiResult<Vec<Profile>> {
 			fields,
 		)
 
-	}).collect())
+	}).collect();
+	Ok(profiles)
 }
 
 
 pub fn handle_create_mapping(mapping: profile::ProfileMapping) -> ZomeApiResult<MapFieldsResult> {
 	let profiles: Vec<profile::Profile> = handle_get_profiles()?;
-	let mut mappings_created = 0;
 
-	for profile in profiles.iter().filter(|profile| profile.source_dna == mapping.retriever_dna)  {
-		for field in profile.fields.iter().filter(|field| field.name == mapping.profile_field_name) {
-			mappings_created += 1;
+	// find all the pairs of profiles and fields we need to link together
+	let mappings_to_create: Vec<(&profile::Profile, &profile::ProfileField)> = 
+	profiles.iter().filter(|profile| profile.source_dna == mapping.retriever_dna).flat_map(|profile| {
+		profile.fields.iter().filter(|field| field.name == mapping.profile_field_name).map(move |field| (profile, field))
+	}).collect();
 
-			let new_field = field.new_with_mapping(Some(profile::FieldMapping {
-				persona_address: mapping.persona_address.to_owned(),
-				persona_field_name: mapping.persona_field_name.to_owned()
-			}));
+	// iterate over the pairs to create the mappings and collect the errors/successes
+	let (success, errors): (Vec<ZomeApiResult<()>>, Vec<ZomeApiResult<()>>) = 
+	mappings_to_create.iter().map(|(profile, field)| {
+		let new_field = field.new_with_mapping(Some(profile::FieldMapping {
+			persona_address: mapping.persona_address.to_owned(),
+			persona_field_name: mapping.persona_field_name.to_owned()
+		}));
 
-			let field_entry = Entry::App(
-		        AppEntryType::from("field_mapping"),
-		        AppEntryValue::from(new_field),
-		    );
-			let field_hash = hdk::commit_entry(&field_entry)?;
-			hdk::link_entries(&profile.hash, &field_hash, "field_mappings", "")?;
-		}
+		let field_entry = Entry::App(
+	        AppEntryType::from("field_mapping"),
+	        AppEntryValue::from(new_field),
+	    );
+		let field_hash = hdk::commit_entry(&field_entry)?;
+		hdk::link_entries(&profile.hash, &field_hash, "field_mappings", "")?;
+		Ok(())
+	}).partition(|result| result.is_ok());
+
+	match errors.len() {
+		0 => Ok(MapFieldsResult{mappings_created: success.len() as i32}),
+		_ => Err(ZomeApiError::Internal(
+			format!("An error occurred while creating one of the mappings: {:?}", errors).to_string()
+		)),
+
 	}
-	Ok(MapFieldsResult{mappings_created})
 }
 
 
@@ -123,7 +133,7 @@ pub fn handle_retrieve(retriever_dna: Address, profile_field: String) -> ZomeApi
 	let fields = get_mapped_profile_fields(&profile.hash)?;
 	let field = fields.iter().find(|elem| elem.entry.name == profile_field)
 		.ok_or(ZomeApiError::Internal("No matching mapped field found in profile".to_string()))?;
-		
+
 	let mapping = field.entry.mapping.clone()
 		.ok_or(ZomeApiError::Internal("Field is not mapped".to_string()))?;
 
