@@ -7,8 +7,9 @@ use hdk::holochain_core_types::{
     entry::{entry_type::AppEntryType, AppEntryValue, Entry},
 };
 
-use hdk::utils::{
-	GetLinksLoadResult,
+use utils::GetLinksLoadResult;
+
+use utils::{
 	get_links_and_load_type,
 };
 
@@ -94,13 +95,13 @@ pub fn handle_create_mapping(mapping: profile::ProfileMapping) -> ZomeApiResult<
 	let profiles: Vec<profile::Profile> = handle_get_profiles()?;
 
 	// find all the pairs of profiles and fields we need to link together
-	let mappings_to_create: Vec<(&profile::Profile, &profile::ProfileField)> = 
+	let mappings_to_create: Vec<(&profile::Profile, &profile::ProfileField)> =
 	profiles.iter().filter(|profile| profile.source_dna == mapping.retriever_dna).flat_map(|profile| {
 		profile.fields.iter().filter(|field| field.name == mapping.profile_field_name).map(move |field| (profile, field))
 	}).collect();
 
 	// iterate over the pairs to create the mappings and collect the errors/successes
-	let (success, errors): (Vec<ZomeApiResult<()>>, Vec<ZomeApiResult<()>>) = 
+	let (success, errors): (Vec<ZomeApiResult<()>>, Vec<ZomeApiResult<()>>) =
 	mappings_to_create.iter().map(|(profile, field)| {
 		let new_field = field.new_with_mapping(Some(profile::FieldMapping {
 			persona_address: mapping.persona_address.to_owned(),

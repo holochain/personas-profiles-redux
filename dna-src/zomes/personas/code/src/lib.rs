@@ -7,11 +7,12 @@ extern crate serde;
 extern crate serde_derive;
 #[macro_use]
 extern crate holochain_core_types_derive;
+extern crate utils;
 
 use hdk_proc_macros::zome;
 
 use crate::persona::Persona;
-use hdk::utils::GetLinksLoadResult;
+use utils::GetLinksLoadResult;
 
 use hdk::{
     error::ZomeApiResult,
@@ -84,17 +85,17 @@ pub mod personas {
     #[zome_fn("hc_public")]
     pub fn create_persona(spec: persona::PersonaSpec) -> ZomeApiResult<Address> {
         persona::handlers::handle_create_persona(spec)
-    }  
-    
+    }
+
     #[zome_fn("hc_public")]
     pub fn get_personas() -> ZomeApiResult<Vec<GetLinksLoadResult<Persona>>> {
         persona::handlers::handle_get_personas()
-    }  
+    }
 
     #[zome_fn("hc_public")]
     pub fn add_field(persona_address: Address, field: persona::PersonaField) -> ZomeApiResult<()> {
         persona::handlers::handle_add_field(persona_address, field)
-    }    
+    }
 
     #[zome_fn("hc_public")]
     pub fn get_field(persona_address: Address, field_name: String) -> ZomeApiResult<RawString> {

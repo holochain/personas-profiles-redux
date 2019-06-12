@@ -1,4 +1,4 @@
-module.exports = (scenario) => {
+module.exports = scenario => {
 
   const testPersonaSpec = {
     spec: {
@@ -16,14 +16,14 @@ module.exports = (scenario) => {
     }
   }
 
-  scenario.runTape('Can create a persona', async (t, {alice}) => {
+  scenario('Can create a persona', async (s, t, {alice}) => {
     const result = await alice.callSync("personas", "create_persona", testPersonaSpec)
     console.log(result)
     t.equal(result.Ok.length, 46)
     console.log('blah')
   })
 
-  scenario.runTape('Can retrieve a list of personas', async (t, {alice}) => {
+  scenario('Can retrieve a list of personas', async (s, t, {alice}) => {
     const result = await alice.callSync("personas", "create_persona", testPersonaSpec)
     console.log(result)
     t.equal(result.Ok.length, 46)
@@ -33,7 +33,7 @@ module.exports = (scenario) => {
   })
 
 
-  scenario.runTape('Can add a field to a persona', async (t, {alice}) => {
+  scenario('Can add a field to a persona', async (s, t, {alice}) => {
     const persona_address = await alice.callSync("personas", "create_persona", testPersonaSpec)
     console.log(persona_address.Ok)
     t.equal(persona_address.Ok.length, 46)

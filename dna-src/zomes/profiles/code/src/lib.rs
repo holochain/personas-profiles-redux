@@ -72,28 +72,28 @@ pub mod profiles {
                     }
                 )
             ]
-        )    
+        )
     }
 
     #[zome_fn("hc_public")]
     pub fn register_app(spec: profile::ProfileSpec) -> ZomeApiResult<()> {
         profile::handlers::handle_register_app(spec)
-    }   
+    }
 
     #[zome_fn("hc_public")]
     pub fn get_profiles() -> ZomeApiResult<Vec<profile::Profile>> {
         profile::handlers::handle_get_profiles()
-    }   
+    }
 
     #[zome_fn("hc_public")]
     pub fn create_mapping(mapping: profile::ProfileMapping) -> ZomeApiResult<profile::MapFieldsResult> {
         profile::handlers::handle_create_mapping(mapping)
-    }            
+    }
 
 
     #[zome_fn("hc_public")]
     pub fn retrieve(retriever_dna: Address, profile_field: String) -> ZomeApiResult<RawString> {
         profile::handlers::handle_retrieve(retriever_dna, profile_field)
-    }       
+    }
 
 }
