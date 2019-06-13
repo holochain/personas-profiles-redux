@@ -1,11 +1,28 @@
 const path = require('path')
-const { Config, Container, Scenario } = require('@holochain/holochain-nodejs')
-Scenario.setTape(require('tape'))
-const dnaPath = path.join(__dirname, "../dist/dna-src.dna.json")
-const dna = Config.dna(dnaPath, 'personas-profiles')
-const agentAlice = Config.agent("alice")
-const instanceAlice = Config.instance(agentAlice, dna)
-const scenario = new Scenario([instanceAlice])
+const tape = require('tape')
 
-require('./agent/personas')(scenario)
-require('./agent/profiles')(scenario)
+const { Diorama, tapeExecutor, backwardCompatibilityMiddleware } = require('@holochain/diorama')
+
+process.on('unhandledRejection', error => {
+  // Will print "unhandledRejection err is not defined"
+  console.error('got unhandledRejection:', error);
+});
+
+const dnaPath = path.join(__dirname, "../dist/dna-src.dna.json")
+const dna = Diorama.dna(dnaPath, 'personas')
+
+const diorama = new Diorama({
+  instances: {
+    alice: dna,
+  },
+  bridges: [
+  ],
+  debugLog: false,
+  executor: tapeExecutor(require('tape')),
+  middleware: backwardCompatibilityMiddleware,
+})
+
+require('./agent/personas')(diorama.registerScenario)
+require('./agent/profiles')(diorama.registerScenario)
+
+diorama.run()

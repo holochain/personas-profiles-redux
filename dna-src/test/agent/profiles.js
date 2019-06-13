@@ -1,5 +1,4 @@
-const test = require('tape');
-module.exports = (scenario) => {
+module.exports = scenario => {
 
   const testFieldSpec = {
     name: "handle",
@@ -16,13 +15,13 @@ module.exports = (scenario) => {
     fields: [testFieldSpec]
   }
 
-  scenario.runTape('Can register a profile spec', async (t,  {alice}) => {
+  scenario('Can register a profile spec', async (s, t,  {alice}) => {
     const register_result = await alice.callSync("profiles", "register_app", {spec: testProfileSpec})
     console.log(register_result)
     t.notEqual(register_result.Ok, undefined)
   })
 
-  scenario.runTape('Can get a list of profiles', async (t, {alice}) => {
+  scenario('Can get a list of profiles', async (s, t, {alice}) => {
     const register_result = await alice.callSync("profiles", "register_app", {spec: testProfileSpec})
     t.notEqual(register_result.Ok, undefined)
     const get_result = await alice.callSync("profiles", "get_profiles", {})
@@ -30,7 +29,7 @@ module.exports = (scenario) => {
     t.deepEqual(get_result.Ok.length, 1)
   })
 
-  scenario.runTape('Can register a profile spec', async (t,  {alice}) => {
+  scenario('Can register a profile spec', async (s, t,  {alice}) => {
     const register_result = await alice.callSync("profiles", "register_app", {spec: testProfileSpec})
     t.notEqual(register_result.Ok, undefined)
 
