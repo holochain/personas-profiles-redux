@@ -39,7 +39,7 @@
   },
   "scripts": {
     "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build && mv ./build ../ui",
+    "build": "rm -rf ../ui && react-scripts-ts build && mv ./build ../ui",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "clean": "rm -rf ../ui",

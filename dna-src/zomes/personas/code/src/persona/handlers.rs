@@ -17,11 +17,11 @@ use hdk::holochain_core_types::{
     json::{RawString},
     cas::content::Address,
     entry::{Entry},
+    link::LinkMatch,
 };
 
-use utils::GetLinksLoadResult;
-
 use utils::{
+    GetLinksLoadResult,
     get_links_and_load_type
 };
 
@@ -49,7 +49,7 @@ pub fn handle_get_personas() -> ZomeApiResult<Vec<GetLinksLoadResult<Persona>>> 
         )
     )?;
 
-    let persona_specs: Vec<GetLinksLoadResult<PersonaSpec>> = get_links_and_load_type(&anchor_address, Some(PERSONA_ANCHOR_LINK_TYPE.into()), None)?;
+    let persona_specs: Vec<GetLinksLoadResult<PersonaSpec>> = get_links_and_load_type(&anchor_address, LinkMatch::Exactly(PERSONA_ANCHOR_LINK_TYPE.into()), LinkMatch::Any)?;
 
     match persona_specs.len() {
         0 => {
@@ -102,7 +102,7 @@ pub fn handle_get_field(persona_address: Address, field_name: String) -> ZomeApi
 
 
 fn get_fields(persona_address: &Address) -> ZomeApiResult<Vec<PersonaField>> {
-    get_links_and_load_type(persona_address, Some(PERSONA_FIELDS_LINK_TYPE.into()), None).map(|result: Vec<GetLinksLoadResult<PersonaField>>| {
+    get_links_and_load_type(persona_address, LinkMatch::Exactly(PERSONA_FIELDS_LINK_TYPE.into()), LinkMatch::Any).map(|result: Vec<GetLinksLoadResult<PersonaField>>| {
         result.iter().map(|elem| {
             elem.entry.clone()
         }).collect()

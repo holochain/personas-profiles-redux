@@ -5,12 +5,12 @@ use hdk::holochain_core_types::{
 	error::HolochainError,
     json::{JsonString, RawString},
     entry::{entry_type::AppEntryType, AppEntryValue, Entry},
+    link::LinkMatch,
 };
 
-use utils::GetLinksLoadResult;
-
 use utils::{
-	get_links_and_load_type,
+    GetLinksLoadResult,
+    get_links_and_load_type
 };
 
 use crate::{
@@ -66,7 +66,7 @@ pub fn handle_get_profiles() -> ZomeApiResult<Vec<Profile>> {
     );
 	let anchor_address = hdk::commit_entry(&anchor_entry)?;
 
-	let result: Vec<GetLinksLoadResult<ProfileSpec>> = get_links_and_load_type(&anchor_address, Some(PROFILES_LINK_TYPE.into()), None)?;
+	let result: Vec<GetLinksLoadResult<ProfileSpec>> = get_links_and_load_type(&anchor_address, LinkMatch::Exactly(PROFILES_LINK_TYPE.into()), LinkMatch::Any)?;
 
 	let profiles = result.iter().map(|elem| {
 		let spec = elem.entry.clone();
@@ -164,5 +164,5 @@ pub fn handle_retrieve(retriever_dna: Address, profile_field: String) -> ZomeApi
 /*=====  End of Public zome functions  ======*/
 
 fn get_mapped_profile_fields(profile_address: &Address) -> ZomeApiResult<Vec<GetLinksLoadResult<ProfileField>>> {
-	get_links_and_load_type(profile_address, Some(FIELD_MAPPINGS_LINK_TYPE.into()), None)
+	get_links_and_load_type(profile_address, LinkMatch::Exactly(FIELD_MAPPINGS_LINK_TYPE.into()), LinkMatch::Any)
 }
