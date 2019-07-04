@@ -29,7 +29,7 @@ path = "tmp-storage"
 id = "websocket_interface"
 [interfaces.driver]
 type = "websocket"
-port = 3400
+port = 3401
 [[interfaces.instances]]
 id = "personas-profiles"
 

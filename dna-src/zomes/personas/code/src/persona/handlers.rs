@@ -1,6 +1,27 @@
 extern crate utils;
-use hdk::AGENT_ADDRESS;
-use hdk::error::{ZomeApiResult, ZomeApiError};
+use hdk::{
+    AGENT_ADDRESS,
+    holochain_core_types::{
+        entry::Entry,
+        link::LinkMatch,
+    },
+    holochain_json_api::{
+        json::RawString,
+    },
+    holochain_persistence_api::{
+        cas::content::Address,
+    },
+    error::{
+        ZomeApiResult,
+        ZomeApiError,
+    }
+};
+
+use utils::{
+    GetLinksLoadResult,
+    get_links_and_load_type
+};
+
 use crate::{
     persona::{
         PersonaSpec,
@@ -13,17 +34,6 @@ use crate::{
     PERSONA_FIELDS_LINK_TYPE,
     PERSONA_ANCHOR_LINK_TYPE,
 };
-use hdk::holochain_core_types::{
-    json::{RawString},
-    cas::content::Address,
-    entry::{Entry},
-    link::LinkMatch,
-};
-
-use utils::{
-    GetLinksLoadResult,
-    get_links_and_load_type
-};
 
 /*==========================================
 =            public fn handlers            =
@@ -32,7 +42,7 @@ use utils::{
 pub fn handle_create_persona(spec: PersonaSpec) -> ZomeApiResult<Address> {
 
     let persona_entry = Entry::App(PERSONA_ENTRY.into(), spec.into());
-    let anchor_entry = Entry::App(PERSONA_ANCHOR_ENTRY.into(), RawString::from(AGENT_ADDRESS.to_string()).into());
+    let anchor_entry = Entry::App(PERSONA_ANCHOR_ENTRY.into(), Address::from(AGENT_ADDRESS.to_string()).into());
     let persona_address = hdk::commit_entry(&persona_entry)?;
     let anchor_address = hdk::commit_entry(&anchor_entry)?;
     hdk::link_entries(&anchor_address, &persona_address, PERSONA_ANCHOR_LINK_TYPE, "")?;
@@ -45,7 +55,7 @@ pub fn handle_get_personas() -> ZomeApiResult<Vec<GetLinksLoadResult<Persona>>> 
     let anchor_address = hdk::commit_entry(
         &Entry::App(
             PERSONA_ANCHOR_ENTRY.into(),
-            RawString::from(AGENT_ADDRESS.to_string()).into(),
+            Address::from(AGENT_ADDRESS.to_string()).into(),
         )
     )?;
 

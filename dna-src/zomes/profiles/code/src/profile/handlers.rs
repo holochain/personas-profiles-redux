@@ -1,11 +1,24 @@
-use hdk::AGENT_ADDRESS;
-
-use hdk::holochain_core_types::{
-    cas::content::Address,
-	error::HolochainError,
-    json::{JsonString, RawString},
-    entry::{entry_type::AppEntryType, AppEntryValue, Entry},
-    link::LinkMatch,
+use std::convert::TryInto;
+extern crate serde_json;
+extern crate utils;
+use hdk::{
+    AGENT_ADDRESS,
+    holochain_core_types::{
+        entry::Entry,
+        link::LinkMatch,
+    },
+    holochain_json_api::{
+        json::RawString,
+        json::JsonString,
+        error::JsonError,
+    },
+    holochain_persistence_api::{
+        cas::content::Address,
+    },
+    error::{
+        ZomeApiResult,
+        ZomeApiError,
+    }
 };
 
 use utils::{
@@ -28,11 +41,8 @@ use crate::profile::{
 	MapFieldsResult,
 };
 
-use std::convert::TryInto;
-
-use hdk::error::{ZomeApiResult, ZomeApiError};
 use crate::profile;
-extern crate serde_json;
+
 
 /*=============================================
 =            Public zome functions            =
@@ -41,14 +51,8 @@ extern crate serde_json;
 
 pub fn handle_register_app(spec: ProfileSpec) -> ZomeApiResult<()> {
     hdk::debug("bridge register profile spec")?;
-	let persona_entry = Entry::App(
-        AppEntryType::from(PROFILE_ENTRY),
-        AppEntryValue::from(spec),
-    );
-    let anchor_entry = Entry::App(
-        AppEntryType::from(PROFILE_ANCHOR_ENTRY),
-        AppEntryValue::from(RawString::from(AGENT_ADDRESS.to_string())),
-    );
+    let persona_entry = Entry::App(PROFILE_ENTRY.into(), spec.into());
+    let anchor_entry = Entry::App(PROFILE_ANCHOR_ENTRY.into(), Address::from(AGENT_ADDRESS.to_string()).into());
 
 	let profile_address = hdk::commit_entry(&persona_entry)?;
 	let anchor_address = hdk::commit_entry(&anchor_entry)?;
@@ -60,10 +64,7 @@ pub fn handle_register_app(spec: ProfileSpec) -> ZomeApiResult<()> {
 
 
 pub fn handle_get_profiles() -> ZomeApiResult<Vec<Profile>> {
-	let anchor_entry = Entry::App(
-        AppEntryType::from(PROFILE_ANCHOR_ENTRY),
-        AppEntryValue::from(RawString::from(AGENT_ADDRESS.to_string())),
-    );
+	let anchor_entry = Entry::App(PROFILE_ANCHOR_ENTRY.into(), Address::from(AGENT_ADDRESS.to_string()).into());
 	let anchor_address = hdk::commit_entry(&anchor_entry)?;
 
 	let result: Vec<GetLinksLoadResult<ProfileSpec>> = get_links_and_load_type(&anchor_address, LinkMatch::Exactly(PROFILES_LINK_TYPE.into()), LinkMatch::Any)?;
@@ -108,10 +109,7 @@ pub fn handle_create_mapping(mapping: profile::ProfileMapping) -> ZomeApiResult<
 			persona_field_name: mapping.persona_field_name.to_owned()
 		}));
 
-		let field_entry = Entry::App(
-	        AppEntryType::from(FIELD_MAPPING_ENTRY),
-	        AppEntryValue::from(new_field),
-	    );
+		let field_entry = Entry::App(FIELD_MAPPING_ENTRY.into(), new_field.into());
 		let field_hash = hdk::commit_entry(&field_entry)?;
 		hdk::link_entries(&profile.hash, &field_hash, FIELD_MAPPINGS_LINK_TYPE, "")?;
 		Ok(())
