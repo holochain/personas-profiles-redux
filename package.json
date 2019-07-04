@@ -1,6 +1,6 @@
 {
   "name": "personas-profiles",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "A Holochain app (hApp) for managing your personal private information.",
   "scripts": {
     "hc:build": "echo `pwd` && rm -rf tmp-storage && mkdir -p dna && cd dna-src && hc package --strip-meta -o ../dna/personas-profiles.dna.json",
