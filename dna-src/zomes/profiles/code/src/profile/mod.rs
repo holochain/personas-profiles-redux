@@ -1,15 +1,16 @@
-
-
-use hdk::holochain_core_types::error::HolochainError;
-use hdk::holochain_core_types::json::JsonString;
 use hdk::{
     self,
     entry_definition::ValidatingEntryType,
-};
-
-use hdk::holochain_core_types::{
-    dna::entry_types::Sharing,
-    cas::content::Address,
+    holochain_core_types::{
+        dna::entry_types::Sharing,
+    },
+    holochain_json_api::{
+    	error::JsonError,
+        json::JsonString,
+    },
+    holochain_persistence_api::{
+        cas::content::Address,
+    },
 };
 
 use crate::{

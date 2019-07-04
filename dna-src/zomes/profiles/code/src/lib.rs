@@ -6,18 +6,22 @@ extern crate serde;
 #[macro_use]
 extern crate serde_derive;
 #[macro_use]
-extern crate holochain_core_types_derive;
+extern crate holochain_json_derive;
 
 use hdk_proc_macros::zome;
 
 use hdk::{
-    error::{ZomeApiResult},
+    error::ZomeApiResult,
     entry_definition::ValidatingEntryType,
     holochain_core_types::{
-        cas::content::Address,
-        json::RawString,
         dna::entry_types::Sharing,
     },
+	holochain_persistence_api::{
+		cas::content::Address,
+	},
+	holochain_json_api::{
+        json::RawString,
+	},
 };
 
 pub mod profile;
