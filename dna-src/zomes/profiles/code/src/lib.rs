@@ -20,7 +20,7 @@ use hdk::{
 		cas::content::Address,
 	},
 	holochain_json_api::{
-        json::RawString,
+        json::{JsonString, RawString},
 	},
 };
 
