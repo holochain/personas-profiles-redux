@@ -17,32 +17,32 @@ module.exports = scenario => {
   }
 
   scenario('Can create a persona', async (s, t, {alice}) => {
-    const result = await alice.callSync("personas", "create_persona", testPersonaSpec)
+    const result = await alice.app.call("personas", "create_persona", testPersonaSpec)
     console.log(result)
     t.equal(result.Ok.length, 46)
     console.log('blah')
   })
 
   scenario('Can retrieve a list of personas', async (s, t, {alice}) => {
-    const result = await alice.callSync("personas", "create_persona", testPersonaSpec)
+    const result = await alice.app.call("personas", "create_persona", testPersonaSpec)
     console.log(result)
     t.equal(result.Ok.length, 46)
-    const listOfPersonas = await alice.callSync("personas", "get_personas", {})
+    const listOfPersonas = await alice.app.call("personas", "get_personas", {})
     console.log(listOfPersonas)
     t.equal(listOfPersonas.Ok.length, 1)
   })
 
 
   scenario('Can add a field to a persona', async (s, t, {alice}) => {
-    const persona_address = await alice.callSync("personas", "create_persona", testPersonaSpec)
+    const persona_address = await alice.app.call("personas", "create_persona", testPersonaSpec)
     console.log(persona_address.Ok)
     t.equal(persona_address.Ok.length, 46)
-    const add_result = await alice.callSync("personas", "add_field", testField(persona_address.Ok))
+    const add_result = await alice.app.call("personas", "add_field", testField(persona_address.Ok))
     console.log(add_result)
     t.notEqual(add_result.Ok, undefined)
 
     // can get the field
-    const get_result = await alice.callSync("personas", "get_personas", {})
+    const get_result = await alice.app.call("personas", "get_personas", {})
     console.log(get_result)
     t.equal(get_result.Ok.filter(p => p.entry.name === "something")[0].entry.fields.length, 1)
   })
