@@ -47,7 +47,7 @@ const styles: StyleRulesCallback = theme => ({
   }
 })
 
-export interface RouterProps extends RouteComponentProps<{hash: string}> {}
+export interface RouterProps extends RouteComponentProps<{hash: string, returnUrl: string}> {}
 
 export interface OwnProps {
   classes?: any,
@@ -65,6 +65,7 @@ export interface StateProps {
   personas: Array<PersonaType>
   selectedPersona: PersonaType
   profile: ProfileType,
+  returnUrl: string
 }
 
 export interface State {
@@ -135,8 +136,10 @@ class Profile extends React.Component<Props & RouterProps, State> {
     this.props.save(this.state.profile, this.props.personas)
       .then(this.props.getProfiles)
       .then(() => {
-        if (this.props.onSubmit) {
-          this.props.onSubmit()
+        if (this.props.returnUrl === '/profiles') {
+          this.props.history.push(this.props.returnUrl)
+        } else {
+          window.location.replace(decodeURIComponent(this.props.returnUrl))
         }
       })
       .catch(err => console.log(err))

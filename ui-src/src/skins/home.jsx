@@ -37,7 +37,10 @@ class MiniDrawer extends React.Component {
           <Route path='/persona/:name' component={PersonaContainer} />
           <Route path='/profiles' component={ProfilesContainer} />
           <Route path='/profile/:hash' render={ props =>
-            <ProfileContainer {...props} onSubmit={() => this.props.history.push('/profiles')} />
+            <ProfileContainer {...props} />
+          } />
+          <Route path='/profile/:hash/:returnUrl' render={ props =>
+            <ProfileContainer {...props} />
           } />
           <MediaQuery minDeviceWidth={1025}>
 

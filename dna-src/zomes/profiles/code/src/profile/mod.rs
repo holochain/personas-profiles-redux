@@ -1,20 +1,28 @@
-
-
-use hdk::holochain_core_types::error::HolochainError;
-use hdk::holochain_core_types::json::JsonString;
 use hdk::{
     self,
     entry_definition::ValidatingEntryType,
+    holochain_core_types::{
+        dna::entry_types::Sharing,
+    },
+    holochain_json_api::{
+    	error::JsonError,
+        json::JsonString,
+    },
+    holochain_persistence_api::{
+        cas::content::Address,
+    },
 };
 
-use hdk::holochain_core_types::{
-    dna::entry_types::Sharing,
-    cas::content::Address,
+use crate::{
+    PROFILE_ENTRY,
+    FIELD_MAPPING_ENTRY,
+    FIELD_MAPPINGS_LINK_TYPE,
 };
 
 pub mod handlers;
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct ProfileSpec {
     pub name: String,
     pub source_dna: Address,
@@ -22,6 +30,7 @@ pub struct ProfileSpec {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct ProfileFieldSpec {
     pub name: String,
     pub display_name: String,
@@ -38,6 +47,7 @@ pub enum UsageType {
 }
 
 #[derive(Serialize, Deserialize, Debug, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct ProfileMapping {
     pub retriever_dna: Address,
     pub profile_field_name: String,
@@ -46,6 +56,7 @@ pub struct ProfileMapping {
 }
 
 #[derive(Serialize, Deserialize, Debug, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct Profile {
     pub name: String,
     pub source_dna: Address,
@@ -55,12 +66,14 @@ pub struct Profile {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct FieldMapping {
     pub persona_address: Address,
     pub persona_field_name: String
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct ProfileField {
     pub name: String,
     pub display_name: String,
@@ -72,13 +85,14 @@ pub struct ProfileField {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]
+#[serde(rename_all = "camelCase")]
 pub struct MapFieldsResult {
     pub mappings_created: i32,
 }
 
 pub fn profile_definition() -> ValidatingEntryType {
     entry!(
-        name: "profile",
+        name: PROFILE_ENTRY,
         description: "A data schema provided by a hApp that describes what data it is requiesting and how it will use it",
         sharing: Sharing::Public,
         validation_package: || {
@@ -89,8 +103,8 @@ pub fn profile_definition() -> ValidatingEntryType {
         },
         links: [
             to!(
-                "field_mapping",
-                tag: "field_mappings",
+                FIELD_MAPPING_ENTRY,
+                link_type: FIELD_MAPPINGS_LINK_TYPE,
                 validation_package: || {
                     hdk::ValidationPackageDefinition::Entry
                 },
@@ -104,7 +118,7 @@ pub fn profile_definition() -> ValidatingEntryType {
 
 pub fn field_mapping_definition() -> ValidatingEntryType {
     entry!(
-        name: "field_mapping",
+        name: FIELD_MAPPING_ENTRY,
         description: "A single piece of data that is attached to a persona",
         sharing: Sharing::Public,
         validation_package: || {

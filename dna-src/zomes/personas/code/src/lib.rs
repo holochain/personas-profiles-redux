@@ -1,33 +1,77 @@
-#![feature(try_from)]
+#![feature(try_from, proc_macro_hygiene)]
 #[macro_use]
 extern crate hdk;
+extern crate hdk_proc_macros;
 extern crate serde;
 #[macro_use]
 extern crate serde_derive;
 #[macro_use]
-extern crate holochain_core_types_derive;
+extern crate holochain_json_derive;
+extern crate utils;
+
+use hdk_proc_macros::zome;
 
 use crate::persona::Persona;
-use crate::utils::GetLinksLoadResult;
+use utils::GetLinksLoadResult;
+
 use hdk::{
     error::{ZomeApiResult},
-    holochain_core_types::{cas::content::Address, json::JsonString, json::RawString, error::HolochainError},
-    holochain_core_types::dna::entry_types::Sharing,
+    entry_definition::ValidatingEntryType,
+    holochain_core_types::{
+        dna::entry_types::Sharing,
+    },
+	holochain_persistence_api::{
+		cas::content::Address,
+	},
+	holochain_json_api::{
+        json::RawString,
+	},
 };
 
+// use hdk::{
+//     error::ZomeApiResult,
+//     entry_definition::ValidatingEntryType,
+//     holochain_core_types::{
+//         cas::content::Address,
+//         json::RawString,
+//         dna::entry_types::Sharing,
+//     },
+// };
+
 pub mod persona;
-pub mod utils;
 pub type Base = RawString;
 
- define_zome! {
+pub static PERSONA_ENTRY: &str = "persona";
+pub static PERSONA_FIELD_ENTRY: &str = "persona_field";
+pub static PERSONA_ANCHOR_ENTRY: &str = "persona_anchor";
 
-	entries: [
-		persona::persona_definition(),
-        persona::field_definition(),
-		entry!(
-			name: "persona_anchor",
-	        description: "",
-	        sharing: Sharing::Public,
+pub static PERSONA_FIELDS_LINK_TYPE: &str = "fields";
+pub static PERSONA_ANCHOR_LINK_TYPE: &str = "personas";
+
+#[zome]
+pub mod personas {
+
+    #[genesis]
+    fn genesis() {
+        Ok(())
+    }
+
+    #[entry_def]
+    pub fn persona_entry_def() -> ValidatingEntryType {
+        persona::persona_definition()
+    }
+
+    #[entry_def]
+    pub fn persona_field_entry_def() -> ValidatingEntryType {
+        persona::field_definition()
+    }
+
+    #[entry_def]
+    pub fn persona_anchor_entry_def() -> ValidatingEntryType {
+        entry!(
+            name: PERSONA_ANCHOR_ENTRY,
+            description: "",
+            sharing: Sharing::Public,
 
             validation_package: || {
                 hdk::ValidationPackageDefinition::Entry
@@ -38,8 +82,8 @@ pub type Base = RawString;
 
             links: [
                 to!(
-                    "persona",
-                    tag: "personas",
+                    PERSONA_ENTRY,
+                    link_type: PERSONA_ANCHOR_LINK_TYPE,
                     validation_package: || {
                         hdk::ValidationPackageDefinition::Entry
                     },
@@ -48,39 +92,28 @@ pub type Base = RawString;
                     }
                 )
             ]
-		)
-	]
-
-    genesis: || {
-        {
-            Ok(())
-        }
+        )
     }
 
-    functions: [
-		create_persona: {
-			inputs: |spec: persona::PersonaSpec|,
-			outputs: |result: ZomeApiResult<Address>|,
-			handler: persona::handlers::handle_create_persona
-		}
-		get_personas: {
-			inputs: | |,
-			outputs: |personas: ZomeApiResult<GetLinksLoadResult<Persona>>|,
-			handler: persona::handlers::handle_get_personas
-		}
-        add_field: {
-            inputs: |persona_address: Address, field: persona::PersonaField|,
-            outputs: |result: ZomeApiResult<()>|,
-            handler: persona::handlers::handle_add_field
-        }
-        get_field: {
-            inputs: |persona_address: Address, field_name: String|,
-            outputs: |result: ZomeApiResult<RawString>|,
-            handler: persona::handlers::handle_get_field
-        }
-	]
 
-    traits: {
-        hc_public [create_persona, get_personas, add_field, get_field]
+    #[zome_fn("hc_public")]
+    pub fn create_persona(spec: persona::PersonaSpec) -> ZomeApiResult<Address> {
+        persona::handlers::handle_create_persona(spec)
     }
- }
+
+    #[zome_fn("hc_public")]
+    pub fn get_personas() -> ZomeApiResult<Vec<GetLinksLoadResult<Persona>>> {
+        persona::handlers::handle_get_personas()
+    }
+
+    #[zome_fn("hc_public")]
+    pub fn add_field(persona_address: Address, field: persona::PersonaField) -> ZomeApiResult<()> {
+        persona::handlers::handle_add_field(persona_address, field)
+    }
+
+    #[zome_fn("hc_public")]
+    pub fn get_field(persona_address: Address, field_name: String) -> ZomeApiResult<RawString> {
+        persona::handlers::handle_get_field(persona_address, field_name)
+    }
+
+}
