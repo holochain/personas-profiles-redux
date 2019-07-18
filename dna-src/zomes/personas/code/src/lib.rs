@@ -1,4 +1,4 @@
-#![feature(try_from, proc_macro_hygiene)]
+#![feature(proc_macro_hygiene)]
 #[macro_use]
 extern crate hdk;
 extern crate hdk_proc_macros;
@@ -25,18 +25,9 @@ use hdk::{
 	},
 	holochain_json_api::{
         json::RawString,
+        json::JsonString,
 	},
 };
-
-// use hdk::{
-//     error::ZomeApiResult,
-//     entry_definition::ValidatingEntryType,
-//     holochain_core_types::{
-//         cas::content::Address,
-//         json::RawString,
-//         dna::entry_types::Sharing,
-//     },
-// };
 
 pub mod persona;
 pub type Base = RawString;

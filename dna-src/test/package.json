@@ -1,7 +1,9 @@
 {
   "dependencies": {
-    "@holochain/diorama": "^0.1.1",
+    "@holochain/try-o-rama": "0.0.2",
+    "faucet": "0.0.1",
     "json3": "*",
+    "sleep": "^5.2.3",
     "tape": "^4.9.1"
   }
 }
