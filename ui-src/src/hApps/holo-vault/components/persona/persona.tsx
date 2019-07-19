@@ -187,7 +187,7 @@ class Persona extends React.Component<Props & RouterProps, State> {
 
     return (
       <div className={classes.root}>
-        <Typography variant='h1'>
+        <Typography variant='h3'>
           Manage Your Personas
         </Typography>
         <Typography variant='body1' gutterBottom={true}>

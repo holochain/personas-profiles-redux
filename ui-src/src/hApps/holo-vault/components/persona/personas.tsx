@@ -46,7 +46,7 @@ class Personas extends React.Component<Props & RouterProps, {}> {
     const { classes, personas } = this.props
     return (
     <div className={classes.root}>
-      <Typography variant='h1'>
+      <Typography variant='h3'>
         Personas
       </Typography>
       <Typography variant='body1' gutterBottom={true}>

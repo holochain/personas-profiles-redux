@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
-import { action } from '@storybook/addon-actions'
+// import { action } from '@storybook/addon-actions'
 import { MemoryRouter } from 'react-router-dom'
 import { specs } from 'storybook-addon-specifications'
 import { withNotes } from '@storybook/addon-notes'
@@ -45,7 +45,7 @@ storiesOf('HoloVault/Profile', module)
       getPersonas: mockPromise,
       setCurrentPersona: mockFn
     }
-    return <MemoryRouter initialEntries={['/']}><Profile {...props} handleSaveProfile={action('Save')} /></MemoryRouter>
+    return <MemoryRouter initialEntries={['/']}><Profile {...props} /></MemoryRouter>
   }))
   .add('Not mapped has matching defaults', withNotes(profileNotMappedHasDefaults)(() => {
     // specs(() => profileTests)
