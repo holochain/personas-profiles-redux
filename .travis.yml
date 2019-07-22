@@ -1,7 +1,7 @@
 dist: trusty
 language: nix
 script:
-- nix-shell --run 'cd ui-src && npm install && cd .. && npm run prerelease' https://holochain.love
+- nix-shell --run 'cd ui-src && npm install && cd .. && npm run prerelease'
 - PACKAGE_NAME=$(node -p -e "require('./package.json').name")
 - PACKAGE_VERSION=$(node -p -e "require('./package.json').version")
 - cd release/ui
@@ -19,3 +19,4 @@ deploy:
   on:
     tags: true
     branch: master
+    name: $TRAVIS_TAG
