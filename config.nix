@@ -62,7 +62,7 @@ echo "All finished!!!"
   # the commit hash that the release process should target
   # this will always be behind what ends up being deployed
   # the release process needs to add some commits for changelog etc.
-  commit = "28a1e8ad37949b041ff3948c7cdf52c02b258558";
+  commit = "cf8369217eda41253f3eb453d4ef22deac5f3c47";
 
   # the semver for prev and current releases
   # the previous version will be scanned/bumped by release scripts
@@ -93,7 +93,7 @@ See:
    owner = "holochain";
 
    # repository name on github that release are deployed to
-   repo = "holochain-basic-chat";
+   repo = "personas-profiles";
 
    # canonical local upstream name as per `git remote -v`
    upstream = "origin";
