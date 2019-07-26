@@ -1,5 +1,6 @@
 use hdk::{
     self,
+    api::DNA_ADDRESS,
     entry_definition::ValidatingEntryType,
     holochain_core_types::{
         dna::entry_types::Sharing,
@@ -27,6 +28,20 @@ pub struct ProfileSpec {
     pub name: String,
     pub source_dna: Address,
     pub fields: Vec<ProfileFieldSpec>
+}
+
+impl Default for ProfileSpec {
+    fn default() -> Self {
+        Self {
+            name: "Default".to_string(),
+            source_dna: Address::from(DNA_ADDRESS.to_string()),
+            fields: [ProfileFieldSpec{name: "handle".to_string(), display_name: "handle".to_string(), description: "This is the name other people you chat to will see.".to_string(), usage: UsageType::STORE, required: false, schema: "".to_string()},
+            ProfileFieldSpec{name: "avatar".to_string(), display_name: "Avatar".to_string(), description: "".to_string(), usage: UsageType::STORE, required: false, schema: "".to_string()},
+            ProfileFieldSpec{name: "first_name".to_string(), display_name: "First Name".to_string(), description: "Your name will show when someone clicks it in the members list if you are online".to_string(), usage: UsageType::DISPLAY, required: false, schema: "".to_string()},
+            ProfileFieldSpec{name: "last_name".to_string(), display_name: "Last Name".to_string(), description: "Your name will show when someone clicks it in the members list if you are online".to_string(), usage: UsageType::DISPLAY, required: false, schema: "".to_string()}
+            ].to_vec()
+        }
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, DefaultJson)]

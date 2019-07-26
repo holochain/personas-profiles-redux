@@ -49,7 +49,7 @@ use crate::profile;
 =============================================*/
 
 
-pub fn handle_register_app(spec: ProfileSpec) -> ZomeApiResult<()> {
+pub fn handle_register_app(spec: ProfileSpec) -> ZomeApiResult<(Address)> {
     hdk::debug("bridge register profile spec")?;
     let persona_entry = Entry::App(PROFILE_ENTRY.into(), spec.into());
     let anchor_entry = Entry::App(PROFILE_ANCHOR_ENTRY.into(), Address::from(AGENT_ADDRESS.to_string()).into());
@@ -59,7 +59,7 @@ pub fn handle_register_app(spec: ProfileSpec) -> ZomeApiResult<()> {
 
 	hdk::link_entries(&anchor_address, &profile_address, PROFILES_LINK_TYPE, "")?;
     hdk::debug("finish bridge register profile spec")?;
-	Ok(())
+	Ok(profile_address)
 }
 
 
@@ -69,26 +69,44 @@ pub fn handle_get_profiles() -> ZomeApiResult<Vec<Profile>> {
 
 	let result: Vec<GetLinksLoadResult<ProfileSpec>> = get_links_and_load_type(&anchor_address, LinkMatch::Exactly(PROFILES_LINK_TYPE.into()), LinkMatch::Any)?;
 
-	let profiles = result.iter().map(|elem| {
-		let spec = elem.entry.clone();
-		let mapped_fields = get_mapped_profile_fields(&elem.address).unwrap_or(Vec::new());
+    match result.len() {
+        0 => {
+            hdk::debug("create Default profile")?;
+            let profile_address = create_default_profile()?;
 
-		let fields: Vec<profile::ProfileField> = spec.fields.iter().map(|field_spec| {
+            let default_result = Profile{
+                name: ProfileSpec::default().name,
+                source_dna: ProfileSpec::default().source_dna,
+                hash: profile_address,
+                fields: vec!(profile::ProfileField::from_spec(ProfileSpec::default().fields[0].clone(), None)),
+                expiry: 0
+            };
 
-			mapped_fields.iter().find(|mapped_field| { mapped_field.entry.name == field_spec.name })
-				.map(|matching_map| matching_map.entry.clone())
-				.unwrap_or(profile::ProfileField::from_spec(field_spec.clone(), None))
+            Ok(vec![default_result])
+        },
+        _ => {
+            let profiles = result.iter().map(|elem| {
+                let spec = elem.entry.clone();
+                let mapped_fields = get_mapped_profile_fields(&elem.address).unwrap_or(Vec::new());
 
-		}).collect();
+                let fields: Vec<profile::ProfileField> = spec.fields.iter().map(|field_spec| {
 
-		profile::Profile::from_spec(
-			spec,
-			elem.address.to_owned(),
-			fields,
-		)
+                    mapped_fields.iter().find(|mapped_field| { mapped_field.entry.name == field_spec.name })
+                        .map(|matching_map| matching_map.entry.clone())
+                        .unwrap_or(profile::ProfileField::from_spec(field_spec.clone(), None))
 
-	}).collect();
-	Ok(profiles)
+                }).collect();
+
+                profile::Profile::from_spec(
+                    spec,
+                    elem.address.to_owned(),
+                    fields,
+                )
+
+            }).collect();
+            Ok(profiles)
+        }
+    }
 }
 
 
@@ -163,4 +181,8 @@ pub fn handle_retrieve(retriever_dna: Address, profile_field: String) -> ZomeApi
 
 fn get_mapped_profile_fields(profile_address: &Address) -> ZomeApiResult<Vec<GetLinksLoadResult<ProfileField>>> {
 	get_links_and_load_type(profile_address, LinkMatch::Exactly(FIELD_MAPPINGS_LINK_TYPE.into()), LinkMatch::Any)
+}
+
+fn create_default_profile() -> ZomeApiResult<(Address)> {
+    handle_register_app(ProfileSpec::default())
 }

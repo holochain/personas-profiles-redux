@@ -56,7 +56,7 @@ class LoginForm extends React.Component<Props & RouterProps, State> {
 
   handleSubmit = () => {
     this.props.login(this.state.login)
-    this.props.history.push('/happProfile')
+    this.props.history.push('/')
   }
 
   updateEmail (email: string) {
