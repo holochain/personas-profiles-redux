@@ -10,9 +10,6 @@ import { Persona as PersonaType } from '../../types/persona'
 import Button from '@material-ui/core/Button'
 import { GetProfiles, GetPersonas } from '../../actions'
 import FieldMapper from './fieldMapper'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import {
   StyleRulesCallback,
@@ -42,6 +39,9 @@ const styles: StyleRulesCallback = theme => ({
   },
   select: {
     width: '100%'
+  },
+  paper: {
+    padding: theme.spacing.unit
   }
 })
 
@@ -164,9 +164,8 @@ class Profile extends React.Component<Props & RouterProps, State> {
 
     return (
       <div className={classes.container}>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography variant='h5' component='h2'>
+        <Paper className={classes.paper}>
+          <Typography variant='h4' component='h2'>
             Profile for {profile.name}
           </Typography>
           <Typography component='p'>
@@ -197,14 +196,11 @@ class Profile extends React.Component<Props & RouterProps, State> {
                 />
               )
             })}
+            <Button id='Agree' onClick={this.handleSaveProfile} color='primary'>
+              Save Profile
+            </Button>
           </Paper>
-        </CardContent>
-        <CardActions>
-          <Button id='Agree' onClick={this.handleSaveProfile} color='primary'>
-            Save Profile
-          </Button>
-        </CardActions>
-      </Card>
+        </Paper>
       </div>
     )
   }

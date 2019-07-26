@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { withStyles, Theme, StyleRulesCallback } from '@material-ui/core/styles'
 import { withRouter, Route, RouteComponentProps } from 'react-router-dom'
+import Paper from '@material-ui/core/Paper'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -16,6 +17,9 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   root: {
     width: '100%',
     backgroundColor: theme.palette.background.paper
+  },
+  paper: {
+    padding: theme.spacing.unit
   }
 })
 
@@ -46,47 +50,48 @@ class Personas extends React.Component<Props & RouterProps, {}> {
     const { classes, personas } = this.props
     return (
     <div className={classes.root}>
-      <Typography variant='h3'>
-        Personas
-      </Typography>
-      <Typography variant='body1' gutterBottom={true}>
-        Look after your personal information here, click on a Persona to update or click Add Persona to create a new one.
-      </Typography>
-      <List id='personas' component='nav'>
-        {
-          personas.map((persona: PersonaType, index: number) => (
-            <Route
-              render={({ history }) => (
-                <ListItem
-                  key={index}
-                  id={persona.hash}
-                  button={true}
-                  onClick={() => {
-                    history.push(`/persona/${persona.name}`)
-                  }}
-                >
-                  <ListItemIcon>
-                    <Person/>
-                  </ListItemIcon>
-                <ListItemText primary={persona.name}/>
-                </ListItem>)}
-            />))
-        }
-      </List>
-      <Route
-        render={({ history }) => (
-          <Button
-            name='addPersona'
-            variant='contained'
-            className={classes.button}
-            onClick={() => {
-              history.push(`/persona/new`)
-            }}
-          >
-          <PersonAdd/>
-          Add Persona
-          </Button>)}
-      />
+      <Paper className={classes.paper}>
+        <Typography variant='h4'>
+          Personas
+        </Typography>
+        <Typography variant='body1' gutterBottom={true}>
+          Look after your personal information here, click on a Persona to update or click Add Persona to create a new one.
+        </Typography>
+        <List id='personas' component='nav'>
+          {
+            personas.map((persona: PersonaType, index: number) => (
+              <Route
+                render={({ history }) => (
+                  <ListItem
+                    key={index}
+                    id={persona.hash}
+                    button={true}
+                    onClick={() => {
+                      history.push(`/persona/${persona.name}`)
+                    }}
+                  >
+                    <ListItemIcon>
+                      <Person/>
+                    </ListItemIcon>
+                  <ListItemText primary={persona.name}/>
+                  </ListItem>)}
+              />))
+          }
+        </List>
+        <Route
+          render={({ history }) => (
+            <Button
+              name='addPersona'
+              color='primary'
+              onClick={() => {
+                history.push(`/persona/new`)
+              }}
+            >
+            <PersonAdd/>
+            Add Persona
+            </Button>)}
+        />
+      </Paper>
     </div>)
   }
 }
