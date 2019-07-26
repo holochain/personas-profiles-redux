@@ -36,11 +36,17 @@ class MiniDrawer extends React.Component {
           <Route path='/personas' title='Personas' component={PersonasContainer} />
           <Route path='/persona/:name' component={PersonaContainer} />
           <Route path='/profiles' component={ProfilesContainer} />
-          <Route path='/profile/:hash' render={ props =>
+          <Route exact path='/profile/:hash' render={ props =>
             <ProfileContainer {...props} />
           } />
-          <Route path='/profile/:hash/:returnUrl' render={ props =>
+          <Route exact path='/profile/:hash/:returnUrl' render={ props =>
             <ProfileContainer {...props} />
+          } />
+          <Route exact path='/' render={ props =>
+            <div>
+              <PersonasContainer {...props} />
+              <ProfilesContainer {...props} />
+            </div>
           } />
           <MediaQuery minDeviceWidth={1025}>
 
@@ -54,8 +60,6 @@ class MiniDrawer extends React.Component {
     );
   }
 }
-
-//={props => <ProfileContainer onSubmit={() => this.props.history.push('/holo-vault/personas')}/>}
 
 MiniDrawer.propTypes = {
   classes: PropTypes.object.isRequired,

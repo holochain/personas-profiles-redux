@@ -2,11 +2,13 @@ import * as React from 'react'
 import { withStyles, Theme, StyleRulesCallback } from '@material-ui/core/styles'
 import withRoot from '../../../../withRoot'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
+import Paper from '@material-ui/core/Paper'
 import { PersonaField, Persona as PersonaType, PersonaSpec } from '../../types/persona'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import PersonAdd from '@material-ui/icons/PersonAdd'
+import PersonOutline from '@material-ui/icons/PersonOutline'
 import TextFields from '@material-ui/icons/TextFields'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Dialog from '@material-ui/core/Dialog'
@@ -50,6 +52,9 @@ const styles: StyleRulesCallback = (theme: Theme) => ({
   button: {
     marginRight: theme.spacing.unit,
     marginTop: theme.spacing.unit
+  },
+  paper: {
+    padding: theme.spacing.unit
   }
 })
 
@@ -187,46 +192,48 @@ class Persona extends React.Component<Props & RouterProps, State> {
 
     return (
       <div className={classes.root}>
-        <Typography variant='h1'>
-          Manage Your Personas
-        </Typography>
-        <Typography variant='body1' gutterBottom={true}>
-          You can add a new Persona and add as many fields to it as you like. You will probably have a *Default*, *Work* and a *Friends* persona.
-        </Typography>
-          <div>
-            <TextField name='personaName' value={this.state.persona.name} onChange={e => this.updateName(e.target.value)} label='Persona Name'/>
-          </div>
-          {this.state.persona.fields.map((field: PersonaField, index: number) => (<PersonaField key={index} index={index} field={field} onChange={(newField: PersonaField) => this.updateField(newField, index)}/>))}
-          <Button name='addField' variant='contained' className={classes.button} onClick={this.handleAddPersonaField}>
-            <TextFields/>
-            Add Field
-          </Button>
-          <Button name='submitPersona' variant='contained' className={classes.button} onClick={() => this.handleSubmit()}>
-            <PersonAdd/>
-            {this.state.persona.hash === '' ? 'Create Persona' : 'Update Persona'}
-          </Button>
-          <Button name='deletePersona' variant='contained' className={classes.button} onClick={() => this.handleConfirmDelete()}>
-            <PersonAdd/>
-            Delete Persona
-          </Button>
-          <Dialog open={this.state.open} onClose={this.handleCloseDialog}>
-            <DialogTitle id='alert-dialog-slide-title'>
-              Delete {this.state.persona.name} Persona?
-            </DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Agreeing will delete this Persona.
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleCloseDialog} color='primary'>
-                Cancel
-              </Button>
-              <Button id='Agree' onClick={this.handleDelete} color='primary'>
-                Delete
-              </Button>
-            </DialogActions>
-          </Dialog>
+        <Paper className={classes.paper}>
+          <Typography variant='h4'>
+            Manage Your Personas
+          </Typography>
+          <Typography variant='body1' gutterBottom={true}>
+            You can add a new Persona and add as many fields to it as you like. You will probably have a *Default*, *Work* and a *Friends* persona.
+          </Typography>
+            <div>
+              <TextField name='personaName' value={this.state.persona.name} onChange={e => this.updateName(e.target.value)} label='Persona Name'/>
+            </div>
+            {this.state.persona.fields.map((field: PersonaField, index: number) => (<PersonaField key={index} index={index} field={field} onChange={(newField: PersonaField) => this.updateField(newField, index)}/>))}
+            <Button name='addField' color='primary' onClick={this.handleAddPersonaField}>
+              <TextFields/>
+              Add Field
+            </Button>
+            <Button name='submitPersona' color='primary' onClick={() => this.handleSubmit()}>
+              <PersonAdd/>
+              {this.state.persona.hash === '' ? 'Create Persona' : 'Update Persona'}
+            </Button>
+            <Button name='deletePersona' color='primary' onClick={() => this.handleConfirmDelete()}>
+              <PersonOutline/>
+              Delete Persona
+            </Button>
+            <Dialog open={this.state.open} onClose={this.handleCloseDialog}>
+              <DialogTitle id='alert-dialog-slide-title'>
+                Delete {this.state.persona.name} Persona?
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Agreeing will delete this Persona.
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleCloseDialog} color='primary'>
+                  Cancel
+                </Button>
+                <Button id='Agree' onClick={this.handleDelete} color='primary'>
+                  Delete
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </Paper>
       </div>
     )
   }

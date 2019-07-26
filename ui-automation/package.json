@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "test": "CYPRESS_baseUrl=http://localhost:3000 cypress run --record --key 76c89433-91c8-4cb3-b083-200a4f107448 --reporter mochawesome",
-    "cypress:open": "CYPRESS_baseUrl=http://localhost:3000 cypress open",
+    "cypress:open": "CYPRESS_baseUrl=http://localhost:3001 cypress open",
     "cypress:docker": "CYPRESS_baseUrl=http://localhost:4141 cypress open",
     "cypress:open:agent1": "CYPRESS_baseUrl=http://localhost:4001 cypress open",
     "cypress:open:agent2": "CYPRESS_baseUrl=http://localhost:4002 cypress open",
