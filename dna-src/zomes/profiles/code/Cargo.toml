@@ -1,6 +1,6 @@
 [package]
   name = "profiles"
-version = "0.1.3"
+version = "0.1.4"
   authors = ["willem <willemolding@gmail.com>, Philip Beadle <philip.beadle@holo.host>"]
   edition = "2018"
 [dependencies]
