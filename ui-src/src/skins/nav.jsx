@@ -71,6 +71,7 @@ class Navigation extends React.Component {
     history.push(path)
   };
 
+
   render() {
     const { classes, theme } = this.props;
 
@@ -105,9 +106,14 @@ class Navigation extends React.Component {
             <IconButton color='inherit' aria-label='open drawer' onClick={this.handleDrawerToggle} className={classes.navIconHide}>
               <MenuIcon />
             </IconButton>
-            <Typography variant='title' color='inherit' noWrap>
-              Holo Brain
-            </Typography>
+            <Route render={({ history}) => (
+              <div>
+                <Typography variant='title' color='inherit' noWrap onClick={() => { history.push('/') }}>
+                  Holochain Personas & Profiles
+                </Typography>
+              </div>
+            )} />
+
           </Toolbar>
         </AppBar>
         <Hidden mdUp>

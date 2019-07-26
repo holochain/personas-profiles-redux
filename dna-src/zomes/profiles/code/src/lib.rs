@@ -81,7 +81,7 @@ pub mod profiles {
     }
 
     #[zome_fn("hc_public")]
-    pub fn register_app(spec: profile::ProfileSpec) -> ZomeApiResult<()> {
+    pub fn register_app(spec: profile::ProfileSpec) -> ZomeApiResult<(Address)> {
         profile::handlers::handle_register_app(spec)
     }
 
