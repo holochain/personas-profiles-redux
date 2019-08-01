@@ -109,7 +109,7 @@ class Navigation extends React.Component {
             <Route render={({ history}) => (
               <div>
                 <Typography variant='title' color='inherit' noWrap onClick={() => { history.push('/') }}>
-                  Holochain Personas & Profiles
+                  Holochain Identity Manager
                 </Typography>
               </div>
             )} />

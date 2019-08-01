@@ -8,7 +8,7 @@ import autoCompleteProfileFieldNotes from './autoCompleteProfileFieldNotes.md'
 import { autoCompleteProfileFieldTests } from './autoCompleteProfileField.test'
 import * as constants from '../../constants'
 
-storiesOf('HoloVault/Profile/AutoComplete', module)
+storiesOf('Profile/AutoComplete', module)
   .add('Autocomplete Profile Field not mapped', withNotes(autoCompleteProfileFieldNotes)(() => {
     // specs(() => autoCompleteProfileFieldTests)
     const props = {

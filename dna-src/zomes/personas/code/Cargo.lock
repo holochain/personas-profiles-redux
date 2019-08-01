@@ -544,7 +544,7 @@ dependencies = [
 
 [[package]]
 name = "personas"
-version = "0.1.1"
+version = "0.1.5"
 dependencies = [
  "boolinator 2.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "derive_more 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -555,7 +555,7 @@ dependencies = [
  "serde 1.0.89 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_derive 1.0.89 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_json 1.0.39 (registry+https://github.com/rust-lang/crates.io-index)",
- "utils 0.0.1",
+ "utils 0.1.5",
 ]
 
 [[package]]
@@ -821,7 +821,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "utils"
-version = "0.0.1"
+version = "0.1.5"
 dependencies = [
  "hdk 0.0.24-alpha2 (git+https://github.com/holochain/holochain-rust?tag=0.0.24-alpha2)",
  "holochain_core_types 0.0.24-alpha2 (git+https://github.com/holochain/holochain-rust?tag=0.0.24-alpha2)",

@@ -9,6 +9,7 @@ import Persona from './persona'
 import newPersonaNotes from './newPersona.md'
 import editPersonaNotes from './threePersonas.md'
 import { personaTests } from './persona.test'
+// import { personaEditTests } from './persona.edit.test'
 import CreateStore from '../../../../store'
 import { Persona as PersonaType } from '../../types/persona'
 
@@ -32,12 +33,13 @@ let editPersona: PersonaType = {
   ]
 }
 
-storiesOf('HoloVault/Persona', module)
+storiesOf('Persona', module)
   .add('New Persona', withNotes(newPersonaNotes)(() => {
     specs(() => personaTests)
     return getPersona(newPersona)
   }))
   .add('Edit Existing Persona', withNotes(editPersonaNotes)(() => {
+    specs(() => personaTests)
     return getPersona(editPersona)
   })
 )

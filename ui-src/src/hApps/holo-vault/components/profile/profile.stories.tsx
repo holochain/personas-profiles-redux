@@ -16,9 +16,9 @@ import * as constants from '../../constants'
 const mockFn = jest.fn()
 const mockPromise = jest.fn(() => Promise.reject('Storybook mock function'))
 
-storiesOf('HoloVault/Profile', module)
+storiesOf('Profile', module)
   .add('Not mapped no defaults', withNotes(profileNotMappedNoDefaults)(() => {
-    // specs(() => profileTests)
+    specs(() => profileTests)
     let props: Props
     props = {
       returnUrl: '',
@@ -33,7 +33,7 @@ storiesOf('HoloVault/Profile', module)
     return <MemoryRouter initialEntries={['/']}><Profile {...props} /></MemoryRouter>
   }))
   .add('Not mapped no defaults manual mapping', withNotes(profileNotMappedNoDefaultsManualMap)(() => {
-    // specs(() => profileTests)
+    specs(() => profileTests)
     let props: Props
     props = {
       returnUrl: '',
@@ -48,7 +48,7 @@ storiesOf('HoloVault/Profile', module)
     return <MemoryRouter initialEntries={['/']}><Profile {...props} /></MemoryRouter>
   }))
   .add('Not mapped has matching defaults', withNotes(profileNotMappedHasDefaults)(() => {
-    // specs(() => profileTests)
+    specs(() => profileTests)
     let props: Props
     props = {
       returnUrl: '',
@@ -78,6 +78,7 @@ storiesOf('HoloVault/Profile', module)
     return <MemoryRouter initialEntries={['/']}><Profile {...props} /></MemoryRouter>
   }))
   .add('Faulty mapping', withNotes(profileFaultyMapping)(() => {
+    specs(() => profileTests)
     let props: Props
     props = {
       returnUrl: '',

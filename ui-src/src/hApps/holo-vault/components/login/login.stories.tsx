@@ -12,7 +12,7 @@ import CreateStore from '../../../../store'
 
 let store = CreateStore()
 
-storiesOf('HoloVault/KeyGen', module)
+storiesOf('KeyGen', module)
   .addDecorator(story => (
     <Provider store={store}><MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter></Provider>
   ))

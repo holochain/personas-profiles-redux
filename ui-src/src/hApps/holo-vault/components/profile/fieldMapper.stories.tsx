@@ -5,7 +5,7 @@ import FieldMapper from './fieldMapper'
 import { fieldMapperTests } from './fieldMapper.test'
 import * as constants from '../../constants'
 
-storiesOf('HoloVault/Profile/FieldMapper', module)
+storiesOf('Profile/FieldMapper', module)
   .add('Renders with a mapped profile field and personas', (() => {
     specs(() => fieldMapperTests)
 

@@ -8,6 +8,8 @@ import * as Adapter from 'enzyme-adapter-react-16'
 import Personas from './personas'
 import listPersonasNotes from './listPersonas.md'
 import * as constants from '../../constants'
+import { specs } from 'storybook-addon-specifications'
+import { personaListTests } from './personas.test'
 import { Persona } from '../../types/persona'
 
 configure({ adapter: new Adapter() })
@@ -16,8 +18,9 @@ import CreateStore from '../../../../store'
 
 let store = CreateStore()
 
-storiesOf('HoloVault/Persona', module)
+storiesOf('Persona', module)
   .add('List Personas', withNotes(listPersonasNotes)(() => {
+    specs(() => personaListTests)
     return getPersonas(constants.personas)
   }))
 
