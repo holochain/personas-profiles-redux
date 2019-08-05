@@ -42,11 +42,16 @@ pub static PERSONA_ANCHOR_LINK_TYPE: &str = "personas";
 #[zome]
 pub mod personas {
 
-    #[genesis]
-    fn genesis() {
+    #[init]
+    fn init() {
         Ok(())
     }
 
+    #[validate_agent]
+    pub fn validate_agent(validation_data: EntryValidationData<AgentId>) {
+        Ok(())
+    }
+    
     #[entry_def]
     pub fn persona_entry_def() -> ValidatingEntryType {
         persona::persona_definition()

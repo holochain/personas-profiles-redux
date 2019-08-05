@@ -38,8 +38,14 @@ pub static PROFILES_LINK_TYPE: &str = "profiles";
 
 #[zome]
 pub mod profiles {
-    #[genesis]
-    fn genesis() {
+    
+    #[init]
+    fn init() {
+        Ok(())
+    }
+
+    #[validate_agent]
+    pub fn validate_agent(validation_data: EntryValidationData<AgentId>) {
         Ok(())
     }
 
