@@ -22,7 +22,7 @@ const diorama = new Diorama({
   middleware: backwardCompatibilityMiddleware,
 })
 
-// require('./agent/personas')(diorama.registerScenario)
+require('./agent/personas')(diorama.registerScenario)
 require('./agent/profiles')(diorama.registerScenario)
 
 diorama.run()
