@@ -6,9 +6,8 @@
 
 [[dnas]]
   id = "personas_profiles"
-  file = "dna/personas-profiles-agent1.dna.json"
+  file = "dna/personas-profiles.dna.json"
   hash = "QmYpd9Mevcf6bYB8PMsbFjyspAfFJnuFJaHVvTKhi1ySNS"
-
 
 [[instances]]
   id = "personas-profiles"
