@@ -4,6 +4,7 @@ import { Dispatch } from 'redux'
 import { PersonaField, Persona as PersonaType, PersonaSpec } from '../types/persona'
 import {
   CreatePersona,
+  UpdatePersona,
   AddField,
   GetPersonas
 } from '../actions'
@@ -43,10 +44,21 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
               return dispatch(AddField.create({ persona_address: personaAddress, field }))
             })
           )
-        })
+        }
+      )
     },
     /* tslint:disable */
-    update: (() => { }),
+    update: (personaAddress: string, personaSpec: PersonaSpec, personaFields: Array<PersonaField>) => {
+      return dispatch(UpdatePersona.create({ persona_address: personaAddress, spec: personaSpec }))
+        .then((updatedPersonaAddress: string) => {
+          return Promise.all(
+            personaFields.map((field: PersonaField) => {
+              return dispatch(AddField.create({ persona_address: updatedPersonaAddress, field }))
+            })
+          )
+        }
+      )
+    },
     delete: (() => { })
     /* tslint:enable */
   }

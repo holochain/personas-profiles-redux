@@ -1,9 +1,11 @@
 module.exports = scenario => {
 
   const testPersonaSpec = {
-    spec: {
       name: "something"
-    }
+  }
+
+  const testUpdatePersonaSpec = {
+      name: "Updated"
   }
 
   const testField = (persona_address) => {
@@ -20,11 +22,10 @@ module.exports = scenario => {
     const result = await alice.callSync("personas", "create_persona", testPersonaSpec)
     console.log(result)
     t.equal(result.Ok.length, 46)
-    console.log('blah')
   })
 
   scenario('Can retrieve a list of personas', async (s, t, {alice}) => {
-    const result = await alice.callSync("personas", "create_persona", testPersonaSpec)
+    const result = await alice.callSync("personas", "create_persona", {spec: testPersonaSpec})
     console.log(result)
     t.equal(result.Ok.length, 46)
     const listOfPersonas = await alice.callSync("personas", "get_personas", {})
@@ -34,7 +35,7 @@ module.exports = scenario => {
 
 
   scenario('Can add a field to a persona', async (s, t, {alice}) => {
-    const persona_address = await alice.callSync("personas", "create_persona", testPersonaSpec)
+    const persona_address = await alice.callSync("personas", "create_persona", {spec: testPersonaSpec})
     console.log(persona_address.Ok)
     t.equal(persona_address.Ok.length, 46)
     const add_result = await alice.callSync("personas", "add_field", testField(persona_address.Ok))
@@ -45,5 +46,17 @@ module.exports = scenario => {
     const get_result = await alice.callSync("personas", "get_personas", {})
     console.log(get_result)
     t.equal(get_result.Ok.filter(p => p.entry.name === "something")[0].entry.fields.length, 1)
+  })
+
+  scenario('Can update a persona', async (s, t, {alice}) => {
+    const result = await alice.callSync("personas", "create_persona", {spec: testPersonaSpec})
+    console.log(result)
+    const resultUpdate = await alice.callSync("personas", "update_persona", {persona_address: result.Ok, spec: testUpdatePersonaSpec})
+    console.log(resultUpdate)
+    t.equal(resultUpdate.Ok.length, 46)
+    const listOfPersonas = await alice.callSync("personas", "get_personas", {})
+    console.log(listOfPersonas)
+    t.equal(listOfPersonas.Ok.length, 1)
+    t.equal(listOfPersonas.Ok[0].entry.name, testUpdatePersonaSpec.name)
   })
 }

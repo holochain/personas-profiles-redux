@@ -83,8 +83,8 @@ export const personaTests = describe('Looking after your Personas', () => {
       currentPersona: editPersona,
       title: 'Edit - Persona',
       personas: [],
-      create: mockFn,
-      update: mockFn,
+      create: mockPromise,
+      update: mockPromise,
       delete: mockFn,
       getPersonas: mockPromise
     }
