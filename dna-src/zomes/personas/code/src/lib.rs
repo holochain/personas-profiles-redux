@@ -51,7 +51,7 @@ pub mod personas {
     pub fn validate_agent(validation_data: EntryValidationData<AgentId>) {
         Ok(())
     }
-    
+
     #[entry_def]
     pub fn persona_entry_def() -> ValidatingEntryType {
         persona::persona_definition()
@@ -95,6 +95,11 @@ pub mod personas {
     #[zome_fn("hc_public")]
     pub fn create_persona(spec: persona::PersonaSpec) -> ZomeApiResult<Address> {
         persona::handlers::handle_create_persona(spec)
+    }
+
+    #[zome_fn("hc_public")]
+    pub fn update_persona(persona_address: Address, spec: persona::PersonaSpec) -> ZomeApiResult<Address> {
+        persona::handlers::handle_update_persona(persona_address, spec)
     }
 
     #[zome_fn("hc_public")]

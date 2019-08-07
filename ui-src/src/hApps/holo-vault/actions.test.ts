@@ -18,6 +18,12 @@ const asyncActionTestTable: Array<[string, any, any, any]> = [
     'xxx'
   ],
   [
+    'update_persona',
+    vaultActions.UpdatePersona,
+    { personaHash: 'xxx', spec: { name: 'update persona', id: 'test_persona' } },
+    'xxx'
+  ],
+  [
     'get_personas',
     vaultActions.GetPersonas,
     null,

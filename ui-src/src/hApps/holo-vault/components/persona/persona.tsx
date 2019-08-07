@@ -32,7 +32,7 @@ export interface StateProps {
 
 export interface DispatchProps {
   create: (personaSpec: PersonaSpec, personaFields: Array<PersonaField>) => Promise<any>,
-  update: (persona: PersonaType) => void,
+  update: (personaAddress: string, personaSpec: PersonaSpec, personaFields: Array<PersonaField>) => Promise<any>,
   delete: (persona: PersonaType) => void,
   getPersonas: typeof GetPersonas.sig
 }
@@ -97,17 +97,16 @@ class Persona extends React.Component<Props & RouterProps, State> {
   }
 
   handleSubmit = () => {
-
+    const personaSpec: PersonaSpec = { 'name': this.state.persona.name }
+    const personaFields: Array<PersonaField> = this.state.persona.fields
     if (this.state.persona.hash === '') {
-      const personaSpec: PersonaSpec = { 'name': this.state.persona.name }
-      const personaFields: Array<PersonaField> = this.state.persona.fields
       this.props.create(personaSpec, personaFields)
         .then(this.props.getPersonas)
         .catch(err => console.log(err))
     } else {
-      this.props.update(this.state.persona)
-        // .then(this.props.getPersonas)
-        // .catch(err => console.error(err))
+      this.props.update(this.state.persona.hash, personaSpec, personaFields)
+        .then(this.props.getPersonas)
+        .catch(err => console.error(err))
     }
     this.props.history.push('/personas')
   }

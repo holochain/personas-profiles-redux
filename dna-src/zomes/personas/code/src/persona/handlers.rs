@@ -17,6 +17,8 @@ use hdk::{
     }
 };
 
+// use std::convert::TryFrom;
+
 use utils::{
     GetLinksLoadResult,
     get_links_and_load_type
@@ -50,6 +52,9 @@ pub fn handle_create_persona(spec: PersonaSpec) -> ZomeApiResult<Address> {
     Ok(persona_address.to_string().into())
 }
 
+pub fn handle_update_persona(persona_address: Address, spec: PersonaSpec) -> ZomeApiResult<Address> {
+    hdk::update_entry(Entry::App(PERSONA_ENTRY.into(), spec.into()), &persona_address)
+}
 
 pub fn handle_get_personas() -> ZomeApiResult<Vec<GetLinksLoadResult<Persona>>> {
     let anchor_address = hdk::commit_entry(

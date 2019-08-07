@@ -13,6 +13,8 @@ export const Login = createHolochainZomeCallAsyncAction<{spec: LoginType}, strin
 
 export const CreatePersona = createHolochainZomeCallAsyncAction<{spec: PersonaSpec}, string>(`personas-profiles`, 'personas', 'create_persona')
 
+export const UpdatePersona = createHolochainZomeCallAsyncAction<{persona_address: string, spec: PersonaSpec}, string>(`personas-profiles`, 'personas', 'update_persona')
+
 export const GetPersonas = createHolochainZomeCallAsyncAction<{}, Array<{address: string, entry: Persona}>>(`personas-profiles`, 'personas', 'get_personas')
 
 export const AddField = createHolochainZomeCallAsyncAction<{persona_address: string, field: PersonaField}, null>(`personas-profiles`, 'personas', 'add_field')
