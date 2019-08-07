@@ -5,6 +5,7 @@ import { PersonaField, Persona as PersonaType, PersonaSpec } from '../types/pers
 import {
   CreatePersona,
   UpdatePersona,
+  DeletePersona,
   AddField,
   GetPersonas
 } from '../actions'
@@ -59,7 +60,9 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
         }
       )
     },
-    delete: (() => { })
+    delete: (personaAddress: string) => {
+      return dispatch(DeletePersona.create({ persona_address: personaAddress }))
+    }
     /* tslint:enable */
   }
 }

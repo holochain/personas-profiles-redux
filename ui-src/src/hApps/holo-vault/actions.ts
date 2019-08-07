@@ -7,25 +7,25 @@ import { Login as LoginType } from './types/login'
 
 /*----------  Login Actions  ----------*/
 
-export const Login = createHolochainZomeCallAsyncAction<{spec: LoginType}, string>(`personas-profiles`, 'login', 'login')
+export const Login = createHolochainZomeCallAsyncAction<{spec: LoginType}, string>('personas-profiles', 'login', 'login')
 
 /*----------  Persona Actions  ----------*/
 
-export const CreatePersona = createHolochainZomeCallAsyncAction<{spec: PersonaSpec}, string>(`personas-profiles`, 'personas', 'create_persona')
+export const CreatePersona = createHolochainZomeCallAsyncAction<{spec: PersonaSpec}, string>('personas-profiles', 'personas', 'create_persona')
 
-export const UpdatePersona = createHolochainZomeCallAsyncAction<{persona_address: string, spec: PersonaSpec}, string>(`personas-profiles`, 'personas', 'update_persona')
+export const UpdatePersona = createHolochainZomeCallAsyncAction<{persona_address: string, spec: PersonaSpec}, string>('personas-profiles', 'personas', 'update_persona')
 
-export const GetPersonas = createHolochainZomeCallAsyncAction<{}, Array<{address: string, entry: Persona}>>(`personas-profiles`, 'personas', 'get_personas')
+export const DeletePersona = createHolochainZomeCallAsyncAction<{persona_address: string}, null>('personas-profiles', 'personas', 'delete_persona')
 
-export const AddField = createHolochainZomeCallAsyncAction<{persona_address: string, field: PersonaField}, null>(`personas-profiles`, 'personas', 'add_field')
+export const GetPersonas = createHolochainZomeCallAsyncAction<{}, Array<{address: string, entry: Persona}>>('personas-profiles', 'personas', 'get_personas')
+
+export const AddField = createHolochainZomeCallAsyncAction<{persona_address: string, field: PersonaField}, null>('personas-profiles', 'personas', 'add_field')
 
 /*----------  Profile Actions  ----------*/
 
-export const GetProfiles = createHolochainZomeCallAsyncAction<{}, Array<Profile>>(`personas-profiles`, 'profiles', 'get_profiles')
+export const GetProfiles = createHolochainZomeCallAsyncAction<{}, Array<Profile>>('personas-profiles', 'profiles', 'get_profiles')
 
-export const CreateMapping = createHolochainZomeCallAsyncAction<{mapping: ProfileMapping}, {mappings_created: number}>(`personas-profiles`, 'profiles', 'create_mapping')
-
-// export const GetProfileFields = createHolochainZomeCallAsyncAction<Hash, Array<ProfileField>>(`holo-vault`, 'profiles', 'get_profile_fields')
+export const CreateMapping = createHolochainZomeCallAsyncAction<{mapping: ProfileMapping}, {mappings_created: number}>('personas-profiles', 'profiles', 'create_mapping')
 
 /*----------  non holochain actions  ----------*/
 

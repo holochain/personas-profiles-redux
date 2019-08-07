@@ -103,6 +103,11 @@ pub mod personas {
     }
 
     #[zome_fn("hc_public")]
+    pub fn delete_persona(persona_address: Address) -> ZomeApiResult<Address> {
+        persona::handlers::handle_delete_persona(persona_address)
+    }
+
+    #[zome_fn("hc_public")]
     pub fn get_personas() -> ZomeApiResult<Vec<GetLinksLoadResult<Persona>>> {
         persona::handlers::handle_get_personas()
     }

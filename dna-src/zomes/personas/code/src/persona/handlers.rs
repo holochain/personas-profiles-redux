@@ -56,6 +56,13 @@ pub fn handle_update_persona(persona_address: Address, spec: PersonaSpec) -> Zom
     hdk::update_entry(Entry::App(PERSONA_ENTRY.into(), spec.into()), &persona_address)
 }
 
+pub fn handle_delete_persona(persona_address: Address) -> ZomeApiResult<Address> {
+    let anchor_entry = Entry::App(PERSONA_ANCHOR_ENTRY.into(), Address::from(AGENT_ADDRESS.to_string()).into());
+    let anchor_address = hdk::commit_entry(&anchor_entry)?;
+    hdk::remove_link(&anchor_address.clone(), &persona_address.clone(), PERSONA_ANCHOR_LINK_TYPE, "")?;
+    hdk::remove_entry(&persona_address)
+}
+
 pub fn handle_get_personas() -> ZomeApiResult<Vec<GetLinksLoadResult<Persona>>> {
     let anchor_address = hdk::commit_entry(
         &Entry::App(

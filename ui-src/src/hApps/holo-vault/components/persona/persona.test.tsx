@@ -129,7 +129,7 @@ export const personaTests = describe('Looking after your Personas', () => {
       personas: [],
       create: mockFn,
       update: mockFn,
-      delete: mockFn,
+      delete: mockPromise,
       getPersonas: mockPromise
     }
 
