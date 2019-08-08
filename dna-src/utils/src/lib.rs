@@ -41,10 +41,8 @@ pub fn get_links_and_load_type<R: TryFrom<AppEntryValue>>(
     link_type: LinkMatch<&str>,
     tag: LinkMatch<&str>,
 ) -> ZomeApiResult<Vec<GetLinksLoadResult<R>>> {
-    let link_results = hdk::get_links(base, link_type, &tag.clone())?;
-    hdk::debug(format!("get_links {:?}", link_results)).ok();
     let link_load_results = hdk::get_links_and_load(base, link_type, tag)?;
-    hdk::debug(format!("get_links_and_load {:?}", link_load_results)).ok();
+
     Ok(link_load_results
         .iter()
         .map(|maybe_entry| match maybe_entry {
