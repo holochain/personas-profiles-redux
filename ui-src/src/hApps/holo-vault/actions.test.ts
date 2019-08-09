@@ -24,6 +24,12 @@ const asyncActionTestTable: Array<[string, any, any, any]> = [
     'xxx'
   ],
   [
+    'delete_persona',
+    vaultActions.DeletePersona,
+    { personaHash: 'xxx' },
+    true
+  ],
+  [
     'get_personas',
     vaultActions.GetPersonas,
     null,

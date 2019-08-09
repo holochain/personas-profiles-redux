@@ -7,7 +7,7 @@
 [[dnas]]
   id = "personas_profiles"
   file = "dna/personas-profiles.dna.json"
-  hash = "QmUBMsHBu53aYb3ir6FhKyPg8ZjFHGDUxFE9KZ4cE978Ax"
+  hash = "QmZc4SSPYeWEFpeVzCUphfhgUjarAnqfViugtrJViudkHf"
 
 [[instances]]
   id = "personas-profiles"
@@ -43,7 +43,7 @@
 #   dna_interface = "websocket_interface"
 
 # -----------  Networking  -----------
-# 
+#
 # [network]
 # type = "n3h"
 # n3h_mode = "REAL"

@@ -47,10 +47,7 @@ export function vaultReducer (state: VaultState = initialState, action: VaultAct
         ...state,
         profiles: action.payload.map((profile: Profile) => {
           const fields = profile.fields.map((field: ProfileField) => {
-            return {
-              ...field,
-              mapping: field.mapping ? field.mapping : undefined
-            }
+            return { ...field, mapping: field.mapping ? field.mapping : undefined }
           })
           return { ...profile, fields }
         })

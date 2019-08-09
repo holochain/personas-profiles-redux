@@ -33,7 +33,7 @@ export interface StateProps {
 export interface DispatchProps {
   create: (personaSpec: PersonaSpec, personaFields: Array<PersonaField>) => Promise<any>,
   update: (personaAddress: string, personaSpec: PersonaSpec, personaFields: Array<PersonaField>) => Promise<any>,
-  delete: (persona: PersonaType) => void,
+  delete: (personaAddress: string) => Promise<any>,
   getPersonas: typeof GetPersonas.sig
 }
 
@@ -121,7 +121,9 @@ class Persona extends React.Component<Props & RouterProps, State> {
     this.setState({
       open: false
     })
-    this.props.delete(this.state.persona)
+    this.props.delete(this.state.persona.hash)
+      .then(this.props.getPersonas)
+      .catch(err => console.error(err))
     this.props.history.push('/personas')
   }
 

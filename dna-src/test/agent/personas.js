@@ -19,9 +19,16 @@ module.exports = scenario => {
   }
 
   scenario('Can create a persona', async (s, t, {alice}) => {
-    const result = await alice.callSync("personas", "create_persona", testPersonaSpec)
+    const result = await alice.callSync("personas", "create_persona", {spec: testPersonaSpec})
     console.log(result)
     t.equal(result.Ok.length, 46)
+  })
+
+  scenario('A Default persona is created', async (s, t, {alice}) => {
+    const listOfPersonas = await alice.callSync("personas", "get_personas", {})
+    console.log(listOfPersonas)
+    t.equal(listOfPersonas.Ok.length, 1)
+    t.equal(listOfPersonas.Ok.filter(p => p.entry.name === "Default")[0].entry.fields.length, 0)
   })
 
   scenario('Can retrieve a list of personas', async (s, t, {alice}) => {
@@ -58,5 +65,20 @@ module.exports = scenario => {
     console.log(listOfPersonas)
     t.equal(listOfPersonas.Ok.length, 1)
     t.equal(listOfPersonas.Ok[0].entry.name, testUpdatePersonaSpec.name)
+  })
+
+  scenario('Can delete a persona', async (s, t, {alice}) => {
+    const listOfPersonas = await alice.callSync("personas", "get_personas", {})
+    console.log(listOfPersonas)
+    t.equal(listOfPersonas.Ok.length, 1)
+    const result = await alice.callSync("personas", "create_persona", {spec: testPersonaSpec})
+    console.log(result)
+    const resultDelete = await alice.callSync("personas", "delete_persona", {persona_address: result.Ok})
+    console.log(resultDelete)
+    t.equal(resultDelete.Ok.length, 46)
+    const listOfPersonas_2 = await alice.callSync("personas", "get_personas", {})
+    console.log(listOfPersonas_2)
+    t.equal(listOfPersonas_2.Ok.length, 1)
+    t.equal(listOfPersonas_2.Ok.filter(p => p.entry.name === "Default")[0].entry.fields.length, 0)
   })
 }

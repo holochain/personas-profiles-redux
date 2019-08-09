@@ -5,7 +5,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 {{ version-heading }}
 
 ### Added
-
+Can now update a persona including fields [#35](!https://github.com/holochain/personas-profiles/pull/35)
+Can now delete a Persona [#36](!https://github.com/holochain/personas-profiles/pull/36)
 ### Changed
 
 ### Deprecated
@@ -15,4 +16,3 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Fixed
 
 ### Security
-
