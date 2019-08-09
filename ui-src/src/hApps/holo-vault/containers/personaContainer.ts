@@ -48,7 +48,6 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
         }
       )
     },
-    /* tslint:disable */
     update: (personaAddress: string, personaSpec: PersonaSpec, personaFields: Array<PersonaField>) => {
       return dispatch(UpdatePersona.create({ persona_address: personaAddress, spec: personaSpec }))
         .then((updatedPersonaAddress: string) => {
@@ -63,7 +62,6 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
     delete: (personaAddress: string) => {
       return dispatch(DeletePersona.create({ persona_address: personaAddress }))
     }
-    /* tslint:enable */
   }
 }
 
